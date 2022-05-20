@@ -1,9 +1,7 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <h1>모달</h1>
-    <br />
-    <br />
+    <router-view></router-view>
   </div>
 </template>
 
