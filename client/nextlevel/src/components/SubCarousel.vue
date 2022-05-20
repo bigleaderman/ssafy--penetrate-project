@@ -7,25 +7,25 @@
       :infiniteScroll="true"
     >
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <slide>
-        <div id="app2">슬라이드</div>
+        <div class="slide-div">슬라이드</div>
       </slide>
       <hooper-navigation slot="hooper-addons"></hooper-navigation>
     </hooper>
@@ -68,10 +68,12 @@ export default {
 <style>
 #app3 {
   background-color: gray;
+  display: flex;
+  align-items: center;
 }
-#app2 {
-  background-color: beige;
+
+.slide-div {
+  background-color: aqua;
   margin: 5px;
-  height: 170px;
 }
 </style>
