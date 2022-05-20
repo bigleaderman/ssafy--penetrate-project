@@ -1,9 +1,14 @@
 <template>
+<<<<<<< client/nextlevel/src/App.vue
   <div class="please myMind">
     -
     -
     -
     -
+=======
+  <div class="please script myMind">
+    - - - -
+>>>>>>> client/nextlevel/src/App.vue
     <nav-bar></nav-bar>
     <router-view></router-view>
   </div>
