@@ -8,14 +8,13 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import MovieDetail from "@/components/MovieDetail.vue";
+
 
 export default {
   name: "app",
 
   components: {
     NavBar,
-    MovieDetail,
   },
 };
 </script>

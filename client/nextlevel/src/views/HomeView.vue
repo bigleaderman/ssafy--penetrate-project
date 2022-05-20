@@ -34,15 +34,22 @@
 </template>
 
 <script>
-import SubCarousel from '@/components/SubCarousel.vue'
-
+import SubCarousel from '@/components/Movie/SubCarousel.vue'
+import { mapActions } from 'vuex' 
 
 export default {
   name: "HomeView",
-  created() {},
   components: {
     SubCarousel,
   },
+
+  methods : {
+    ...mapActions(['getmovies']),
+  },
+
+  created(){
+    this.getmovies()
+  }
 };
 </script>
 
