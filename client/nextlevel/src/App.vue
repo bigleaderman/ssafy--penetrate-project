@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="please">
+    -
+    -
+    -
+    -
     <nav-bar></nav-bar>
     <router-view></router-view>
   </div>
