@@ -52,7 +52,9 @@
       <span class="visually-hidden">Next</span>
     </button>
     <div>
-      <h1>메롱</h1>
+      <h1>메롱
+        <p>asasdfdsaldfkhadsafaewfewgfgsav</p>
+      </h1>
     </div>
   </div>
 </template>
