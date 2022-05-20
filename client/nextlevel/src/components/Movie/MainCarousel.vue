@@ -5,6 +5,7 @@
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
       </slide>
     </hooper>
+    <div></div>
   </div>
 </template>
 
