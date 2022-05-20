@@ -1,10 +1,25 @@
 <template>
-  <nav id="myNav" class="navbar navbar-fixed-top navbar-expand-md navbar-dark bg-dark sticky-top">
+  <nav
+    id="myNav"
+    class="
+      navbar navbar-fixed-top navbar-expand-md navbar-dark
+      bg-dark
+      sticky-top
+    "
+  >
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'movies:index' %}">
-        <img src="@/assets/logo.png" alt="" width="200px">
+        <img src="@/assets/logo.png" alt="" width="200px" />
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" id="navbarSupportedContent">
@@ -12,10 +27,19 @@
           <ul class="navbar-nav mb-lg-0">
             <li class="nav-item">
               <!-- active 클래스! -->
-              <a class="nav-link active" aria-current="page" href="{% url 'movies:index' %}">Home | </a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'movies:index' %}"
+                >홈 |
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'movies:recommendations' %}">영화추천받기</a>
+              <a
+                class="nav-link active"
+                href="{% url 'movies:recommendations' %}"
+                >영화추천받기</a
+              >
             </li>
           </ul>
         </div>
@@ -25,16 +49,13 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-  #myNav {
-    font-size: 30px;
-    border : 1px solid salmon;
-    background-color: aquamarine !important;
-  }
-
+#myNav {
+  font-size: 30px;
+  border: 1px solid salmon;
+  background-color: aquamarine !important;
+}
 </style>
