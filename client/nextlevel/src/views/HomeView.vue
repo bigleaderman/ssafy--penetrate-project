@@ -3,13 +3,10 @@
     <!-- 시작박스 -->
     <div class="row">
       <!-- 메인캐러셀시작 -->
-      <div id="temp1">
-        <h1>메인캐러샐</h1>
-        <main-carousel :movies="mainCarouselMovie"></main-carousel>
-      </div>
+      <h1>메인캐러샐</h1>
+      <main-carousel :movies="mainCarouselMovie"></main-carousel>
     </div>
     <!-- 메인캐러셀끝 -->
-
     <div class="row sub-div">
       <!-- 서브 캐러셀 -->
       <sub-carousel :movies="SubCarouselMovie"></sub-carousel>
