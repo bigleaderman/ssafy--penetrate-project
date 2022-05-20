@@ -33,12 +33,16 @@
 </template>
 
 <script>
-
 import "hooper/dist/hooper.css";
 import { Hooper, Slide, Navigation as HooperNavigation } from "hooper";
 
 export default {
   name: "App",
+  props: {
+    movies: {
+      type: Array,
+    },
+  },
   components: {
     Hooper,
     Slide,

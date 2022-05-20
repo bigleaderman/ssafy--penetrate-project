@@ -10,37 +10,72 @@ const API_URL = 'https://api.themoviedb.org/3/movie/popular?'
 export default {
   // namespaced: true,
   state: {
-    movies : {}
+    movies: []
   },
   getters: {
-    mainCarousel(state){
-      return state.movies.filter( (movie, idx) => {
+    mainCarouselMovie(state) {
+      return state.movies.filter((movie, idx) => {
         if (idx < 5) {
           return movie
         }
       })
     },
-    
-  
+    SubCarouselMovie(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 5) {
+          return movie
+        }
+      })
+    },
+    SubCarouselMovie2(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 5) {
+          return movie
+        }
+      })
+    },
+    SubCarouselMovie3(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 5) {
+          return movie
+        }
+      })
+    },
+    SubCarouselMovie4(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 5) {
+          return movie
+        }
+      })
+    },
+    SubCarouselMovie5(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 5) {
+          return movie
+        }
+      })
+    },
+
+
   },
 
   mutations: {
-    GET_MOVIES(state, movies){
+    GET_MOVIES(state, movies) {
       state.movies = movies
       console.log(movies)
     }
   },
 
   actions: {
-    getmovies( {commit} ){
+    getmovies({ commit }) {
       const params = {
-        api_key : API_KEY,
-        language : 'ko-KR',
-        page : 1
+        api_key: API_KEY,
+        language: 'ko-KR',
+        page: 1
       }
       axios({
-        methods : 'get',
-        url : API_URL,
+        methods: 'get',
+        url: API_URL,
         params,
       })
         .then(res => {
