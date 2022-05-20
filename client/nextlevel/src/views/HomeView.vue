@@ -10,9 +10,9 @@
     </div>
     <!-- 메인캐러셀끝 -->
 
-    <!-- <div class="row sub-div"> -->
-    <!-- 서브 캐러셀 -->
-    <!-- <sub-carousel :movies="SubCarouselMovie"></sub-carousel>
+    <div class="row sub-div">
+      <!-- 서브 캐러셀 -->
+      <sub-carousel :movies="SubCarouselMovie"></sub-carousel>
     </div>
     <div class="row sub-div">
       <sub-carousel :movies="SubCarouselMovie2"></sub-carousel>
@@ -25,7 +25,7 @@
     </div>
     <div class="row sub-div">
       <sub-carousel :movies="SubCarouselMovie5"></sub-carousel>
-    </div> -->
+    </div>
     <!-- 부분캐러셀끝 -->
 
     <div>
@@ -37,14 +37,14 @@
 
 <script>
 import MainCarousel from "@/components/Movie/MainCarousel.vue";
-// import SubCarousel from "@/components/Movie/SubCarousel.vue";
+import SubCarousel from "@/components/Movie/SubCarousel.vue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "HomeView",
   components: {
     MainCarousel,
-    // SubCarousel,
+    SubCarousel,
   },
 
   methods: {
