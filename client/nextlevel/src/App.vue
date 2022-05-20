@@ -1,5 +1,5 @@
 <template>
-  <div class="please">
+  <div class="please myMind">
     -
     -
     -
