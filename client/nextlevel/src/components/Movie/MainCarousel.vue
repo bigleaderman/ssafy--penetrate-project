@@ -45,6 +45,9 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+    <div>
+      <h1>메롱</h1>
+    </div>
   </div>
 </template>
 
