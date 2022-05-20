@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="overlay" @click="$emit('close-modal')"></div>
     <div class="modal-card">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {};
 }
 .overlay {
   opacity: 0.5;
-  background-color: black;
+  background-color: rgb(206, 26, 26);
 }
 .modal-card {
   position: relative;
@@ -30,9 +30,9 @@ export default {};
   margin: auto;
   margin-top: 30px;
   padding: 20px;
-  background-color: white;
+  background-color: rgb(150, 23, 23);
   min-height: 500px;
-  z-index: 10;
+  z-index: 20;
   opacity: 1;
 }
-</style>
+</style

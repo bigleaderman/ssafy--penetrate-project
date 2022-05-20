@@ -1,6 +1,5 @@
 <template>
   <div class="please script">
-    - - - -
     <nav-bar></nav-bar>
     <router-view></router-view>
   </div>

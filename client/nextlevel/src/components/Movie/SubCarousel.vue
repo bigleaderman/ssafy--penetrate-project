@@ -5,27 +5,12 @@
       :centerMode="true"
       pagination="no"
       :infiniteScroll="true"
+      style="height : 400px"
     >
-      <slide>
-        <div class="slide-div">슬라이드</div>
-      </slide>
-      <slide>
-        <div class="slide-div">슬라이드</div>
-      </slide>
-      <slide>
-        <div class="slide-div">슬라이드</div>
-      </slide>
-      <slide>
-        <div class="slide-div">슬라이드</div>
-      </slide>
-      <slide>
-        <div class="slide-div">슬라이드</div>
-      </slide>
-      <slide>
-        <div class="slide-div">슬라이드</div>
-      </slide>
-      <slide>
-        <div class="slide-div">슬라이드</div>
+      <slide v-for="movie in movies" :key="movie.id">
+        <div class="slide-div"  @click="getDetail(movie)">
+          <img width="100%" height="400px" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`">
+        </div>
       </slide>
       <hooper-navigation slot="hooper-addons"></hooper-navigation>
     </hooper>
@@ -35,6 +20,7 @@
 <script>
 import "hooper/dist/hooper.css";
 import { Hooper, Slide, Navigation as HooperNavigation } from "hooper";
+import { mapActions } from 'vuex'
 
 export default {
   name: "App",
@@ -48,20 +34,29 @@ export default {
     Slide,
     HooperNavigation,
   },
+  methods : {
+    ...mapActions(['getDetail'])
+  },
+
   data() {
     return {
       hooperSettings: {
         itemsToShow: 3,
         centerMode: true,
         breakpoints: {
-          800: {
-            centerMode: false,
-            itemsToShow: 4,
-          },
-          1000: {
+
+          1100: {
             itemsToShow: 5,
             pagination: "fraction",
           },
+          1400: {
+            itemsToShow: 7,
+            pagination: "fraction",
+          },
+          2000 :{
+            itemsToShow: 9,
+            pagination: "fraction",
+          }
         },
       },
     };
@@ -71,13 +66,15 @@ export default {
 
 <style>
 #app3 {
-  background-color: gray;
-  display: flex;
-  align-items: center;
+  background-color: rgba(56, 51, 51, 0.8);
+  height: auto;
+  padding : 21px 0;
 }
 
-.slide-div {
-  background-color: aqua;
-  margin: 5px;
+.slide-div{
+  height: 400px;
+  padding: 10px;
+  width: 100%;
 }
+
 </style>

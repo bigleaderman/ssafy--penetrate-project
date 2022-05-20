@@ -2,7 +2,9 @@
   <div>
     <hooper :autoPlay="true" :playSpeed="5000" style="height: 400px">
       <slide v-for="movie in movies" :key="movie.id" class="slide">
-        <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
+        <div class="slide-div"  @click="getDetail(movie)">
+          <img width="100%" height="600px" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`">
+        </div>
       </slide>
     </hooper>
   </div>

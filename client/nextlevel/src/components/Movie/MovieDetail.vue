@@ -1,10 +1,36 @@
 <template>
-  <p>안녕하세요 반갑습니다</p>
+  <div id="detail" class="container-fluid" :style="{'background-image':`url('http://image.tmdb.org/t/p/w185${moviedetail.backdrop_path}')`}">
+    <div id="detail2" >
+      <h1>{{ moviedetail.title }}</h1>
+      
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex'
+
+export default {
+  name : "movie-detail",
+  computed : {
+    ...mapGetters(['moviedetail'])
+  }
+}
 </script>
 
 <style>
+#detail{
+  z-index: 30;
+  width: 100%;
+  height: 1000px;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#detail2{
+  z-index: 40;
+}
+
 </style>

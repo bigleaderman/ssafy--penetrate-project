@@ -10,7 +10,8 @@ const API_URL = 'https://api.themoviedb.org/3/movie/popular?'
 export default {
   // namespaced: true,
   state: {
-    movies: []
+    movies: [],
+    moviedetail : null,
   },
   getters: {
     mainCarouselMovie(state) {
@@ -48,26 +49,28 @@ export default {
         }
       })
     },
-    SubCarouselMovie5(state) {
-      return state.movies.filter((movie, idx) => {
-        if (idx < 5) {
-          return movie
-        }
-      })
+    moviedetail(state) {
+      return state.moviedetail
     },
-
-
+    isModalView(state){
+      return !!state.moviedetail
+    }
   },
-
   mutations: {
     GET_MOVIES(state, movies) {
       state.movies = movies
       console.log(movies)
+    },
+    GET_MOVIE_DETAIL(state, movie) {
+      state.moviedetail = movie
+    },
+    DELETE_DETAIL(state){
+      state.moviedetail = null
     }
   },
 
   actions: {
-    getmovies({ commit }) {
+    getMovies({ commit }) {
       const params = {
         api_key: API_KEY,
         language: 'ko-KR',
@@ -84,6 +87,13 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    getDetail({commit}, movie){
+      commit('GET_MOVIE_DETAIL', movie)
+    },
+    deleteMovie({commit},event){
+      event.stopPropagation()
+      commit('DELETE_DETAIL')
     }
   },
 }
