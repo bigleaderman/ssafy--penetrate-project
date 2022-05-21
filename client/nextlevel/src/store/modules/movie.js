@@ -6,12 +6,15 @@ import axios from 'axios'
 
 const API_KEY = '5e8f5d1235d0a3c13fdd637e53ff9c56'
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?'
+const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA'
+const API_URL_YOU = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {
   // namespaced: true,
   state: {
     movies: [],
     moviedetail : null,
+    movievideo : ''
   },
   getters: {
     mainCarouselMovie(state) {
@@ -54,6 +57,9 @@ export default {
     },
     isModalView(state){
       return !!state.moviedetail
+    },
+    getMovieVideo(state){
+      if(state.movievideo) return `https://www.youtube.com/embed/${state.movievideo}`
     }
   },
   mutations: {
@@ -66,6 +72,10 @@ export default {
     },
     DELETE_DETAIL(state){
       state.moviedetail = null
+    },
+    SET_MOVIE_VIDEO(state, video){
+      console.log(video)
+      state.movievideo = video
     }
   },
 
@@ -89,11 +99,25 @@ export default {
         })
     },
     getDetail({commit}, movie){
-      commit('GET_MOVIE_DETAIL', movie)
+      const params = {
+        key : API_KEY_YOU,
+        part : 'snippet',
+        Type : 'video',
+        q : movie.title + '메인예고편',
+      }
+      axios({
+        method : 'get',
+        url : API_URL_YOU,
+        params
+      })
+        .then(res=>{
+          commit('GET_MOVIE_DETAIL', movie)
+          commit('SET_MOVIE_VIDEO',res.data.items[0].id.videoId)
+        })
     },
     deleteMovie({commit},event){
       event.stopPropagation()
       commit('DELETE_DETAIL')
-    }
+    },
   },
 }
