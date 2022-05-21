@@ -92,11 +92,11 @@ export default {
   padding: 100px 0px 300px;
   z-index: 10;
   
+  
 }
 .white-bg {
   width: 100%;
-
-  background : white;
+  border: 10px solid black;
   padding: 0px;
   z-index: 20;
   margin: auto;
