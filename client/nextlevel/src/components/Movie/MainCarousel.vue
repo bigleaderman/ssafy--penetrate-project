@@ -1,9 +1,37 @@
 <template>
   <div>
-    <hooper :autoPlay="true" :playSpeed="5000" style="height: 400px">
+    <hooper :autoPlay="true" :playSpeed="5000" style="height: 600px">
       <slide v-for="movie in movies" :key="movie.id" class="slide">
-        <div class="slide-div"  @click="getDetail(movie)">
-          <img width="100%" height="600px" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`">
+        <div class="slide-div" @click="getDetail(movie)">
+          <div
+            id="test"
+            :style="{
+              'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/w500${movie.backdrop_path}')`,
+            }"
+          >
+            <div id="main-sub">
+              <div class="main-title">
+                <h1>{{ movie.title }}</h1>
+                <br />
+                <span id="main-overview"> {{ movie.overview }} </span>
+                <hr />
+                <button
+                  class="btn btn-outline-warning"
+                  @click="getDetail(movie)"
+                >
+                  자세히 보기
+                </button>
+              </div>
+            </div>
+            <!-- <img
+            id="linear"
+            width="100%"
+            height="600px"
+            :style="{
+              background: `linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/w500${movie.backdrop_path}')`,
+            }"
+          /> -->
+          </div>
         </div>
       </slide>
     </hooper>
@@ -13,6 +41,7 @@
 <script>
 import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
+import { mapActions } from "vuex";
 
 export default {
   name: "MainCarousel",
@@ -22,11 +51,30 @@ export default {
     },
   },
   components: { Hooper, Slide },
+  methods: {
+    ...mapActions(["getDetail"]),
+  },
 };
 </script>
 
 <style>
-#img {
-  height: 300px;
+#test {
+  height: 600px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#main-sub {
+  padding: 200px 50px;
+  height: 100px;
+  width: 500px;
+}
+
+#main-overview {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>

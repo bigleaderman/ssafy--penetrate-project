@@ -8,13 +8,12 @@
       </div>
     </div>
 
-
     <!-- 모달 끝 -->
 
     <!-- 시작박스 -->
-    <div class="row">
+    <div class="row main-div">
       <!-- 메인캐러셀시작 -->
-      <h1>메인캐러샐</h1>
+      <span class="h1">메인캐러샐</span>
       <main-carousel :movies="mainCarouselMovie"></main-carousel>
     </div>
     <!-- 메인캐러셀끝 -->
@@ -36,7 +35,6 @@
       <sub-carousel :movies="SubCarouselMovie4"></sub-carousel>
     </div>
     <!-- 부분캐러셀끝 -->
-
   </div>
   <!-- 시작박스끝 -->
 </template>
@@ -48,7 +46,6 @@ import MovieDetail from "@/components/Movie/MovieDetail.vue";
 
 import { mapActions, mapGetters } from "vuex";
 
-
 export default {
   name: "HomeView",
   components: {
@@ -58,7 +55,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getMovies","deleteMovie"]),
+    ...mapActions(["getMovies", "deleteMovie"]),
   },
 
   created() {
@@ -66,49 +63,58 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["mainCarouselMovie","SubCarouselMovie","SubCarouselMovie2",
-      "SubCarouselMovie3", "SubCarouselMovie4", "isModalView"
+    ...mapGetters([
+      "mainCarouselMovie",
+      "SubCarouselMovie",
+      "SubCarouselMovie2",
+      "SubCarouselMovie3",
+      "SubCarouselMovie4",
+      "isModalView",
     ]),
   },
 };
 </script>
 
 <style>
-
-#myButton{
+.h1 {
+  font-weight: 700;
+}
+.main-div {
+  margin: 10px;
+  color: white !important;
+}
+#myButton {
   color: white;
   position: absolute;
   background-color: black;
   right: 10%;
 }
 
-
 .sub-div {
   margin: 100px 0px;
   height: 450px !important;
-  color : white !important;
+  color: white !important;
 }
 /* 모달창 */
-.my-modal{
+.my-modal {
   box-sizing: border-box;
   background-color: red;
 }
 .black-bg {
-  width : 100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  position : fixed ;
-  padding: 5% 10% 2% 10%; 
+  position: fixed;
+  padding: 5% 10% 2% 10%;
   z-index: 10;
 }
 
 .white-bg {
   width: 100%;
   height: 90%;
-  background-color : rgb(45, 45, 45,0.9);
+  background-color: rgb(45, 45, 45, 0.9);
   padding: auto;
   z-index: 20;
   margin: auto;
 }
-
 </style>
