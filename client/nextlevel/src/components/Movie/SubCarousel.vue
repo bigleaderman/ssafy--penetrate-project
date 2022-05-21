@@ -5,11 +5,15 @@
       :centerMode="true"
       pagination="no"
       :infiniteScroll="true"
-      style="height : 400px"
+      style="height: 400px"
     >
       <slide v-for="movie in movies" :key="movie.id">
-        <div class="slide-div"  @click="getDetail(movie)">
-          <img width="100%" height="400px" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`">
+        <div class="slide-div" @click="getDetail(movie)">
+          <img
+            width="100%"
+            height="400px"
+            :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
+          />
         </div>
       </slide>
       <hooper-navigation slot="hooper-addons"></hooper-navigation>
@@ -20,7 +24,7 @@
 <script>
 import "hooper/dist/hooper.css";
 import { Hooper, Slide, Navigation as HooperNavigation } from "hooper";
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -34,8 +38,8 @@ export default {
     Slide,
     HooperNavigation,
   },
-  methods : {
-    ...mapActions(['getDetail'])
+  methods: {
+    ...mapActions(["getDetail"]),
   },
 
   data() {
@@ -44,7 +48,6 @@ export default {
         itemsToShow: 3,
         centerMode: true,
         breakpoints: {
-
           1100: {
             itemsToShow: 5,
             pagination: "fraction",
@@ -53,10 +56,10 @@ export default {
             itemsToShow: 7,
             pagination: "fraction",
           },
-          2000 :{
+          2000: {
             itemsToShow: 9,
             pagination: "fraction",
-          }
+          },
         },
       },
     };
@@ -66,15 +69,14 @@ export default {
 
 <style>
 #app3 {
-  background-color: rgba(56, 51, 51, 0.8);
+  background-color: rgba(40, 40, 40);
   height: auto;
-  padding : 21px 0;
+  padding: 21px 0;
 }
 
-.slide-div{
+.slide-div {
   height: 400px;
   padding: 10px;
   width: 100%;
 }
-
 </style>

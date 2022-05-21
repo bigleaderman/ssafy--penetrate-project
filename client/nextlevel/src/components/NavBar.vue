@@ -31,14 +31,35 @@
                 class="nav-link active"
                 aria-current="page"
                 href="{% url 'movies:index' %}"
-                >홈 |
+                >Home
               </a>
             </li>
             <li class="nav-item">
               <a
                 class="nav-link active"
                 href="{% url 'movies:recommendations' %}"
-                >영화추천받기</a
+                >영화추천
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="{% url 'movies:recommendations' %}"
+                >리뷰
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="{% url 'movies:recommendations' %}"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="{% url 'movies:recommendations' %}"
+                >회원가입</a
               >
             </li>
           </ul>
@@ -54,8 +75,7 @@ export default {};
 
 <style>
 #myNav {
-  font-size: 30px;
-  border: 1px solid salmon;
-  background-color: aquamarine !important;
+  font-size: 22px;
+  background-color: rgb(40, 40, 40) !important;
 }
 </style>
