@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import CommunitiesView from '@/views/CommunitiesView.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path : '/communities',
+    name : 'communities',
+    component : CommunitiesView
+  }
 ]
 
 const router = new VueRouter({

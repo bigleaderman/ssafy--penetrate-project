@@ -5,6 +5,7 @@
       :centerMode="true"
       pagination="no"
       :infiniteScroll="true"
+      :wheelControl="false"
       style="height: 400px"
     >
       <slide v-for="movie in movies" :key="movie.id">
