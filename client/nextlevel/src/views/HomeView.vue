@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <!-- 모달 -->
-    <div class="black-bg" v-if="isModalView" @click="deleteMovie">
+    <div id="black-bg" class="black-bg" v-if="isModalView" @click="deleteMovie">
       <div class="white-bg" onclick="event.stopImmediatePropagation()">
-          <movie-detail></movie-detail>
+        <button id="myButton" @click="deleteMovie"><h1>X</h1></button>
+        <movie-detail></movie-detail>
       </div>
     </div>
 
@@ -44,7 +45,7 @@
 import MainCarousel from "@/components/Movie/MainCarousel.vue";
 import SubCarousel from "@/components/Movie/SubCarousel.vue";
 import MovieDetail from "@/components/Movie/MovieDetail.vue";
-// import ModalView from "@/components/Movie/ModalView.vue";
+
 import { mapActions, mapGetters } from "vuex";
 
 
@@ -54,7 +55,6 @@ export default {
     MainCarousel,
     SubCarousel,
     MovieDetail,
-    // ModalView,
   },
 
   methods: {
@@ -74,6 +74,15 @@ export default {
 </script>
 
 <style>
+
+#myButton{
+  color: white;
+  position: absolute;
+  background-color: black;
+  right: 10%;
+}
+
+
 .sub-div {
   margin: 100px 0px;
   height: 450px !important;
@@ -89,18 +98,17 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position : fixed ;
-  padding: 2% 0px 2%;
+  padding: 5% 10% 2% 10%; 
   z-index: 10;
-  
-  
 }
+
 .white-bg {
   width: 100%;
-  height: 80%;
-  border: 10px solid black;
-  background-color : black;
+  height: 90%;
+  background-color : rgb(45, 45, 45,0.9);
   padding: auto;
   z-index: 20;
   margin: auto;
 }
+
 </style>
