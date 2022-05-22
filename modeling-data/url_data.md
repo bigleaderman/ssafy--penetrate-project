@@ -2,7 +2,7 @@
 
 #### serve to client
 
-### Home : /(GET)
+### Home : home/(GET)
 
 movies data
 
