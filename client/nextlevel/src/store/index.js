@@ -3,8 +3,10 @@ import Vuex from 'vuex'
 
 import movie from './modules/movie'
 import communities from './modules/communities'
+import accounts from './modules/accounts'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules : { movie, communities }
+  modules: { movie, communities, accounts }
 })
