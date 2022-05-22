@@ -1,7 +1,6 @@
 import drf from '@/api/drf'
 import axios from 'axios'
-// import router from '@/router'
-// import drf from '@/api/drf'
+import router from '@/router'
 
 // import _ from 'lodash'
 
@@ -9,7 +8,8 @@ export default {
   // namespaced: true,
   state: {
     reviews: [],
-    review: {},
+    review: null,
+    reviewComments : [],
   },
 
   getters: {},
@@ -17,111 +17,159 @@ export default {
   mutations: {
     FETCHREVIEWS( state, reviews){
       state.reviews = reviews
-    } 
+    },
+    FETCHREVIEW( state, review){
+      state.reviewComments = review.review
+      state.reviews = review
+    },
+    PUSHREVIEW( state, review){
+      state.reviews.push(review)
+    },
+    DELETEREVIEW( state ){
+      state.reviewComments = {}
+      state.review = null
+    },
+    PUSHREVIEWCOMMENT(state, comment){
+      state.reviewComments.push(comment)
+    },
+    UPDATECOMMENT(state, commentPk, content) {
+      state.reviewComments = state.reviewComments.map(comment => {
+        if (comment.pk === commentPk) {
+          comment.content = content
+          return comment
+        } else {
+          comment
+        }
+      })
+    },
+    DELETECOMMENT(state, commentPk){
+      const num = state.reviewComments.indexof(commentPk)
+      state.reviewComments.slice(num,1)
+    }
   },
 
   actions: {
     fetchReviews({ commit }) {
       axios({
-        url : drf.communities.review(),
+        url : drf.communities.reviews(),
         method : 'get',
       })
         .then(res => {
           commit('FETCHREVIEWS', res.data)
         })
-        .catch(err =>{
+        .catch(err =>{ // 에러페이지로 이동 구현
           console.log(err)
         })
     },
 
-    fetchReview({ commit, getters }) {
-      /* 단일 게시글 받아오기
-      GET: article URL (token)
-        성공하면
-          응답으로 받은 게시글들을 state.articles에 저장
-        실패하면
-          단순 에러일 때는
-            에러 메시지 표시
-          404 에러일 때는
-            NotFound404 로 이동
-      */
+    fetchReview({ commit }, reviewPk) {
+      axios({
+        url : drf.communities.review(reviewPk),
+        method : 'get',
+      })
+        .then(res => {
+          commit('FETCHREVIEW', res.data)
+          router.push({naame : 'review'})
+        })
+        .catch(err =>{ // 에러페이지로 이동 구현
+          console.log(err)
+        })
+
     },
 
-    createArticle({ commit, getters }) {
-      /* 게시글 생성
-      POST: articles URL (게시글 입력정보, token)
-        성공하면
-          응답으로 받은 게시글을 state.article에 저장
-          ArticleDetailView 로 이동
-        실패하면
-          에러 메시지 표시
-      */
+    createArticle({ commit, dispatch }, credentials) {
+      axios({
+        url : drf.communities.review(),
+        method : 'post',
+        data : credentials,
+      })
+        .then(res => {
+          commit('PUSHREVIEW', res.data)
+          dispatch(this.fetchReview, res.data.reviewPk)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },  
+
+    updateArticle({ commit }, credentials ) {
+      axios({
+        url : drf.communities.review(),
+        method : 'put',
+        data : credentials,
+      })
+        .then(res => {
+          commit('FETCHREVIEW', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
 
-    updateArticle({ commit, getters }) {
-      /* 게시글 수정
-      PUT: article URL (게시글 입력정보, token)
-        성공하면
-          응답으로 받은 게시글을 state.article에 저장
-          ArticleDetailView 로 이동
-        실패하면
-          에러 메시지 표시
-      */
+    deleteArticle({ commit }, reviewPK) {
+      axios({
+        url : drf.communities.review(reviewPK),
+        method : 'delete',
+      })
+        .then(() => {
+          commit('DELETEREVIEW')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
 
-    deleteArticle({ commit, getters }) {
-      /* 게시글 삭제
-      사용자가 확인을 받고
-        DELETE: article URL (token)
-          성공하면
-            state.article 비우기
-            AritcleListView로 이동
-          실패하면
-            에러 메시지 표시
+    // likeArticle({ commit, getters }) {
+    //   /* 좋아요
+    //   POST: likeArticle URL(token)
+    //     성공하면
+    //       state.article 갱신
+    //     실패하면
+    //       에러 메시지 표시
+    //   */
+    // },
 
-      */
+    createComment({ commit }, { articePk, credentials }) {
+      axios({
+        url : drf.communities.commentCreate(articePk),
+        method : 'post',
+        data : credentials,
+      })
+        .then(res => {
+          commit('PUSHREVIEWCOMMENT',res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
 
-    likeArticle({ commit, getters }) {
-      /* 좋아요
-      POST: likeArticle URL(token)
-        성공하면
-          state.article 갱신
-        실패하면
-          에러 메시지 표시
-      */
+    updateComment({ commit }, credentials) { //commentPk를 받아야함
+      axios({
+        url : drf.communities.commentChange(credentials.article_pk, credentials.comment_pk),
+        method : 'put',
+        data : credentials, // 수정필요할 것 같은 부분
+      })
+        .then(() => {
+          const data = {
+            articlePk : credentials.article_pk,
+            commentPk : credentials.comment_pk,
+          }
+          commit('CHANGECOMMENT', data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
 
-    createComment({ commit, getters }) {
-      /* 댓글 생성
-      POST: comments URL(댓글 입력 정보, token)
-        성공하면
-          응답으로 state.article의 comments 갱신
-        실패하면
-          에러 메시지 표시
-      */
-    },
-
-    updateComment({ commit, getters }, { articlePk, commentPk, content }) {
-      /* 댓글 수정
-      PUT: comment URL(댓글 입력 정보, token)
-        성공하면
-          응답으로 state.article의 comments 갱신
-        실패하면
-          에러 메시지 표시
-      
-      */
-    },
-
-    deleteComment({ commit, getters }, { articlePk, commentPk }) {
-      /* 댓글 삭제
-      사용자가 확인을 받고
-        DELETE: comment URL (token)
-          성공하면
-            응답으로 state.article의 comments 갱신
-          실패하면
-            에러 메시지 표시
-      */
+    deleteComment({ commit },  credentials ) {
+      axios({
+        url : drf.communities.commentChange(credentials.article_pk, credentials.comment_pk),
+        method : 'put',
+        data : credentials, // 수정필요할 것 같은 부분
+      })
+        .then(() => {
+          commit('DELETECOMMENT',credentials.comment_pk)
+        })
     },
   },
 }

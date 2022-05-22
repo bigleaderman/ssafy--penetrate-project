@@ -105,16 +105,14 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  padding: 5% 10% 2% 10%;
+  padding: 3% 10% 2% 10%;
   z-index: 10;
 }
 
 .white-bg {
   width: 100%;
-  height: 90%;
+  height: 85%;
   background-color: rgb(45, 45, 45, 0.9);
-  padding: auto;
-  z-index: 20;
-  margin: auto;
+
 }
 </style>

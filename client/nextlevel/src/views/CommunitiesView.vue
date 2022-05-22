@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="basic-body">
-      
+    <div id="communities">
+      <div class="community-form">
+        <h1>h1</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -13,9 +15,14 @@ export default {
 </script>
 
 <style>
-.basic-body {
-  width: 80%;
-  background-color: rgba(40, 40, 40);
-  height: 80%;
+#communities {
+  padding: 10% 0%;
+}
+
+.community-form {
+  width: 100%;
+  height: 800px;
+  padding: 5%;
+  background-color:white;
 }
 </style>
