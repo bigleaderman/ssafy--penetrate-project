@@ -4,7 +4,7 @@
       {{ field }}
       <ul>
         <li v-for="(error, idx) in errors" :key="idx">
-          {{ error }}
+          <p>잘못된 정보가 호출되었습니다.</p>
         </li>
       </ul>
     </p>

@@ -3,7 +3,7 @@ const HOST = 'http://localhost:8000/'
 // const MOVIES = 'movies/'
 // const RECOMMENDATION = 'recommendation/'
 const COMMUNITIES = 'communities/'
-const ACCOUNTS = 'account/'
+const ACCOUNTS = 'accounts/'
 
 
 export default {

@@ -8,7 +8,7 @@
     "
   >
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'movies:index' %}">
+      <a class="navbar-brand" href="http://localhost:8080/">
         <img src="@/assets/logo.png" alt="" width="200px" />
       </a>
       <button
@@ -30,7 +30,7 @@
               <a
                 class="nav-link active"
                 aria-current="page"
-                href="{% url 'movies:index' %}"
+                href="http://localhost:8080/"
                 >Home
               </a>
             </li>
@@ -49,16 +49,12 @@
               </a>
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                href="{% url 'movies:recommendations' %}"
+              <a class="nav-link active" href="http://localhost:8080/login"
                 >Login</a
               >
             </li>
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                href="{% url 'movies:recommendations' %}"
+              <a class="nav-link active" href="http://localhost:8080/signup"
                 >회원가입</a
               >
             </li>

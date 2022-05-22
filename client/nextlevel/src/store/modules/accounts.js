@@ -44,7 +44,7 @@ export default {
           const token = res.data.key
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
-          router.push({ name: 'articles' })
+          router.push({ name: 'home' })
         })
         .catch(err => {
           console.error(err.response.data)
@@ -62,7 +62,7 @@ export default {
           const token = res.data.key
           dispatch('saveToken', token)
           dispatch('fetchCurrentUser')
-          router.push({ name: 'articles' })
+          router.push({ name: 'home' })
         })
         .catch(err => {
           console.error(err.response.data)
@@ -74,13 +74,12 @@ export default {
       axios({
         url: drf.accounts.logout(),
         method: 'post',
-        // data: {},
         headers: getters.authHeader,
       })
         .then(() => {
           dispatch('removeToken')
-          alert('성공적으로 logout!')
-          router.push({ name: 'login' })
+          alert('로그아웃 되었습니다.')
+          router.push({ name: 'home' })
         })
         .error(err => {
           console.error(err.response)

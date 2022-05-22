@@ -24,7 +24,7 @@
         />
       </div>
       <div>
-        <label for="password2">Password Confirmation:</label>
+        <label for="password2">비밀번호 확인:</label>
         <input
           v-model="credentials.password2"
           type="password"
@@ -66,4 +66,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+label {
+  color: aliceblue;
+}
+</style>
