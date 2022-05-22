@@ -6,7 +6,9 @@ import axios from 'axios'
 
 const API_KEY = '5e8f5d1235d0a3c13fdd637e53ff9c56'
 const API_URL = 'https://api.themoviedb.org/3/movie/popular?'
+// 모달안나올시 바꾸기
 const API_KEY_YOU = 'AIzaSyD7y62yDxCe7Sy86zArwOyvSDfQr8ba8f4'
+// const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA' 
 const API_URL_YOU = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {
