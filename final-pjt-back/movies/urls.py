@@ -3,6 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path('review/',)
+    path('home/', views.movie),
+    path('home/<int:movie_pk>/score/', views.create_score),
+    path('home/<int:movie_pk>/score/<int:score_pk>', views.score_update_or_delete),
     
 ]
