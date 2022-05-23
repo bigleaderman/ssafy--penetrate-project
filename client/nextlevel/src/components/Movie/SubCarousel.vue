@@ -11,6 +11,7 @@
       <slide v-for="movie in movies" :key="movie.id">
         <div class="slide-div" @click="getDetail(movie)">
           <img
+            style="cursor: pointer"
             width="100%"
             height="400px"
             :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"

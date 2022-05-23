@@ -1,12 +1,15 @@
 const HOST = 'http://localhost:8000/'
 
-// const MOVIES = 'movies/'
+const MOVIES = 'movies/'
 // const RECOMMENDATION = 'recommendation/'
 const COMMUNITIES = 'communities/'
 const ACCOUNTS = 'accounts/'
 
 
 export default {
+  movies: {
+    home: () => HOST + MOVIES + 'home/'
+  },
   accounts: {
     login: () => HOST + ACCOUNTS + 'login/',
     logout: () => HOST + ACCOUNTS + 'logout/',

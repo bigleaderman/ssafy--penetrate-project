@@ -34,7 +34,7 @@ def movie(request):
     
     movies_animation = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres=16).order_by('-vote_average')[:10]
     movie = Movie.objects.get(pk=335787)
-    print(movie.scores.all()[0].number)
+
     result = list(movies_now) + list(movies_top10_popular) + list(movies_korea_top10) + list(movies_animation) + list(movies_weather)
     serializer = MovieSerializer(result, many=True)
     return Response(serializer.data)
