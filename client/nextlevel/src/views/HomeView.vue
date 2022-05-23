@@ -62,7 +62,7 @@ export default {
   },
 
   created() {
-    this.getMovies()
+    this.getMovies();
   },
 
   computed: {
@@ -95,7 +95,7 @@ export default {
 }
 
 .sub-div {
-  margin: 100px 0px;
+  margin: 100px 30px;
   height: 450px !important;
   color: white !important;
 }

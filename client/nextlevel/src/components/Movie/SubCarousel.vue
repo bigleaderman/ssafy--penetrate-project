@@ -51,15 +51,15 @@ export default {
         centerMode: true,
         breakpoints: {
           1100: {
-            itemsToShow: 5,
+            itemsToShow: 4,
             pagination: "fraction",
           },
           1400: {
-            itemsToShow: 7,
+            itemsToShow: 6,
             pagination: "fraction",
           },
           2000: {
-            itemsToShow: 9,
+            itemsToShow: 8,
             pagination: "fraction",
           },
         },
@@ -71,7 +71,7 @@ export default {
 
 <style>
 #app3 {
-  background-color: rgba(40, 40, 40);
+  background-color: rgba(20, 20, 20);
   height: auto;
   padding: 21px 0;
 }

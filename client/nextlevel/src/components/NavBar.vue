@@ -9,7 +9,7 @@
   >
     <div class="container-fluid">
       <a class="navbar-brand" href="http://localhost:8080/">
-        <img src="@/assets/logo.png" alt="" width="150px" />
+        <span>NEXTLEVEL</span>
       </a>
       <button
         class="navbar-toggler"
@@ -44,7 +44,7 @@
             <li v-if="isLoggedIn" class="nav-item">
               <a
                 class="nav-link active"
-                href="{% url 'movies:recommendations' %}"
+                href="http://localhost:8080/communities"
                 >리뷰
               </a>
             </li>
@@ -87,6 +87,6 @@ export default {
 <style>
 #myNav {
   font-size: 18px;
-  background-color: rgb(40, 40, 40) !important;
+  background-color: rgb(0, 0, 0) !important;
 }
 </style>
