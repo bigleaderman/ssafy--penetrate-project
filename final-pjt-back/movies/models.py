@@ -19,6 +19,8 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     is_active = models.BooleanField()
     genres = models.ManyToManyField(Genre)
+    director = models.CharField(max_length=100, null=True)
+    actors = models.JSONField(null=True)
 
 class Score(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='scores')

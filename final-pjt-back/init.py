@@ -27,7 +27,9 @@ def get_movie_datas():
                                 'title': movie['title'],
                                 'vote_average': movie['vote_average'],
                                 'genres': movie['genre_ids'],
-                                'is_active' : True
+                                'is_active' : True,
+                                'director': '',
+                                'actors': [],
                             }
 
                         data = {
@@ -51,7 +53,9 @@ def get_movie_datas():
                                 'title': movie['title'],
                                 'vote_average': movie['vote_average'],
                                 'genres': movie['genre_ids'],
-                                'is_active' : False
+                                'is_active' : False,
+                                'director': '',
+                                'actors': [],
                             }
 
                         data = {
@@ -76,7 +80,9 @@ def get_movie_datas():
                             'title': movie['title'],
                             'vote_average': movie['vote_average'],
                             'genres': movie['genre_ids'],
-                            'is_active' : False
+                            'is_active' : False,
+                            'director': '',
+                            'actors': [],
                         }
 
                     data = {
@@ -87,7 +93,7 @@ def get_movie_datas():
 
                     total_data.append(data)
     
-    for i in range(1, 20):
+    for i in range(1, 30):
         request_url = f"https://api.themoviedb.org/3/movie/top_rated?api_key={TMDB_API_KEY}&language=ko-KR&page={i}"
         movies = requests.get(request_url).json()
 
@@ -105,7 +111,9 @@ def get_movie_datas():
                         'title': movie['title'],
                         'vote_average': movie['vote_average'],
                         'genres': movie['genre_ids'],
-                        'is_active' : False
+                        'is_active' : False,
+                        'director': '',
+                        'actors': [],
                     }
 
                 data = {
@@ -115,6 +123,19 @@ def get_movie_datas():
                 }
 
                 total_data.append(data)
+
+    for data in total_data:
+        movie_id = data['pk']
+        
+        credit_request_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={TMDB_API_KEY}"
+        credit_info = requests.get(credit_request_url).json()
+
+        # 배우는 최대 10명까지만 저장한다.
+        for cast in credit_info['cast'][:5]:
+            data['fields']['actors'].append(cast['name'])
+        
+        if credit_info['crew']:
+            data['director'] = credit_info['crew'][0]['name']
     
     with open("movies/fixtures/movie_data.json", "w", encoding="utf-8") as w:
         json.dump(total_data, w, indent=4, ensure_ascii=False)
