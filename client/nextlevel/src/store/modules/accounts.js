@@ -11,9 +11,10 @@ export default {
   },
 
   getters: {
-    isLoggedIn: state => !!state.token,
     currentUser: state => state.currentUser,
+    isLoggedIn: state => !!state.token,
     authError: state => state.authError,
+    isAuthError: state => !!state.authError,
     authHeader: state => ({ Authorization: `Token ${state.token}` })
   },
 

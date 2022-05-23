@@ -5,6 +5,7 @@
         <div class="slide-div" @click="getDetail(movie)">
           <div
             id="test"
+            style="cursor: pointer"
             :style="{
               'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/w500${movie.backdrop_path}')`,
             }"

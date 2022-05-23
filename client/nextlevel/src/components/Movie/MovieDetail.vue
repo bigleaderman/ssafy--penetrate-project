@@ -58,15 +58,15 @@ export default {
 }
 #contentbox{
   height: 100%;
-  padding: 5% 0%;
+  padding: 1% 0% 1%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 #contents{
   background-color: rgba(40, 40, 40, 0.614);
-  height: 98%;
-  padding: 3% 10%;
+  height: 100%;
+  padding: 1% 5%;
   color: white;
   
 }

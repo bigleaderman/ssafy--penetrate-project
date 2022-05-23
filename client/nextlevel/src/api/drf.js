@@ -1,12 +1,15 @@
 const HOST = 'http://localhost:8000/'
 
-// const MOVIES = 'movies/'
+const MOVIES = 'movies/'
 // const RECOMMENDATION = 'recommendation/'
-const COMMUNITIES = 'communities/'
+const COMMUNITIES = 'communitys/'
 const ACCOUNTS = 'accounts/'
 
 
 export default {
+  movies: {
+    home: () => HOST + MOVIES + 'home/'
+  },
   accounts: {
     login: () => HOST + ACCOUNTS + 'login/',
     logout: () => HOST + ACCOUNTS + 'logout/',
@@ -15,8 +18,8 @@ export default {
   },
   communities: {
     reviews: () => HOST + COMMUNITIES + 'review/',
-    review: reviewPk => HOST + COMMUNITIES + `${reviewPk}/`,
-    commentCreate: (articlePk) => HOST + COMMUNITIES + 'review/' + `${articlePk}/` + 'comment/',
+    review: reviewPk => HOST + COMMUNITIES + 'review/' + `${reviewPk}/`,
+    commentCreate: (reviewPk) => HOST + COMMUNITIES + 'review/' + `${reviewPk}/` + 'comment/',
     commentChange: (articlePk, commentPk) => HOST + COMMUNITIES + 'review/' + `${articlePk}/` + 'comment/' + `${commentPk}/`
     // likeArticle: articlePk => HOST + ARTICLES + `${articlePk}/` + 'like/',
     // comments: articlePk => HOST + ARTICLES + `${articlePk}/` + COMMENTS,
