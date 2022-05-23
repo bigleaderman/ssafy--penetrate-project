@@ -26,7 +26,7 @@ export default {
   name: "RecommendationForm",
   props: {
     movies: {
-      type: Array,
+      type: String,
     },
   },
   methods: {
