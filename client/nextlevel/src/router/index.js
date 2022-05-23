@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
 import CommunitiesView from '@/views/CommunitiesView.vue'
+import CreateReviewView from '@/views/CreateReviewView.vue'
+import ReviewDetailView from '@/views/ReviewDetailView.vue'
+import UpdateReviewView from '@/views/UpdateReviewView.vue'
 
 import LoginView from '@/views/LoginView.vue'
 import LogoutView from '@/views/LogoutView.vue'
@@ -21,6 +25,25 @@ const routes = [
     name: 'communities',
     component: CommunitiesView
   },
+  {
+    path: '/communities/create',
+    name: 'createReview',
+    component: CreateReviewView
+  },
+  {
+    path: '/communities/:reviewPk/update',
+    name: 'updateReview',
+    component: UpdateReviewView
+  },
+  {
+    path: '/communities/:reviewPk',
+    name: 'reviewDetail',
+    component: ReviewDetailView
+  },
+
+
+
+
   {
     path: '/login',
     name: 'login',
