@@ -2,57 +2,46 @@ import drf from '@/api/drf'
 import axios from 'axios'
 import router from '@/router'
 
+
 // import _ from 'lodash'
 
 export default {
   // namespaced: true,
   state: {
     reviews: [],
-    review: null,
-    reviewComments: [],
+    selectedReview: {},
   },
 
-  getters: {},
+  getters: {
+    reviews (state){
+      return state.reviews
+    },
+    selectedReview (state){
+      return state.selectedReview
+    },
+    isReview (state) {
+      return !!state.selectedReview
+    }
+  },
 
   mutations: {
     FETCHREVIEWS(state, reviews) {
       state.reviews = reviews
     },
-    FETCHREVIEW(state, review) {
-      state.reviewComments = review.review
-      state.reviews = review
+    FETCHREVIEW( state, review){
+      state.selectedReview = review
     },
-    PUSHREVIEW(state, review) {
-      state.reviews.push(review)
-    },
-    DELETEREVIEW(state) {
-      state.reviewComments = {}
-      state.review = null
-    },
-    PUSHREVIEWCOMMENT(state, comment) {
-      state.reviewComments.push(comment)
-    },
-    UPDATECOMMENT(state, commentPk, content) {
-      state.reviewComments = state.reviewComments.map(comment => {
-        if (comment.pk === commentPk) {
-          comment.content = content
-          return comment
-        } else {
-          comment
-        }
-      })
-    },
-    DELETECOMMENT(state, commentPk) {
-      const num = state.reviewComments.indexof(commentPk)
-      state.reviewComments.slice(num, 1)
+    SETCOMMENTS (state, comments){
+      state.selectedReview.comments = comments
     }
   },
 
   actions: {
-    fetchReviews({ commit }) {
+    fetchReviews({ commit, getters }) {
       axios({
-        url: drf.communities.reviews(),
-        method: 'get',
+        url : drf.communities.reviews(),
+        method : 'get',
+        headers: getters.authHeader,
       })
         .then(res => {
           commit('FETCHREVIEWS', res.data)
@@ -62,14 +51,15 @@ export default {
         })
     },
 
-    fetchReview({ commit }, reviewPk) {
+    fetchReview({ commit, getters }, reviewPk) {
       axios({
-        url: drf.communities.review(reviewPk),
-        method: 'get',
+        url : drf.communities.review(reviewPk),
+        method : 'get',
+        headers: getters.authHeader,
       })
         .then(res => {
+          console.log(res.data)
           commit('FETCHREVIEW', res.data)
-          router.push({ naame: 'review' })
         })
         .catch(err => { // 에러페이지로 이동 구현
           console.log(err)
@@ -77,46 +67,54 @@ export default {
 
     },
 
-    createArticle({ commit, dispatch }, credentials) {
+    createReview({ commit, getters }, credentials) {
       axios({
-        url: drf.communities.review(),
-        method: 'post',
-        data: credentials,
-      })
-        .then(res => {
-          commit('PUSHREVIEW', res.data)
-          dispatch(this.fetchReview, res.data.reviewPk)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-
-    updateArticle({ commit }, credentials) {
-      axios({
-        url: drf.communities.review(),
-        method: 'put',
-        data: credentials,
+        url : drf.communities.reviews(),
+        method : 'post',
+        data : credentials,
+        headers: getters.authHeader,
       })
         .then(res => {
           commit('FETCHREVIEW', res.data)
+          // dispatch(this.fetchReview, paresInt(res.data.reviewPk))
+          router.push({name : 'reviewDetail', params : {'reviewPk' : res.data.pk} })
         })
         .catch(err => {
           console.log(err)
         })
     },
 
-    deleteArticle({ commit }, reviewPK) {
+    updateReview({ commit, getters }, credentials ) {
       axios({
-        url: drf.communities.review(reviewPK),
-        method: 'delete',
+        url : drf.communities.review(credentials.pk),
+        method : 'put',
+        data : credentials,
+        headers: getters.authHeader,
       })
-        .then(() => {
-          commit('DELETEREVIEW')
+        .then(res => {
+          commit('FETCHREVIEW', res.data)
+          router.push({name : 'reviewDetail', params : {'reviewPk' : res.data.pk} })
         })
         .catch(err => {
           console.log(err)
         })
+    },
+
+    deleteReview({ commit, getters }, reviewPK) {
+      if(confirm('정말 삭제하시겠습니까?')){
+        axios({
+          url : drf.communities.review(reviewPK),
+          method : 'delete',
+          headers: getters.authHeader,
+        })
+          .then(() => {
+            commit('FETCHREVIEW','')
+            router.push({name: 'communities'})
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        }
     },
 
     // likeArticle({ commit, getters }) {
@@ -129,46 +127,49 @@ export default {
     //   */
     // },
 
-    createComment({ commit }, { articePk, credentials }) {
+    createComment({ commit,getters }, { reviewPk, content }) {
+      const comment = { content }
       axios({
-        url: drf.communities.commentCreate(articePk),
-        method: 'post',
-        data: credentials,
+        url : drf.communities.commentCreate(reviewPk),
+        method : 'post',
+        data : comment,
+        headers: getters.authHeader,
       })
-        .then(res => {
-          commit('PUSHREVIEWCOMMENT', res.data)
+        .then((res) => {
+          commit('SETCOMMENTS', res.data) 
         })
         .catch(err => {
           console.log(err)
         })
     },
 
-    updateComment({ commit }, credentials) { //commentPk를 받아야함
+    updateComment({ commit, getters }, credentials) { //commentPk를 받아야함
       axios({
-        url: drf.communities.commentChange(credentials.article_pk, credentials.comment_pk),
-        method: 'put',
-        data: credentials, // 수정필요할 것 같은 부분
+        url : drf.communities.commentChange(credentials.reviewPk, credentials.commentPk),
+        method : 'put',
+        data : credentials,
+        headers: getters.authHeader,
       })
-        .then(() => {
-          const data = {
-            articlePk: credentials.article_pk,
-            commentPk: credentials.comment_pk,
-          }
-          commit('CHANGECOMMENT', data)
+        .then((res) => {
+          commit('SETCOMMENTS', res.data)
         })
         .catch(err => {
           console.log(err)
         })
     },
 
-    deleteComment({ commit }, credentials) {
+    deleteComment({ commit, getters },  credentials ) {
       axios({
-        url: drf.communities.commentChange(credentials.article_pk, credentials.comment_pk),
-        method: 'put',
-        data: credentials, // 수정필요할 것 같은 부분
+        url : drf.communities.commentChange(credentials.reviewPk, credentials.commentPk),
+        method : 'delete',
+        data : {}, // 수정필요할 것 같은 부분
+        headers: getters.authHeader,
       })
-        .then(() => {
-          commit('DELETECOMMENT', credentials.comment_pk)
+        .then((res) => {
+          commit('SETCOMMENTS', res.data)
+        })
+        .catch(err => {
+          console.log(err)
         })
     },
   },
