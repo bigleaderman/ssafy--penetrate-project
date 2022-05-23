@@ -14,9 +14,6 @@
     <div class="row main-div">
       <!-- 메인캐러셀시작 -->
       <!-- <span class="h1">메인캐러샐</span> -->
-      <span class="h1"
-        >{{ currentUser.username }}을 위한 영화 추천 서비스!</span
-      >
       <main-carousel :movies="mainCarouselMovie"></main-carousel>
     </div>
     <!-- 메인캐러셀끝 -->

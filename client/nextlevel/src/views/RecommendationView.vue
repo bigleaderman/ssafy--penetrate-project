@@ -4,9 +4,11 @@
       나만을 위한 콘텐츠를 추천 받아보세요!
     </h2>
     <br />
-    <h1 class="text-center">보고 싶은 3개 이상의 영화를 선택하세요</h1>
+    <h1 class="text-center">
+      보고 싶은 <span class="h1 yellow"> 3개 이상의 영화</span>를 선택하세요
+    </h1>
     <div>
-      <recommendation-form :movies="mainCarouselMovie"></recommendation-form>
+      <recommendation-form :movies="recCarouselMovie"></recommendation-form>
     </div>
   </div>
 </template>
@@ -29,10 +31,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["mainCarouselMovie", "currentUser"]),
+    ...mapGetters(["recCarouselMovie", "currentUser"]),
   },
 };
 </script>
 
 <style>
+.yellow {
+  color: rgb(255, 208, 0);
+}
 </style>

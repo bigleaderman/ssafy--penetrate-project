@@ -19,9 +19,16 @@ export default {
     movievideo: ''
   },
   getters: {
+    recCarouselMovie(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 30) {
+          return movie
+        }
+      })
+    },
     mainCarouselMovie(state) {
       return state.movies.filter((movie, idx) => {
-        if (idx < 10) {
+        if (idx < 24) {
           return movie
         }
       })
