@@ -21,6 +21,9 @@ export default {
     },
     isReview (state) {
       return !!state.selectedReview
+    },
+    isAuthor (state,getters){
+      return state.selectedReview.user?.username === getters.currentUser.username
     }
   },
 
@@ -58,7 +61,6 @@ export default {
         headers: getters.authHeader,
       })
         .then(res => {
-          console.log(res.data)
           commit('FETCHREVIEW', res.data)
         })
         .catch(err => { // 에러페이지로 이동 구현
@@ -117,15 +119,18 @@ export default {
         }
     },
 
-    // likeArticle({ commit, getters }) {
-    //   /* 좋아요
-    //   POST: likeArticle URL(token)
-    //     성공하면
-    //       state.article 갱신
-    //     실패하면
-    //       에러 메시지 표시
-    //   */
-    // },
+    likeReview({ commit, getters }, reviewPk) {
+      axios({
+        url : drf.communities.reviewLike(reviewPk),
+        method : 'post',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('FETCHREVIEW', res.data)
+        })
+
+        .catch(err => console.error(err.response))
+    },
 
     createComment({ commit,getters }, { reviewPk, content }) {
       const comment = { content }
@@ -158,9 +163,9 @@ export default {
         })
     },
 
-    deleteComment({ commit, getters },  credentials ) {
+    deleteComment({ commit, getters },  {reviewPk,commentPk} ) {
       axios({
-        url : drf.communities.commentChange(credentials.reviewPk, credentials.commentPk),
+        url : drf.communities.commentChange(reviewPk, commentPk),
         method : 'delete',
         data : {}, // 수정필요할 것 같은 부분
         headers: getters.authHeader,

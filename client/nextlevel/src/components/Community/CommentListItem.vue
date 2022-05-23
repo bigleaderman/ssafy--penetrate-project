@@ -27,7 +27,7 @@ export default {
     return {
       isEditing: false,
       payload: {
-        reviewPk: this.comment.article_id,
+        reviewPk: this.$route.params.reviewPk,
         commentPk: this.comment.pk,
         content: this.comment.content,
       },

@@ -1,100 +1,71 @@
 <template>
-  <div id="detail">
-    <div id="please-row" class="row" style="height: 100%">
-      <!--가장큰행 (1: contentbox, 2:moviebox)-->
-      <div
-        id="please-row-2"
-        class="col col-12 col-xxl-5 order-xxl-2"
-        stlye="height:100%"
-      >
-        <div id="moviebox">
-          <iframe
-            class="embed-responsive-item"
-            width="100%"
-            height="100%"
-            :src="getMovieVideo"
-            allow="autoplay;"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
-
-      <div id="please-row-2" class="col col-12 col-xxl-7">
-        <!--반응형 만들시 조정필요!-->
-        <div
-          id="contentbox"
-          :style="{
-            'background-image': `url('http://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
-          }"
-        >
-          <div id="contents" class="row">
-            <div class="movie-title col col-6 col-xxl-12">
-              <h1>{{ moviedetail.title }}</h1>
-              <span> {{ moviedetail.release_date }} </span>
-              <hr />
-              <h4>평점 : {{ moviedetail.vote_average }}</h4>
-            </div>
-            <div class="movie-content col col-6 col-xxl-12">
-              <br />
-              <h6>{{ moviedetail.overview }}</h6>
-            </div>
-            <div class="review-form">
-              <button>좋아요</button>
-              <button>리뷰쓰러가기</button>
-            </div>
-          </div>
-        </div>
+  <div id="modalbox" 
+    :style="{
+    'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
+  }">
+    <div class="row">
+      <div class="col col-12 col-sm-6" style="margin:0px 0px 0px 3%">
+        <h1>{{moviedetail.title}}</h1>
+        <span>개봉일자 : {{moviedetail.released_date}}</span><br>
+        <span>평점 : {{moviedetail.vote_average}}</span>
+        <hr>
+        <p>{{moviedetail.overview}}</p><br>
+        <button class="mybutton" @click.prevent="videoSwitch">예고편보기
+        </button>
+        <video-modal v-if="isVideo" :video="getMovieVideo" @close="videoSwitch"></video-modal>
       </div>
     </div>
-    <!--가장큰행 (1: contentbox, 2:moviebox)-->
   </div>
+
+    <!--가장큰행 (1: contentbox, 2:moviebox)-->
+
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+            // 'background-image': `url('http://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
+import { mapGetters } from "vuex"
+import  VideoModal  from "@/components/Movie/VideoModal.vue"
+
 export default {
   name: "movie-detail",
+  components : {
+    VideoModal,
+  },
   computed: {
     ...mapGetters(["moviedetail", "getMovieVideo"]),
   },
+  data(){
+    return {
+      isVideo : false
+    }
+  },
+  methods : {
+    videoSwitch(){
+      this.isVideo = !this.isVideo
+    }
+  }
 };
 </script>
 
 <style>
-@media (max-width: 1440px) {
-  #please-row {
-    width: 100% !important;
-  }
-  #please-row-2 {
-    padding: 15px 15px 7.5px;
+#modalbox{
+  height: 100%;
+  padding: 8% 0%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+}
+#youtube {
+  padding: 5%;
+}
+
+
+@media (max-width : 1440px) {
+
+  .test {
+  color: white;
   }
 }
 
-#detail {
-  height: 100% !important;
-  padding: 1%;
-}
-#contentbox {
-  height: 100%;
-  padding: 1% 0% 1%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-#contents {
-  background-color: rgba(40, 40, 40, 0.614);
-  height: 100%;
-  padding: 1% 5%;
-  color: white;
-}
-#moviebox {
-  height: 100%;
-}
-.modal-div {
-  padding: 5px;
-}
-.movie-content {
-  padding: 20px 0px;
-  color: white;
-}
 </style>

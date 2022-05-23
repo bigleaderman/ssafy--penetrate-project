@@ -4,17 +4,18 @@
       <h1>제목 : {{ selectedReview.title }}</h1><br>
       <h2>영화 : {{ selectedReview.movie_title }} </h2>
     </div>
-    <div id="information">
+    <div id="information" >
       <span>작성 : {{ selectedReview.created_at }} | 수정 : {{ selectedReview.created_at }}</span>
       <br>
-      <p> 좋아요 : {{ selectedReview.like_count }}</p><hr>
+      <p> 좋아요 : {{ selectedReview.like_count }} <button @click="likeReview(selectedReview.pk)">좋아요</button></p>
     </div>
+    <hr>
     <div id="review-content">
       {{ selectedReview.content }}
       <br>
       <router-link :to="{name:'communities'}"><button>목록</button></router-link>
     </div>
-    <div id="controlbox">
+    <div id="controlbox" v-if="isAuthor">
       <router-link :to="{name:'updateReview', params : {'reviewPk' : selectedReview.pk} }"><button>수정</button></router-link>
       <button @click.prevent="deleteReview(selectedReview.pk)">삭제</button>
     </div>
@@ -35,11 +36,11 @@ export default {
     CommentList,
   },
   methods : {
-    ...mapActions(['fetchReview', 'deleteReview'])
+    ...mapActions(['fetchReview', 'deleteReview','likeReview'])
   },
 
   computed : {
-    ...mapGetters(['selectedReview'])
+    ...mapGetters(['selectedReview', 'isAuthor'])
   },
   created() {
     this.fetchReview(this.$route.params.reviewPk)

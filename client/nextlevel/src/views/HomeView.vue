@@ -91,7 +91,7 @@ export default {
   color: white;
   position: absolute;
   background-color: black;
-  right: 10%;
+  right: 0%;
 }
 
 .sub-div {
@@ -109,13 +109,13 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  padding: 3% 10% 2% 10%;
+  padding: 120px 0% 0% 0%;
   z-index: 10;
 }
 
 .white-bg {
   width: 100%;
-  height: 85%;
-  background-color: rgb(45, 45, 45, 0.9);
+  height: 80%;
+
 }
 </style>

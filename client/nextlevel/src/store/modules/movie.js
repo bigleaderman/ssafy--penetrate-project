@@ -7,8 +7,8 @@ import axios from 'axios'
 // const API_KEY = '5e8f5d1235d0a3c13fdd637e53ff9c56'
 // const API_URL = 'https://api.themoviedb.org/3/movie/popular?'
 // 모달안나올시 바꾸기
-const API_KEY_YOU = 'AIzaSyD7y62yDxCe7Sy86zArwOyvSDfQr8ba8f4'
-// const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA' 
+// const API_KEY_YOU = 'AIzaSyD7y62yDxCe7Sy86zArwOyvSDfQr8ba8f4'
+const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA' 
 const API_URL_YOU = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {
@@ -67,7 +67,6 @@ export default {
   mutations: {
     GET_MOVIES(state, movies) {
       state.movies = movies
-      console.log(movies)
     },
     GET_MOVIE_DETAIL(state, movie) {
       state.moviedetail = movie
@@ -76,7 +75,6 @@ export default {
       state.moviedetail = null
     },
     SET_MOVIE_VIDEO(state, video) {
-      console.log(video)
       state.movievideo = video
     }
   },
@@ -107,7 +105,6 @@ export default {
         headers: getters.authHeader,
       })
         .then(res => {
-          console.log(res)
           commit('GET_MOVIES', res.data)
         })
         .catch(err => {

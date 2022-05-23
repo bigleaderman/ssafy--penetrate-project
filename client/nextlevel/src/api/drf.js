@@ -19,8 +19,9 @@ export default {
   communities: {
     reviews: () => HOST + COMMUNITIES + 'review/',
     review: reviewPk => HOST + COMMUNITIES + 'review/' + `${reviewPk}/`,
+    reviewLike: reviewPk => HOST + COMMUNITIES + 'review/' + `${reviewPk}/` + 'like/', 
     commentCreate: (reviewPk) => HOST + COMMUNITIES + 'review/' + `${reviewPk}/` + 'comment/',
-    commentChange: (articlePk, commentPk) => HOST + COMMUNITIES + 'review/' + `${articlePk}/` + 'comment/' + `${commentPk}/`
+    commentChange: (reviewPk, commentPk) => HOST + COMMUNITIES + 'review/' + `${reviewPk}/` + 'comment/' + `${commentPk}/`
     // likeArticle: articlePk => HOST + ARTICLES + `${articlePk}/` + 'like/',
     // comments: articlePk => HOST + ARTICLES + `${articlePk}/` + COMMENTS,
     // comment: (articlePk, commentPk) =>
