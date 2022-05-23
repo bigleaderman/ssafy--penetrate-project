@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 import HomeView from '../views/HomeView.vue'
-// import RecommendationView from '@/views/CommunitiesView.vue'
+import RecommendationView from '@/views/RecommendationView.vue'
 
 import CommunitiesView from '@/views/CommunitiesView.vue'
 import CreateReviewView from '@/views/CreateReviewView.vue'
@@ -23,11 +23,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  // {
-  //   path: '/recommendation',
-  //   name: 'recommendation',
-  //   component: RecommendationView
-  // },
+  {
+    path: '/recommendation',
+    name: 'recommendation',
+    component: RecommendationView
+  },
   {
     path: '/communities',
     name: 'communities',

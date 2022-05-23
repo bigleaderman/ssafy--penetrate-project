@@ -37,7 +37,7 @@
             <li v-if="isLoggedIn" class="nav-item">
               <a
                 class="nav-link active"
-                href="{% url 'movies:recommendations' %}"
+                href="http://localhost:8080/recommendation"
                 >영화추천
               </a>
             </li>
