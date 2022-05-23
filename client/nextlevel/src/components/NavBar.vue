@@ -9,7 +9,7 @@
   >
     <div class="container-fluid">
       <a class="navbar-brand" href="http://localhost:8080/">
-        <img src="@/assets/logo.png" alt="" width="200px" />
+        <img src="@/assets/logo.png" alt="" width="150px" />
       </a>
       <button
         class="navbar-toggler"
@@ -25,35 +25,40 @@
       <div class="offcanvas offcanvas-end" id="navbarSupportedContent">
         <div class="d-flex justify-content-end">
           <ul class="navbar-nav mb-lg-0">
-            <li class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item">
               <!-- active 클래스! -->
-              <a
+              <router-link
                 class="nav-link active"
                 aria-current="page"
-                href="http://localhost:8080/"
-                >Home
-              </a>
+                :to="{ name: 'home' }"
+                >Home</router-link
+              >
             </li>
-            <li class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item">
               <a
                 class="nav-link active"
                 href="{% url 'movies:recommendations' %}"
                 >영화추천
               </a>
             </li>
-            <li class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item">
               <a
                 class="nav-link active"
                 href="{% url 'movies:recommendations' %}"
                 >리뷰
               </a>
             </li>
-            <li class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item">
+              <a class="nav-link active" href="http://localhost:8080/logout"
+                >Logout</a
+              >
+            </li>
+            <li v-if="!isLoggedIn" class="nav-item">
               <a class="nav-link active" href="http://localhost:8080/login"
                 >Login</a
               >
             </li>
-            <li class="nav-item">
+            <li v-if="!isLoggedIn" class="nav-item">
               <a class="nav-link active" href="http://localhost:8080/signup"
                 >회원가입</a
               >
@@ -66,12 +71,22 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  name: "NavBar",
+  computed: {
+    ...mapGetters(["isLoggedIn", "currentUser"]),
+    username() {
+      return this.currentUser.username ? this.currentUser.username : "guest";
+    },
+  },
+};
 </script>
 
 <style>
 #myNav {
-  font-size: 22px;
+  font-size: 18px;
   background-color: rgb(40, 40, 40) !important;
 }
 </style>
