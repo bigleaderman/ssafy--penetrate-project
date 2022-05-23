@@ -10,6 +10,8 @@
 import NavBar from "@/components/NavBar.vue";
 import FooterBar from "@/components/FooterBar.vue";
 
+import { mapActions } from "vuex";
+
 export default {
   name: "app",
 
@@ -17,13 +19,17 @@ export default {
     NavBar,
     FooterBar,
   },
+  methods: {
+    ...mapActions(["fetchCurrentUser"]),
+  },
+  created() {
+    this.fetchCurrentUser();
+  },
 };
 </script>
 
 
 <style>
-
-
 nav {
   padding: 30px;
 }
