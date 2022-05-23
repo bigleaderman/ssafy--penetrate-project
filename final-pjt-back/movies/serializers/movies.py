@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from ..models import Movie
 from .score import ScoreSerializer
-from django.db.models import Sum
 
 
 
@@ -14,4 +13,4 @@ class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ('pk', 'adult', 'backdrop_path', 'original_language', 'overview',
-        'popularity', 'poster_path', 'released_date', 'title', 'vote_average', 'genres', 'scores', 'score_count','score_sum')
+        'popularity', 'poster_path', 'released_date', 'title', 'vote_average', 'genres', 'actors', 'director', 'scores', 'score_count','score_sum')
