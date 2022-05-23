@@ -1,4 +1,6 @@
+from math import dist
 from django.shortcuts import get_object_or_404
+from django.db.models import Sum
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -20,40 +22,45 @@ def movie(request):
     movie_genres_list = [[27, 53], [10402], [80, 28], [10749], [9648, 37], [35, 18], [10752, 12]]
     idx = weather_list.index(weather)
     if len(movie_genres_list[idx]) == 1:
-        movies_weather = Movie.objects.filter(genres=movie_genres_list[idx][0]).order_by('-vote_average')[:10]
+        movies_weather = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres=movie_genres_list[idx][0]).order_by('-vote_average')[:10]
     else:
-        movies_weather = Movie.objects.filter(Q(genres=movie_genres_list[idx][0]) | Q(genres=movie_genres_list[idx][1])).order_by('-vote_average')[:10]
+        movies_weather = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(Q(genres=movie_genres_list[idx][0]) | Q(genres=movie_genres_list[idx][1])).order_by('-vote_average')[:10]
     
-    movies_now = Movie.objects.filter(is_active=1)
+    movies_now = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(is_active=1)
     
-    movies_top10_popular = Movie.objects.order_by('-vote_average')[:10]
+    movies_top10_popular = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).order_by('-vote_average')[:10]
     
-    movies_korea_top10 = Movie.objects.filter(original_language='ko').order_by('-vote_average')[:10]
+    movies_korea_top10 = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(original_language='ko').order_by('-vote_average')[:10]
     
-    movies_animation = Movie.objects.filter(genres=16).order_by('-vote_average')[:10]
-    
+    movies_animation = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres=16).order_by('-vote_average')[:10]
+    movie = Movie.objects.get(pk=335787)
+    print(movie.scores.all()[0].number)
     result = list(movies_now) + list(movies_top10_popular) + list(movies_korea_top10) + list(movies_animation) + list(movies_weather)
-    print(len(result))
     serializer = MovieSerializer(result, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
 def create_score(request, movie_pk):
     user = request.user
-    print(1)
     movie = get_object_or_404(Movie, pk=movie_pk)
-    print(user)
+    score = movie.scores.filter(user=user).first()
+    if not score:
+        serializer = ScoreSerializer(data = request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie, user=user)
 
-    serializer = ScoreSerializer(data = request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(movie=movie, user=user)
+            scores = movie.scores.all()
+            serializer = ScoreSerializer(scores, many=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        serializer = ScoreSerializer(score, data = request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie, user=user)
 
-        # 기존 serializer 가 return 되면, 단일 comment 만 응답으로 받게됨.
-        # 사용자가 댓글을 입력하는 사이에 업데이트된 comment 확인 불가 => 업데이트된 전체 목록 return 
-        scores = movie.scores.all()
-        print(scores)
-        serializer = ScoreSerializer(scores, many=True)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+            scores = movie.scores.all()
+            serializer = ScoreSerializer(scores, many=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 @api_view(['PUT', 'DELETE'])
 def score_update_or_delete(request, movie_pk, score_pk):
@@ -62,7 +69,7 @@ def score_update_or_delete(request, movie_pk, score_pk):
 
     def update_score():
         if request.user == score.user:
-            serializer = ScoreSerializer(instance=score, data=request.data)
+            serializer = ScoreSerializer(score, request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 scores = movie.scores.all()
