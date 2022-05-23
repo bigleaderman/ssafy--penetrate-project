@@ -1,62 +1,76 @@
 <template>
-  <div id="detail">
-    <div id="please-row" class="row" style="height: 100%">
+  <div class="container py-5" id="modalbox2">
+    <div class="row">
       <div
-        id="please-row-2"
-        class="col col-12 col-xxl-5 order-xxl-2"
-        stlye="height:100%"
-      ></div>
-
-      <div id="please-row-2" class="col col-12 col-xxl-7">
-        <div
-          id="contentbox"
-          :style="{
-            'background-image': `url('http://image.tmdb.org/t/p/w500${movie.backdrop_path}')`,
-          }"
-        ></div>
+        v-for="movie in movies"
+        :key="movie.id"
+        class="col-lg-3 col-md-4 col-sm-6 col-12"
+      >
+        <div style="width: 15rem" class="mb-3">
+          <img
+            :class="{ red: isBind }"
+            @click="setBind"
+            :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
+            class="card-img-top"
+            alt="..."
+            height="365px"
+          />
+        </div>
       </div>
+    </div>
+    <div class="d-flex justify-content-center py-5">
+      <button class="row btn btn-warning" id="select">
+        <a href="http://localhost:8080/recommendation/movie" class="h3"
+          >선택완료</a
+        >
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 export default {
   name: "RecommendationForm",
   props: {
     movies: {
-      type: String,
+      type: Array,
     },
   },
-  methods: {
-    ...mapActions(["getMovies", "fetchCurrentUser"]),
+  data() {
+    return {
+      isBind: false,
+    };
   },
-
-  created() {
-    this.getMovies();
+  methods: {
+    setBind() {
+      this.isBind = !this.isBind;
+    },
   },
 };
 </script>
 
 <style>
-#test {
-  height: 600px;
-  width: 100%;
+#modalbox2 {
+  height: 100%;
+  padding: 8% 0%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
-#main-sub {
-  padding: 200px 50px;
-  height: 100px;
-  width: 500px;
+.card {
+  margin: 20px;
 }
-
-#main-overview {
-  display: -webkit-box;
-  -webkit-line-clamp: 7;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.red {
+  opacity: 0.5;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+#select {
+  height: 60px;
+  width: 500px;
+  /* position: fixed;
+  top: 85%; */
 }
 </style>

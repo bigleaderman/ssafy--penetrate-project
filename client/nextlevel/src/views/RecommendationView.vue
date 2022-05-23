@@ -1,7 +1,13 @@
 <template>
   <div>
-    <h1>영화 추천</h1>
-    <recommendation-form></recommendation-form>
+    <h2 class="text-center mt-5 text-white">
+      나만을 위한 콘텐츠를 추천 받아보세요!
+    </h2>
+    <br />
+    <h1 class="text-center">보고 싶은 3개 이상의 영화를 선택하세요</h1>
+    <div>
+      <recommendation-form :movies="mainCarouselMovie"></recommendation-form>
+    </div>
   </div>
 </template>
 
@@ -23,7 +29,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["mainCarouselMovie", "currentUser"]),
   },
 };
 </script>

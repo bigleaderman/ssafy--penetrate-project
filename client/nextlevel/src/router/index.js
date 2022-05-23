@@ -4,6 +4,7 @@ import store from '../store'
 
 import HomeView from '../views/HomeView.vue'
 import RecommendationView from '@/views/RecommendationView.vue'
+import RecommendationMovie from '@/views/RecommendationMovie.vue'
 
 import CommunitiesView from '@/views/CommunitiesView.vue'
 import CreateReviewView from '@/views/CreateReviewView.vue'
@@ -27,6 +28,11 @@ const routes = [
     path: '/recommendation',
     name: 'recommendation',
     component: RecommendationView
+  },
+  {
+    path: '/recommendation/movie',
+    name: 'recommendationMovie',
+    component: RecommendationMovie
   },
   {
     path: '/communities',

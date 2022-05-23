@@ -24,14 +24,6 @@
                 </button>
               </div>
             </div>
-            <!-- <img
-            id="linear"
-            width="100%"
-            height="600px"
-            :style="{
-              background: `linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/w500${movie.backdrop_path}')`,
-            }"
-          /> -->
           </div>
         </div>
       </slide>
