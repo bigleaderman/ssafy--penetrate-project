@@ -8,14 +8,14 @@
           class="col-lg-2 col-md-3 col-sm-4 col-6"
         >
           <div style="width: 10rem" class="mb-3 mx-1">
-            <img
-              :class="{ red: isBind }"
-              @click="setBind"
-              :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
-              class="card-img-top"
-              alt="..."
-              height="250px"
-            />
+            <div :class="{ red: isBind }" @click="setBind">
+              <img
+                :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
+                class="card-img-top"
+                alt="..."
+                height="250px"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -64,6 +64,7 @@ export default {
 }
 .red {
   opacity: 0.5;
+  border: 1.5px solid rgb(180, 180, 180);
 }
 a {
   text-decoration: none;

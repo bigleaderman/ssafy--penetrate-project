@@ -19,19 +19,30 @@
     <!-- 메인캐러셀끝 -->
     <div class="row sub-div">
       <!-- 서브 캐러셀 -->
-      <span class="h1 my-text">서브캐러샐</span>
+      <div class="h2 my-text">
+        <span class="yellow">오늘의 날씨</span>와 어울리는 영화 ☁
+      </div>
       <sub-carousel :movies="SubCarouselMovie"></sub-carousel>
     </div>
     <div class="row sub-div">
-      <span class="h1 my-text">서브캐러샐</span>
+      <div class="h2 my-text">
+        꼭 봐야하는
+        <span class="yellow">한국 영화 BEST 10 🎬</span>
+      </div>
       <sub-carousel :movies="SubCarouselMovie2"></sub-carousel>
     </div>
     <div class="row sub-div">
-      <span class="h1 my-text">서브캐러샐</span>
+      <div class="h2 my-text">
+        감동이 있는
+        <span class="yellow">일본 애니메이션 🎈</span>
+      </div>
       <sub-carousel :movies="SubCarouselMovie3"></sub-carousel>
     </div>
     <div class="row sub-div">
-      <span class="h1 my-text">서브캐러샐</span>
+      <div class="h2 my-text">
+        영원히 회자되는
+        <span class="yellow">명작 10선 🏆</span>
+      </div>
       <sub-carousel :movies="SubCarouselMovie4"></sub-carousel>
     </div>
     <!-- 부분캐러셀끝 -->
@@ -77,7 +88,7 @@ export default {
 </script>
 
 <style>
-.h1 {
+.h2 {
   font-weight: 700;
 }
 .main-div {

@@ -25,7 +25,7 @@
       <div class="offcanvas offcanvas-end" id="navbarSupportedContent">
         <div class="d-flex justify-content-end">
           <ul class="navbar-nav mb-lg-0">
-            <li v-if="isLoggedIn" class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item mx-3">
               <!-- active 클래스! -->
               <router-link
                 class="nav-link active"
@@ -41,24 +41,24 @@
                 >영화추천
               </a>
             </li>
-            <li v-if="isLoggedIn" class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item mx-3">
               <a
                 class="nav-link active"
                 href="http://localhost:8080/communities"
                 >리뷰
               </a>
             </li>
-            <li v-if="isLoggedIn" class="nav-item">
+            <li v-if="isLoggedIn" class="nav-item mx-3">
               <a class="nav-link active" href="http://localhost:8080/logout"
                 >Logout</a
               >
             </li>
-            <li v-if="!isLoggedIn" class="nav-item">
+            <li v-if="!isLoggedIn" class="nav-item mx-3">
               <a class="nav-link active" href="http://localhost:8080/login"
                 >Login</a
               >
             </li>
-            <li v-if="!isLoggedIn" class="nav-item">
+            <li v-if="!isLoggedIn" class="nav-item mx-3">
               <a class="nav-link active" href="http://localhost:8080/signup"
                 >회원가입</a
               >

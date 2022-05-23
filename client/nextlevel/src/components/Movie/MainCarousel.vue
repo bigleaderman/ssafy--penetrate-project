@@ -17,6 +17,7 @@
                 <span id="main-overview"> {{ movie.overview }} </span>
                 <hr />
                 <button
+                  id="detail-button"
                   class="btn btn-outline-warning"
                   @click="getDetail(movie)"
                 >
@@ -69,5 +70,8 @@ export default {
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+#detail-button {
+  width: 150px;
 }
 </style>
