@@ -3,7 +3,6 @@
     <!-- 모달 -->
     <div id="black-bg" class="black-bg" v-if="isModalView" @click="deleteMovie">
       <div class="white-bg" onclick="event.stopImmediatePropagation()">
-        <button id="myButton" @click="deleteMovie"><h1>X</h1></button>
         <movie-detail></movie-detail>
       </div>
     </div>
@@ -95,12 +94,6 @@ export default {
   margin: 10px;
   color: white !important;
 }
-#myButton {
-  color: white;
-  position: absolute;
-  background-color: black;
-  right: 0%;
-}
 
 .sub-div {
   margin: 100px 30px;
@@ -117,12 +110,12 @@ export default {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  padding: 120px 0% 0% 0%;
-  z-index: 10;
+  padding: 5% 0%;
+  z-index: 1;
 }
 
 .white-bg {
   width: 100%;
-  height: 80%;
+  height: 90%;
 }
 </style>
