@@ -1,13 +1,8 @@
-from math import dist
 from django.shortcuts import get_object_or_404
 from django.db.models import Sum
 import pandas as pd
 import numpy as np
 import warnings; warnings.filterwarnings('ignore')
-import json
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from ast import literal_eval
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -115,9 +110,39 @@ def recommendation(request):
         movies_list = []
         for i in sample_num:
             movies_list.append(movies[i])
-        print(movies_list)
         serializer = RecommandMovieSerializer(movies_list, many=True)
         return Response(serializer.data)
 
+    def post_movie(request):
+        movies_df = pd.read_csv("result.csv")
+        genre_sim_sorted_ind = np.load('result.npy')
+        def find_sim_movie(df, sorted_ind, title_name, top_n=10):
+            title_movie = df[df['pk'] == title_name]
+            title_index = title_movie.index.values
+
+            similar_indexes = sorted_ind[title_index, : (top_n * 2)]
+            similar_indexes = similar_indexes.reshape(-1)
+
+            similar_indexes = similar_indexes[similar_indexes != title_index]
+
+            return df.iloc[similar_indexes].sort_values('weighted_vote', ascending=False)[:top_n]
+        similar_movies = find_sim_movie(movies_df, genre_sim_sorted_ind, request.data[1], 4)
+        for i in range(1, len(request.data)):
+            similar_movies.append(find_sim_movie(movies_df, genre_sim_sorted_ind, request.data[i], 4))
+        val = similar_movies[['pk']].values.tolist()
+        random.shuffle(val)
+        movie_list = []
+        number_list = []
+        i =0 
+        while len(movie_list) != 6:
+            if val[i][0] not in number_list:
+                movie_list.append(Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(pk=val[i][0]))
+            i += 1
+        serializer = MovieSerializer(movie_list, many=True)
+        return Response(serializer.data)
+
+
     if request.method == 'GET':
         return get_movie()
+    elif request.method == 'POST':
+        return post_movie()

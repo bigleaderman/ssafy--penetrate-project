@@ -5,6 +5,9 @@ import json
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from ast import literal_eval
+import csv
+
+
 
 
 movies = pd.read_csv('test4.csv')
@@ -24,6 +27,8 @@ genre_sim = cosine_similarity(genre_mat, genre_mat)
 
 # 내림차순 정렬
 genre_sim_sorted_ind = genre_sim.argsort()[:, ::-1]
+np.save('test.npy',genre_sim_sorted_ind)
+
 
 # 영화 선정을 위한 가중치 선정
 C = movies_df['vote_average'].mean()
@@ -36,6 +41,8 @@ def weighted_vote_average(record):
     return ((v/(v+m)) * R) + ((m / (v + m)) * C)
 
 movies_df['weighted_vote'] = movies_df.apply(weighted_vote_average, axis=1)
+# movies_df.to_csv("filename.csv", mode='w')
+
 
 def find_sim_movie(df, sorted_ind, title_name, top_n=10):
     title_movie = df[df['title'] == title_name]

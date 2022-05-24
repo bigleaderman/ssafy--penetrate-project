@@ -151,7 +151,7 @@ export default {
     },
     recommendMovie({ commit, getters }, movie) {
       axios({
-        url: drf.movies.createReview(movie),
+        url: drf.movies.recommendation(),
         method: 'post',
         data: {
           movie
