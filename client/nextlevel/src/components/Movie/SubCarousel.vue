@@ -1,6 +1,9 @@
 <template>
   <div id="app3">
     <hooper
+      :progress="true"
+      :autoPlay="true"
+      :playSpeed="5000"
       :settings="hooperSettings"
       :centerMode="true"
       pagination="no"
@@ -71,7 +74,7 @@ export default {
 
 <style>
 #app3 {
-  background-color: rgba(20, 20, 20);
+  background-color: rgb(0, 0, 0);
   height: auto;
   padding: 21px 0;
 }

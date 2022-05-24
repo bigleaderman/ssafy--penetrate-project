@@ -25,29 +25,29 @@
     </div>
     <div class="row sub-div">
       <div class="h2 my-text">
-        꼭 봐야하는
-        <span class="yellow">한국 영화 BEST 10 🎬</span>
+        <span class="yellow">지금 시간에는 </span>이 영화 어때요? 🕑
       </div>
       <sub-carousel :movies="SubCarouselMovie2"></sub-carousel>
     </div>
     <div class="row sub-div">
       <div class="h2 my-text">
-        감동이 있는
-        <span class="yellow">일본 애니메이션 🎈</span>
+        영원히 회자되는
+        <span class="yellow">명작 10선 🏆</span>
       </div>
+
       <sub-carousel :movies="SubCarouselMovie3"></sub-carousel>
     </div>
     <div class="row sub-div">
       <div class="h2 my-text">
-        영원히 회자되는
-        <span class="yellow">명작 10선 🏆</span>
+        <span class="yellow"> 한국 영화 BEST 10 </span>아직 안보셨다면! 🎬
       </div>
+
       <sub-carousel :movies="SubCarouselMovie4"></sub-carousel>
     </div>
     <div class="row sub-div">
       <div class="h2 my-text">
-        영원히 회자되는
-        <span class="yellow">명작 10선 🏆</span>
+        감동이 있는
+        <span class="yellow">애니메이션 </span>모음 🎈
       </div>
       <sub-carousel :movies="SubCarouselMovie5"></sub-carousel>
     </div>
@@ -104,7 +104,7 @@ export default {
 }
 
 .sub-div {
-  margin: 100px 30px;
+  margin: 170px 30px;
   height: 450px !important;
   color: white !important;
 }

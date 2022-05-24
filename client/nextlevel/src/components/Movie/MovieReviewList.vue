@@ -1,36 +1,33 @@
 <template>
-  <hooper 
-  :vertical="true" 
-  style="height: 200px" 
-  :itemsToShow="3.5" 
-  :infiniteScroll="true"
-  :centerMode="true">
+  <hooper
+    :vertical="true"
+    style="height: 200px"
+    :itemsToShow="8"
+    :centerMode="true"
+  >
     <slide id="review-content" v-for="review in reviews" :key="review.pk">
-    <p>{{ review.number }} {{review.content}}</p>
-
+      <p>{{ review.number }} {{ review.content }}</p>
     </slide>
-
   </hooper>
 </template>
 
 <script>
-import { Hooper, Slide } from 'hooper';
-import 'hooper/dist/hooper.css';
+import { Hooper, Slide } from "hooper";
+import "hooper/dist/hooper.css";
 
 export default {
-  name : 'MovieReivewList',
-  props : {
-    reviews : {
-      type : Array,
-    }
+  name: "MovieReivewList",
+  props: {
+    reviews: {
+      type: Array,
+    },
   },
   components: {
     Hooper,
-    Slide
+    Slide,
   },
-}
+};
 </script>
 
 <style>
-
 </style>
