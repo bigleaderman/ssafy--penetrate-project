@@ -17,6 +17,13 @@
         다음
       </button>
     </div>
+    <div>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item" v-for="k in pageCount" :key="k"><a class="page-link" href="#">{{k}}</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -74,4 +81,5 @@ export default {
 .button {
   background-color: white;
 }
+
 </style>

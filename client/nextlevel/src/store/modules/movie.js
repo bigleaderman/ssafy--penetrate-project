@@ -128,12 +128,13 @@ export default {
       event.stopPropagation()
       commit('DELETE_DETAIL')
     },
-    setMovieScore({ commit, getters}, {moviePk, number}){
+    setMovieScore({ commit, getters}, {moviePk, number, content}){
       axios({
         url: drf.movies.createReview(moviePk),
         method: 'post',
         data : {
-          number
+          number,
+          content
         },
         headers: getters.authHeader,
       })

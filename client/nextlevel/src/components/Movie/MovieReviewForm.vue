@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="reviewSubmit">
       <label for="score">평점 : </label><input class="review-input" type="" id="score" v-model="number"><br>
-      <label for="review">리뷰 : </label><input class="review-input" type="" id="review" v-model="review">
+      <label for="review">리뷰 : </label><input class="review-input" type="" id="review" v-model="content">
       <button>작성하기</button>
     </form>
   </div>
@@ -16,7 +16,7 @@ export default {
   data (){
     return {
       number : 0,
-      review : '',
+      content : '',
     }
   },
   props : {
@@ -25,7 +25,7 @@ export default {
   methods : {
     ...mapActions(['setMovieScore']),
     reviewSubmit(){
-      this.setMovieScore({moviePk : this.moviePk, number: this.number,})
+      this.setMovieScore({moviePk : this.moviePk, number: this.number, content : this.content})
       this.number = 0
     }
   }
