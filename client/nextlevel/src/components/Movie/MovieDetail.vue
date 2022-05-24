@@ -2,36 +2,56 @@
   <div
     id="modalbox"
     :style="{
-      'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
+      'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
     }"
   >
     <div id="first" v-if="isVideo">
-      <video-modal :video="getMovieVideo" @close="videoSwitch"></video-modal>
+      <div id="youtube-back">
+        <video-modal
+          :video="getMovieVideo"
+          @close="videoSwitch"
+          id="video-fixed"
+        ></video-modal>
+      </div>
     </div>
 
     <button id="myButton" @click="deleteMovie"><h1>X</h1></button>
 
     <div id="second" class="row">
       <div class="col col-12 col-lg-6" style="margin: 2% 0px 0px 3%">
-        <h1>{{ moviedetail.title }}</h1>
-        <span>개봉일자 : {{ moviedetail.released_date }}</span
-        ><br />
-        <span>평점 : {{ moviedetail.vote_average }}</span>
-        <hr />
-        <p>{{ moviedetail.overview }}</p>
-        <br />
-        <button class="mybutton" @click.prevent="videoSwitch">
-          예고편보기
-        </button>
-        <div class="review">
-          <h1>한줄리뷰</h1>
-          <div class="review-form">
-            <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>
+        <div class="mb-5">
+          <h1>{{ moviedetail.title }}</h1>
+          <br />
+          <div class="d-flex justify-content-between">
+            <div>
+              <span class="h4">평점 {{ moviedetail.vote_average }} </span>
+              <span> ㆍ</span>
+              <span v-for="genre in moviedetail.genres" :key="genre.id">
+                {{ genre }} /
+              </span>
+              <span> {{ moviedetail.released_date }}</span>
+            </div>
+            <button
+              class="btn btn-outline-warning mybutton"
+              @click.prevent="videoSwitch"
+            >
+              예고편보기
+            </button>
           </div>
-          <div class="review-list">
-            <movie-review-list
-              :reviews="moviedetail.scores"
-            ></movie-review-list>
+          <hr />
+          <p>{{ moviedetail.overview }}</p>
+        </div>
+        <div>
+          <div class="review">
+            <h2 class="text-end">한줄리뷰</h2>
+            <span class="review-form">
+              <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>
+            </span>
+            <span class="review-list">
+              <movie-review-list
+                :reviews="moviedetail.scores"
+              ></movie-review-list>
+            </span>
           </div>
         </div>
       </div>
@@ -68,6 +88,9 @@ export default {
     videoSwitch() {
       this.isVideo = !this.isVideo;
     },
+    alterClose() {
+      this.$emit("close");
+    },
   },
 };
 </script>
@@ -80,17 +103,32 @@ export default {
   background-position: center;
   color: white;
 }
-#first {
-  height: 100%;
-  position: relative;
-  z-index: 3;
-}
+/* #first {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 70%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.532);
+} */
 
+#video-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* height: 60%; */
+  width: 80%;
+  transform: translate(-50%, -50%);
+}
 #second {
-  position: relative;
+  width: 90%;
+  padding: 30px;
 }
 #myButton {
-  position: relative;
-  right: 0%;
+  position: fixed;
+  left: 100%;
+  transform: translate(-100%);
+  width: 50px;
 }
 </style>
