@@ -1,14 +1,26 @@
 <template>
   <div id="review-list">
     <div id="article-list">
-      <div v-for="review in paginatedData" :key="review.pk" >
-        <router-link :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk} } ">
-          <div>
-            {{ review.title}}
-          </div>
-        </router-link> 
-        <hr>
-      </div>
+      <table class="table" style="width:100%">
+        <th class="row table-secondary" style="color:white">
+          <td class="col col-2">번호</td>
+          <td class="col col-8">제목</td>
+          <td class="col col-2">작성자</td>
+          <!-- <td class="table-date">날짜</td> -->
+        </th>
+        <tr v-for="review in paginatedData" :key="review.pk" >
+          <router-link 
+          :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk}}"
+          class="row"
+          style="color:white">  
+          <td class="col col-2"> {{ review.pk }} </td>
+          <td class="col col-8"> {{ review.title }} <span id="small-text">{{ review.comment_count }}</span></td>
+          <td class="col col-2"> {{ review.user.username }} </td>
+            <!-- <td class="table-date">{{ review.created_at }}</td> -->
+          </router-link> 
+        </tr>
+
+      </table>
     </div>
     <div class="padding">
       <ul class="pagination">
@@ -76,13 +88,26 @@ export default {
 </script>
 
 <style>
-#review-list {
+th {
+  color: white;
+}
+tr {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+table {
+
   width: 100%;
+  padding: 25px;
+}
+
+#review-list {
+  width: 70%;
   margin: auto;
-  background-color: rgb(15, 15, 15) ;
 }
 #article-list{
-  width: 90%;
+  width: 100%;
   margin: auto;
 }
 .button {
@@ -92,4 +117,9 @@ export default {
   display: flex;
   justify-content: center;
 }
+.background-image {
+  width: 100%;
+  opacity: 40%;
+}
+
 </style>

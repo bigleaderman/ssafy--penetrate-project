@@ -12,6 +12,15 @@
           />
         </div>
         <div>
+          <label for="title">게시판: </label>
+          <input
+            v-model="newReview.kind"
+            type="text"
+            id="title"
+            required
+          />
+        </div>
+        <div>
           <label for="content">내용: </label>
           <textarea
             v-model="newReview.content"
@@ -19,24 +28,6 @@
             id="content"
             required
           ></textarea>
-        </div>
-        <div>
-          <label for="movie_title">영화제목:</label>
-          <input
-            v-model="newReview.movie_title"
-            type="text"
-            id="movie_title"
-            required
-          />
-        </div>
-        <div>
-          <label for="score">평점:</label>
-          <input
-            v-model="newReview.score"
-            type="integer"
-            id="score"
-            required
-          />
         </div>
         <div>
           <button>{{action}}</button>
@@ -57,9 +48,8 @@ export default {
     return{ 
       newReview : {
         title : this.review.title,
+        kind : this.review.kind,
         content : this.review.content,
-        movie_title : this.review.movie_title,
-        score : this.review.score,
       }
     }
   },

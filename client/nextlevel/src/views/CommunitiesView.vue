@@ -1,14 +1,14 @@
 <template>
   <div id="communitybody">
     <div id="communities">
-      <div>
+      <div id=community-nav-div>
         <community-nav></community-nav>
       </div>
       <div class="community-form">
         <br>
+        <br>
+        <review-list :reviews="selectedCategory"></review-list>
         <router-link :to="{ name: 'createReview' }"><button>글만들기</button></router-link> 
-        <hr>
-        <review-list :reviews="reviews"></review-list>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@ export default {
     CommunityNav,
   },
   computed : {
-    ...mapGetters(['reviews'])
+    ...mapGetters(['reviews', 'selectedCategory'])
   },
   methods : {
     ...mapActions(['fetchReviews'])
@@ -39,19 +39,32 @@ export default {
 </script>
 
 <style>
-
+#communitybody {
+  background-color: rgb(53, 50, 50);
+}
 
 #communities {
-  margin: auto;
   width: 100%;
-  color: white;
-  margin-top: 100px ;
-  background-color: rgb(8, 8, 8);
+  color: rgb(237, 237, 237);
 }
 .community-form {
-  width: 90%;
-  margin: auto;
+  width: 75%;
+  background-color: rgb(93, 91, 91);
+  margin: 10px auto;
+  border-radius: 10px;
 }
+
+#community-nav-div {
+  width: 100vw;
+  height: 180px;
+  background-image: url("@/assets/backgroundnav.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+
 
 
 

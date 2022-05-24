@@ -2,7 +2,7 @@
   <div class="community-form">
     <div id="title">
       <h1>제목 : {{ selectedReview.title }}</h1><br>
-      <h2>영화 : {{ selectedReview.movie_title }} </h2>
+      <p>게시판 : {{ selectedReview.kind }}</p>
     </div>
     <div id="information" >
       <span>작성 : {{ selectedReview.created_at }} | 수정 : {{ selectedReview.created_at }}</span>

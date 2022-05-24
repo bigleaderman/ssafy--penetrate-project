@@ -10,6 +10,7 @@ export default {
   state: {
     reviews: [],
     selectedReview: {},
+    category : 0,
   },
 
   getters: {
@@ -24,6 +25,18 @@ export default {
     },
     isAuthor (state,getters){
       return state.selectedReview.user?.username === getters.currentUser.username
+    },
+    selectedCategory (state){
+      if(state.category !== 0){
+        return state.reviews.filter(review => {
+          return review.kind === state.category
+        })
+      } else {
+        // state.reviews.filter(review => {
+        //   return review.like_count > 5
+        // })
+        return state.reviews
+      }
     }
   },
 
@@ -33,9 +46,13 @@ export default {
     },
     FETCHREVIEW( state, review){
       state.selectedReview = review
+      // state.reviews.push(review)
     },
     SETCOMMENTS (state, comments){
       state.selectedReview.comments = comments
+    },
+    SET_CATEGORY(state, num){
+      state.category = num
     }
   },
 
@@ -177,5 +194,8 @@ export default {
           console.log(err)
         })
     },
+    setCategory({commit}, num ) {
+      commit('SET_CATEGORY',num)
+    }
   },
 }
