@@ -8,7 +8,7 @@
       보고 싶은 <span class="h1 yellow"> 3개 이상의 영화</span>를 선택하세요
     </h1>
     <div>
-      <recommendation-form :movies="recCarouselMovie"></recommendation-form>
+      <recommendation-form :movies="reMovie"></recommendation-form>
     </div>
   </div>
 </template>
@@ -24,14 +24,14 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser"]),
+    ...mapActions(["getRecommendMovies", "fetchCurrentUser"]),
   },
   created() {
-    this.getMovies();
+    this.getRecommendMovies();
   },
 
   computed: {
-    ...mapGetters(["recCarouselMovie", "currentUser"]),
+    ...mapGetters(["reMovie", "currentUser"]),
   },
 };
 </script>

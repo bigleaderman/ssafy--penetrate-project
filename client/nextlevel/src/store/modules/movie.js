@@ -18,11 +18,12 @@ export default {
     movies: [],
     moviedetail: null,
     movievideo: '',
-    recommendMovie: null
+    recommendMovie: null,
+    reMovies: []
   },
   getters: {
-    recCarouselMovie(state) {
-      return state.movies.filter((movie, idx) => {
+    reMovie(state) {
+      return state.reMovies.filter((movie, idx) => {
         if (idx < 30) {
           return movie
         }
@@ -92,11 +93,11 @@ export default {
     PUSH_MOVIE_REVIEW(state, review) {
       state.moviedetail.scores.push(review)
     },
+    RECOMMEND_GET_MOVIES(state, reMovies) {
+      state.reMovies = reMovies
+    },
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
-    },
-    RECOMMEND_GET_MOVIES(state, movies) {
-      state.movies = movies
     },
   },
 
@@ -150,6 +151,19 @@ export default {
         })
         .catch(err => {
           console.log(err)
+        })
+    },
+    getRecommendMovies({ commit, getters }) {
+      axios({
+        url: drf.movies.recommendation(),
+        method: 'get',
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('RECOMMEND_GET_MOVIES', res.data)
+        })
+        .catch(err => {
+          console.error(err.response.data)
         })
     },
     recommendMovie({ commit, getters }, movie) {
