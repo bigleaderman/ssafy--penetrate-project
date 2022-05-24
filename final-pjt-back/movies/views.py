@@ -10,12 +10,13 @@ from .serializers.movies import MovieSerializer
 from .serializers.score import ScoreSerializer
 from django.db.models import Q
 import requests
+import datetime
 
 # Create your views here.
 @api_view(['GET'])
 def movie(request):
-    import datetime
-    now = datetime.datetime.now() 
+    
+    now = datetime.datetime.now().hour 
     if 5 <= now <= 10:
         time_idx = 0
     elif 11 <= now <= 16:
