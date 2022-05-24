@@ -21,16 +21,20 @@
       </div>
     </div>
     <div class="d-flex justify-content-center py-5 grad" id="button-div">
-      <button class="row btn btn-warning" id="select">
-        <a href="http://localhost:8080/recommendation/movie" class="h3"
-          >선택완료</a
-        >
+      <button
+        class="row btn btn-warning"
+        id="select"
+        @click="recommendMovie(movie)"
+      >
+        <a>선택완료</a>
       </button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "RecommendationForm",
   props: {
@@ -46,6 +50,7 @@ export default {
   },
 
   methods: {
+    ...mapActions(["recommendMovie"]),
     setBind(event, movie) {
       if (event.path[1].classList.toggle("selected")) {
         this.selectedData.push(movie);

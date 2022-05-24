@@ -94,7 +94,10 @@ export default {
     },
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
-    }
+    },
+    RECOMMEND_GET_MOVIES(state, movies) {
+      state.movies = movies
+    },
   },
 
   actions: {
