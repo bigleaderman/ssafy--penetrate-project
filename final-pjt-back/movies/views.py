@@ -1,16 +1,24 @@
 from math import dist
 from django.shortcuts import get_object_or_404
 from django.db.models import Sum
+import pandas as pd
+import numpy as np
+import warnings; warnings.filterwarnings('ignore')
+import json
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from ast import literal_eval
 
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Movie, Score
-from .serializers.movies import MovieSerializer
+from .serializers.movies import MovieSerializer, RecommandMovieSerializer
 from .serializers.score import ScoreSerializer
 from django.db.models import Q
 import requests
 import datetime
+import random
 
 # Create your views here.
 @api_view(['GET'])
@@ -45,8 +53,7 @@ def movie(request):
     
     movies_korea_top10 = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(original_language='ko').order_by('-popularity')[:10]
     
-    movies_animation = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres__icontains="애니메이션").order_by('-popularity')[:10]
-    print(movies_animation)
+    movies_animation = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres__icontains="Animation").order_by('-popularity')[:10]
     result = list(movies_now) + list(movies_weather) + list(movies_time) + list(movies_top10_popular) + list(movies_korea_top10) + list(movies_animation)
     serializer =  MovieSerializer(result, many=True)
     return Response(serializer.data)
@@ -99,3 +106,18 @@ def score_update_or_delete(request, movie_pk, score_pk):
         return update_score()
     elif request.method == 'DELETE':
         return delete_score()
+
+@api_view(['GET', 'POST'])
+def recommendation(request):
+    def get_movie():
+        movies = Movie.objects.filter(vote_average__gt=5)
+        sample_num = random.sample(range(0, len(movies)), 30)
+        movies_list = []
+        for i in sample_num:
+            movies_list.append(movies[i])
+        print(movies_list)
+        serializer = RecommandMovieSerializer(movies_list, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'GET':
+        return get_movie()

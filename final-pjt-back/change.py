@@ -9,79 +9,79 @@ def get_movie_datas():
     genres = [
     {
     "id": 28,
-    "name": "액션"
+    "name": "Action"
     },
     {
     "id": 12,
-    "name": "모험"
+    "name": "Adventure"
     },
     {
     "id": 16,
-    "name": "애니메이션"
+    "name": "Animation"
     },
     {
     "id": 35,
-    "name": "코메디"
+    "name": "Comedy"
     },
     {
     "id": 80,
-    "name": "범죄"
+    "name": "Crime"
     },
     {
     "id": 99,
-    "name": "다큐멘터리"
+    "name": "Documentary"
     },
     {
     "id": 18,
-    "name": "드라마"
+    "name": "Drama"
     },
     {
     "id": 10751,
-    "name": "가족"
+    "name": "Family"
     },
     {
     "id": 14,
-    "name": "판타지"
+    "name": "Fantasy"
     },
     {
     "id": 36,
-    "name": "역사"
+    "name": "History"
     },
     {
     "id": 27,
-    "name": "공포"
+    "name": "Horror"
     },
     {
     "id": 10402,
-    "name": "음악"
+    "name": "Music"
     },
     {
     "id": 9648,
-    "name": "미스테리"
+    "name": "Mystery"
     },
     {
     "id": 10749,
-    "name": "로멘스"
+    "name": "Romance"
     },
     {
     "id": 878,
-    "name": "공상과학"
+    "name": "Science Fiction"
     },
     {
     "id": 10770,
-    "name": "티비영화"
+    "name": "TV Movie"
     },
     {
     "id": 53,
-    "name": "스릴러"
+    "name": "Thriller"
     },
     {
     "id": 10752,
-    "name": "전쟁"
+    "name": "War"
     },
     {
     "id": 37,
-    "name": "서부"
+    "name": "Western"
     }
     ]
 
@@ -105,6 +105,7 @@ def get_movie_datas():
                                 'poster_path': movie['poster_path'],
                                 'released_date': movie['release_date'],
                                 'title': movie['title'],
+                                'vote_count' : movie['vote_count'],
                                 'vote_average': movie['vote_average'],
                                 'genres': movie['genre_ids'],
                                 'is_active' : True,
