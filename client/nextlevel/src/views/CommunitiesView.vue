@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div id="communitybody">
     <div id="communities">
+      <div>
+        <community-nav></community-nav>
+      </div>
       <div class="community-form">
         <br>
         <router-link :to="{ name: 'createReview' }"><button>글만들기</button></router-link> 
         <hr>
-        
         <review-list :reviews="reviews"></review-list>
-
       </div>
     </div>
   </div>
@@ -15,6 +16,7 @@
 
 <script>
 import ReviewList from '@/components/Community/ReviewList.vue'
+import CommunityNav from '@/components/Community/CommunityNav.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 
@@ -22,6 +24,7 @@ export default {
   name : 'CommunitiesView',
   components : {
     ReviewList,
+    CommunityNav,
   },
   computed : {
     ...mapGetters(['reviews'])
@@ -36,19 +39,20 @@ export default {
 </script>
 
 <style>
+
+
 #communities {
-  width: 100wh;
-  background-color:rgba(45, 45, 45, 45);
+  margin: auto;
+  width: 100%;
   color: white;
   margin-top: 100px ;
+  background-color: rgb(8, 8, 8);
 }
-    
-    
 .community-form {
-  width: 1200px;
+  width: 90%;
   margin: auto;
-  height: 59vh;
 }
+
 
 
 </style>
