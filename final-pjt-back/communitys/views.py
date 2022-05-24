@@ -112,3 +112,15 @@ def comment_update_delete(request, review_pk, comment_pk):
         return delete_comment()
 
 
+@api_view(['POST'])
+def comment_like(request, review_pk, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    user = request.user
+    if comment.like_users.filter(pk=user.pk).exists():
+        comment.like_users.remove(user)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+    else:
+        comment.like_users.add(user)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)

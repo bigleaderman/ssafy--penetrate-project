@@ -14,3 +14,9 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = ('pk', 'adult', 'backdrop_path', 'original_language', 'overview',
         'popularity', 'poster_path', 'released_date', 'title', 'vote_average', 'genres', 'actors', 'director', 'scores', 'score_count','score_sum')
+
+class RecommandMovieSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Movie
+        fields = ('pk', 'poster_path', 'title',)
