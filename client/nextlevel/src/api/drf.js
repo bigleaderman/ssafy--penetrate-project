@@ -10,7 +10,7 @@ export default {
   movies: {
     home: () => HOST + MOVIES + 'home/',
     createReview: (moviePk) => HOST + MOVIES + 'home/' + `${moviePk}/` + 'score/',
-    recommendation: () => HOST + MOVIES + 'recommandation/',
+    recommendation: () => HOST + MOVIES + 'recommendation/',
   },
   accounts: {
     login: () => HOST + ACCOUNTS + 'login/',

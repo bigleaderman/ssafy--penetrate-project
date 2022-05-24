@@ -24,7 +24,7 @@
       <button
         class="row btn btn-warning"
         id="select"
-        @click="recommendMovie(movie)"
+        @click="recommendMovie(selectedData)"
       >
         <a>선택완료</a>
       </button>
