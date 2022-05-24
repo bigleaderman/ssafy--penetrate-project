@@ -19,7 +19,7 @@
 
     <div id="second" class="row">
       <div class="col col-12 col-lg-6" style="margin: 2% 0px 0px 3%">
-        <div class="mb-5">
+        <div class="movie-detail">
           <h1>{{ moviedetail.title }}</h1>
           <br />
           <div class="d-flex justify-content-between">
@@ -44,12 +44,14 @@
         <div>
           <div class="review">
             <h2 class="text-end">한줄리뷰</h2>
+            <hr />
             <span class="review-form">
               <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>
             </span>
             <span class="review-list">
               <movie-review-list
                 :reviews="moviedetail.scores"
+                class="mt-5"
               ></movie-review-list>
             </span>
           </div>
@@ -96,6 +98,9 @@ export default {
 </script>
 
 <style>
+.movie-detail {
+  padding: 0px 0px 70px 0px;
+}
 #modalbox {
   height: 100%;
   background-size: cover;

@@ -1,18 +1,41 @@
 <template>
-  <hooper
-    :vertical="true"
-    style="height: 200px"
-    :itemsToShow="8"
-    :centerMode="true"
-  >
-    <slide id="review-content" v-for="review in reviews" :key="review.pk">
-      <p>{{ review.number }} {{ review.content }}</p>
-    </slide>
-  </hooper>
+  <div>
+    <h5 class="mb-3">사용자 평</h5>
+    <hooper
+      :vertical="true"
+      style="height: 150px"
+      id="review-hooper"
+      :itemsToShow="7"
+      :centerMode="true"
+    >
+      <slide id="review-content" v-for="review in reviews" :key="review.pk">
+        <p>
+          <span>ㆍ</span>
+          <span class="star-rating-checkedlabel" v-if="review.number === 5"
+            >★★★★★</span
+          >
+          <span class="star-rating-checkedlabel" v-if="review.number === 4"
+            >★★★★</span
+          >
+          <span class="star-rating-checkedlabel" v-if="review.number === 3"
+            >★★★</span
+          >
+          <span class="star-rating-checkedlabel" v-if="review.number === 2"
+            >★★</span
+          >
+          <span class="star-rating-checkedlabel" v-if="review.number === 1"
+            >★</span
+          >
+          / {{ review.content }}
+        </p>
+      </slide>
+      <hooper-pagination slot="hooper-addons"></hooper-pagination>
+    </hooper>
+  </div>
 </template>
 
 <script>
-import { Hooper, Slide } from "hooper";
+import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
 import "hooper/dist/hooper.css";
 
 export default {
@@ -22,12 +45,30 @@ export default {
       type: Array,
     },
   },
+
   components: {
     Hooper,
     Slide,
+    HooperPagination,
   },
 };
 </script>
 
 <style>
+#hooper-review {
+  padding: 0px 0px 0px 30px;
+}
+.star-rating {
+  flex-direction: row-reverse;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+
+.star-rating-checkedlabel {
+  -webkit-text-fill-color: gold;
+}
 </style>
