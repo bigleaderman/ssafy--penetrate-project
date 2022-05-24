@@ -110,10 +110,12 @@ def recommendation(request):
         movies_list = []
         for i in sample_num:
             movies_list.append(movies[i])
+        print(movies_list)
         serializer = RecommandMovieSerializer(movies_list, many=True)
         return Response(serializer.data)
 
-    def post_movie(request):
+    def post_movie():
+        movies = request.data['movie']
         movies_df = pd.read_csv("result.csv")
         genre_sim_sorted_ind = np.load('result.npy')
         def find_sim_movie(df, sorted_ind, title_name, top_n=10):
@@ -126,9 +128,9 @@ def recommendation(request):
             similar_indexes = similar_indexes[similar_indexes != title_index]
 
             return df.iloc[similar_indexes].sort_values('weighted_vote', ascending=False)[:top_n]
-        similar_movies = find_sim_movie(movies_df, genre_sim_sorted_ind, request.data[1], 4)
-        for i in range(1, len(request.data)):
-            similar_movies.append(find_sim_movie(movies_df, genre_sim_sorted_ind, request.data[i], 4))
+        similar_movies = find_sim_movie(movies_df, genre_sim_sorted_ind, movies[1], 10)
+        for i in range(1, len(movies)):
+            similar_movies.append(find_sim_movie(movies_df, genre_sim_sorted_ind, movies[i], 10))
         val = similar_movies[['pk']].values.tolist()
         random.shuffle(val)
         movie_list = []
@@ -136,7 +138,7 @@ def recommendation(request):
         i =0 
         while len(movie_list) != 6:
             if val[i][0] not in number_list:
-                movie_list.append(Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(pk=val[i][0]))
+                movie_list += list(Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(pk=val[i][0]))
             i += 1
         serializer = MovieSerializer(movie_list, many=True)
         return Response(serializer.data)
