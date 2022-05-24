@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-
 class Movie(models.Model):
     adult = models.BooleanField(default=False)
     backdrop_path = models.CharField(max_length=100)
@@ -14,7 +13,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=50)
     vote_average = models.FloatField()
     is_active = models.BooleanField()
-    genres = models.JSONField(null=True)
+    genres = models.JSONField(default=dict)
     director = models.CharField(max_length=100, null=True)
     actors = models.JSONField(null=True)
 

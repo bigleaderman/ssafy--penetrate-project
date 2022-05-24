@@ -31,21 +31,22 @@ def movie(request):
     weather = res.get('weather')[0].get('main')
     weather_list = ['Thunderstorm', 'Drizzle', 'Rain', 'Snow', 'Atmosphere', 'Clear', 'Clouds']
     
-    movie_genres_list = [["공포", "스릴러"], ["음악", "애니메이션"], ["범죄", "액션"], ["로멘스", "티비영화"], ["미스테리", "서부"], ["코메디", "드라마"], ["전쟁", "모험"]]
-    movie_time_list = ["가족", "역사", "판타지", "다큐멘터리"]
+    movie_genres_list = [["horror", "thriller"], ["music", "animation"], ["crime", "action"], ["romance", "tv movie"], ["mystery", "western"], ["comedy", "drama"], ["war", "adventure"]]
+    movie_time_list = ["family", "history", "fantasy", "documentary"]
     idx = weather_list.index(weather)
     
     movies_time = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres=movie_time_list[time_idx]).order_by('-vote_average')[:10]
-
-    movies_weather = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(Q(genres=movie_genres_list[idx][0]) | Q(genres=movie_genres_list[idx][1])).order_by('-popularity')[:10]
+    
+    movies_weather = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(Q(genres=movie_genres_list[idx][0]) | Q(genres=movie_genres_list[idx][1])).order_by('-popularity')[10:20]
     
     movies_now = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(is_active=1)
     
     movies_top10_popular = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).order_by('-vote_average').order_by('-popularity')[:10]
     
-    movies_korea_top10 = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(original_language='ko').order_by('-vote_average')[:10]
+    movies_korea_top10 = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(original_language='ko').order_by('-popularity')[:10]
     
-    movies_animation = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres=16).order_by('-popularity')[:10]
+    movies_animation = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres="애니메이션").order_by('-popularity')[:10]
+    print(movies_animation)
     result = list(movies_now) + list(movies_weather) + list(movies_time) + list(movies_top10_popular) + list(movies_korea_top10) + list(movies_animation)
     serializer =  MovieSerializer(result, many=True)
     return Response(serializer.data)
