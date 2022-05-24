@@ -17,7 +17,8 @@ export default {
   state: {
     movies: [],
     moviedetail: null,
-    movievideo: ''
+    movievideo: '',
+    recommendMovie: null
   },
   getters: {
     recCarouselMovie(state) {
@@ -90,6 +91,9 @@ export default {
     },
     PUSH_MOVIE_REVIEW(state, review) {
       state.moviedetail.scores.push(review)
+    },
+    RECOMMEND_MOVIES(state, movie) {
+      state.recommendMovie = movie
     }
   },
 
@@ -128,11 +132,11 @@ export default {
       event.stopPropagation()
       commit('DELETE_DETAIL')
     },
-    setMovieScore({ commit, getters}, {moviePk, number, content}){
+    setMovieScore({ commit, getters }, { moviePk, number, content }) {
       axios({
         url: drf.movies.createReview(moviePk),
         method: 'post',
-        data : {
+        data: {
           number,
           content
         },
@@ -144,7 +148,22 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    recommendMovie({ commit, getters }, movie) {
+      axios({
+        url: drf.movies.createReview(movie),
+        method: 'post',
+        data: {
+          movie
+        },
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('RECOMMEND_MOVIES', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-
   },
 }

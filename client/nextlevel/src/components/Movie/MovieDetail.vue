@@ -2,8 +2,9 @@
   <div
     id="modalbox"
     :style="{
-    'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
-  }">
+      'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
+    }"
+  >
     <div id="first" v-if="isVideo">
       <video-modal :video="getMovieVideo" @close="videoSwitch"></video-modal>
     </div>
@@ -11,13 +12,17 @@
     <button id="myButton" @click="deleteMovie"><h1>X</h1></button>
 
     <div id="second" class="row">
-      <div class="col col-12 col-lg-6" style="margin:2% 0px 0px 3%">
-        <h1>{{moviedetail.title}}</h1>
-        <span>개봉일자 : {{moviedetail.released_date}}</span><br>
-        <span>평점 : {{moviedetail.vote_average}}</span>
-        <hr>
-        <p>{{moviedetail.overview}}</p><br>
-        <button class="mybutton" @click.prevent="videoSwitch">예고편보기</button>
+      <div class="col col-12 col-lg-6" style="margin: 2% 0px 0px 3%">
+        <h1>{{ moviedetail.title }}</h1>
+        <span>개봉일자 : {{ moviedetail.released_date }}</span
+        ><br />
+        <span>평점 : {{ moviedetail.vote_average }}</span>
+        <hr />
+        <p>{{ moviedetail.overview }}</p>
+        <br />
+        <button class="mybutton" @click.prevent="videoSwitch">
+          예고편보기
+        </button>
         <div class="review">
           <h1>한줄리뷰</h1>
           <div class="review-form">
@@ -37,10 +42,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
-import  VideoModal  from "@/components/Movie/VideoModal.vue"
-import MovieReviewForm from '@/components/Movie/MovieReviewForm.vue'
-import MovieReviewList from '@/components/Movie/MovieReviewList.vue'
+import { mapGetters, mapActions } from "vuex";
+import VideoModal from "@/components/Movie/VideoModal.vue";
+import MovieReviewForm from "@/components/Movie/MovieReviewForm.vue";
+import MovieReviewList from "@/components/Movie/MovieReviewList.vue";
 
 export default {
   name: "movie-detail",
@@ -57,17 +62,13 @@ export default {
       isVideo: false,
     };
   },
+
   methods: {
+    ...mapActions(["deleteMovie"]),
     videoSwitch() {
       this.isVideo = !this.isVideo;
     },
   },
-  methods : {
-    ...mapActions(["deleteMovie"]),
-    videoSwitch(){
-      this.isVideo = !this.isVideo
-    }
-  }
 };
 </script>
 
@@ -86,8 +87,7 @@ export default {
 }
 
 #second {
-  position : relative;
-
+  position: relative;
 }
 #myButton {
   position: relative;

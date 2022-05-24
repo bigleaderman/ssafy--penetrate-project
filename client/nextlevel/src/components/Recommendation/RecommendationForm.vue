@@ -8,7 +8,7 @@
           class="col-lg-2 col-md-3 col-sm-4 col-6"
         >
           <div style="width: 10rem" class="mb-3 mx-1">
-            <div @click="setBind">
+            <div @click="setBind($event, movie.pk)">
               <img
                 :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
                 class="card-img-top"
@@ -38,9 +38,21 @@ export default {
       type: Array,
     },
   },
+
+  data() {
+    return {
+      selectedData: [],
+    };
+  },
+
   methods: {
-    setBind(event) {
-      event.path[1].classList.toggle("selected");
+    setBind(event, movie) {
+      if (event.path[1].classList.toggle("selected")) {
+        this.selectedData.push(movie);
+      } else {
+        const moviePop = this.selectedData.indexOf(movie);
+        this.selectedData.splice(moviePop, 1);
+      }
     },
   },
 };
