@@ -1,50 +1,46 @@
 <template>
   <div id="back" @click="alterClose">
     <div id="youtube">
-      <p align="middle" style="margin:0px"><iframe
-      width="100%"
-      height="500rem"
-      :src="video"
-      ></iframe></p>
+      <p align="middle" style="margin: 0px">
+        <iframe width="100%" height="500rem" :src="video"></iframe>
+      </p>
       <button id="video-stop" @click="alterClose">그만보기</button>
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name : 'video-modal',
-  props : {
-    video : {
-      type : String,
-    }
+  name: "video-modal",
+  props: {
+    video: {
+      type: String,
+    },
   },
-  methods : {
-    alterClose(){
-      this.$emit('close',)
-    }
-  }
-}
+  methods: {
+    alterClose() {
+      this.$emit("close");
+    },
+  },
+};
 </script>
 
 <style>
-@media (max-width : 1339) {
+@media (max-width: 1339) {
   #youtube {
-    padding : 10px 0% !important;
+    padding: 10px 0% !important;
   }
 }
 
-
-@media (min-width : 1440px){
+@media (min-width: 1440px) {
   #youtube {
-    padding: 50px 15% !important; 
+    padding: 50px 15% !important;
   }
 }
-
 
 #back {
   position: fixed;
-  top : 225px;
+  top: 25%;
 }
 #youtube {
   position: fixed;
