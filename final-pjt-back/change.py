@@ -96,6 +96,7 @@ def get_movie_datas():
                     if movie.get('release_date', ''):
                         if movie.get('backdrop_path', ''):
                             fields = {
+                                "pk": movie['id'],
                                 'adult' : movie['adult'],
                                 'backdrop_path' : movie['backdrop_path'],
                                 'original_language' : movie['original_language'],
@@ -116,17 +117,12 @@ def get_movie_datas():
                                 if dic_moive['id'] == fields.get('genres')[i]:
                                     fields.get('genres')[i] = dic_moive['name']
 
-                        data = {
-                            "pk": movie['id'],
-                            "model": "movies.movie",
-                            "fields": fields
-                        }
-
-                        total_data.append(data)
+                        total_data.append(fields)
                 else:
                     if movie.get('release_date', ''):
                         if movie.get('backdrop_path', ''):
                             fields = {
+                                "pk": movie['id'],
                                 'adult' : movie['adult'],
                                 'backdrop_path' : movie['backdrop_path'],
                                 'original_language' : movie['original_language'],
@@ -147,18 +143,13 @@ def get_movie_datas():
                                 if dic_moive['id'] == fields.get('genres')[i]:
                                     fields.get('genres')[i] = dic_moive['name']
 
-                        data = {
-                            "pk": movie['id'],
-                            "model": "movies.movie",
-                            "fields": fields
-                        }
-
-                        total_data.append(data)
+                        total_data.append(fields)
         else:
             for movie in movies['results']:
                 if movie.get('release_date', ''):
                     if movie.get('backdrop_path', ''):
                         fields = {
+                            "pk": movie['id'],
                             'adult' : movie['adult'],
                             'backdrop_path' : movie['backdrop_path'],
                             'original_language' : movie['original_language'],
@@ -179,14 +170,7 @@ def get_movie_datas():
                             if dic_moive['id'] == fields.get('genres')[i]:
                                 fields.get('genres')[i] = dic_moive['name']
 
-
-                    data = {
-                        "pk": movie['id'],
-                        "model": "movies.movie",
-                        "fields": fields
-                    }
-
-                    total_data.append(data)
+                    total_data.append(fields)
     
     for i in range(1, 30):
         request_url = f"https://api.themoviedb.org/3/movie/top_rated?api_key={TMDB_API_KEY}&language=ko-KR&page={i}"
@@ -196,6 +180,7 @@ def get_movie_datas():
             if movie.get('release_date', ''):
                 if movie.get('backdrop_path', ''):
                     fields = {
+                        "pk": movie['id'],
                         'adult' : movie['adult'],
                         'backdrop_path' : movie['backdrop_path'],
                         'original_language' : movie['original_language'],
@@ -215,13 +200,8 @@ def get_movie_datas():
                         # 딕서너리 내에서 id 값이 같은 값들만 찾아 genre네임 확보
                         if dic_moive['id'] == fields.get('genres')[i]:
                             fields.get('genres')[i] = dic_moive['name']
-                data = {
-                    "pk": movie['id'],
-                    "model": "movies.movie",
-                    "fields": fields
-                }
 
-                total_data.append(data)
+                total_data.append(fields)
 
     for data in total_data:
         movie_id = data['pk']
@@ -231,39 +211,16 @@ def get_movie_datas():
 
         # 배우는 최대 10명까지만 저장한다.
         for cast in credit_info['cast'][:5]:
-            data['fields']['actors'].append(cast['name'])
+            data['actors'].append(cast['name'])
         
         if credit_info['crew']:
-            data['fields']['director'] = credit_info['crew'][0]['name']
+            data['director'] = credit_info['crew'][0]['name']
     
     with open("movies/fixtures/movies_practice.json", "w", encoding="utf-8") as w:
         json.dump(total_data, w, indent=4, ensure_ascii=False)
 
-def get_genre_data():
-    total_data = []
-
-    request_url = f"https://api.themoviedb.org/3/genre/movie/list?api_key={TMDB_API_KEY}"
-    genres = requests.get(request_url).json()
-
-    for genre in genres['genres']:
-        fields = {
-            # 'genre_id': genre['id'],
-            'name': genre['name'],
-        }
-
-        data = {
-            "pk": genre['id'],
-            "model": "movies.genre",
-            "fields": fields
-        }
-        total_data.append(data)
-
-    with open("movies/fixtures/genre_data.json", "w", encoding="utf-8") as w:
-        json.dump(total_data, w, indent=4, ensure_ascii=False)
-
 
 get_movie_datas()
-# get_genre_data()
 
 '''
 movies/fixtures/ 만들고 실행
