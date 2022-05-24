@@ -13,6 +13,13 @@
         <button class="mybutton" @click.prevent="videoSwitch">예고편보기
         </button>
         <video-modal v-if="isVideo" :video="getMovieVideo" @close="videoSwitch"></video-modal>
+        <div class="review">
+          <h1>한줄리뷰</h1>
+          <movie-review-form></movie-review-form>
+          <div class="review-form">
+            평점
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -25,11 +32,13 @@
             // 'background-image': `url('http://image.tmdb.org/t/p/original${moviedetail.backdrop_path}')`,
 import { mapGetters } from "vuex"
 import  VideoModal  from "@/components/Movie/VideoModal.vue"
+import MovieReviewForm from '@/components/Movie/MovieReviewForm.vue'
 
 export default {
   name: "movie-detail",
   components : {
     VideoModal,
+    MovieReviewForm,
   },
   computed: {
     ...mapGetters(["moviedetail", "getMovieVideo"]),
@@ -50,7 +59,7 @@ export default {
 <style>
 #modalbox{
   height: 100%;
-  padding: 8% 0%;
+  padding: 4% 0%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
