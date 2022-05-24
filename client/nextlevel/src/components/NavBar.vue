@@ -35,32 +35,43 @@
               >
             </li>
             <li v-if="isLoggedIn" class="nav-item">
-              <a
+              <router-link
                 class="nav-link active"
-                href="http://localhost:8080/recommendation"
-                >영화추천
-              </a>
+                aria-current="page"
+                :to="{ name: 'recommendation' }"
+                >영화추천</router-link
+              >
             </li>
             <li v-if="isLoggedIn" class="nav-item mx-3">
-              <a
+              <router-link
                 class="nav-link active"
-                href="http://localhost:8080/communities"
-                >리뷰
-              </a>
+                aria-current="page"
+                :to="{ name: 'communities' }"
+                >리뷰</router-link
+              >
             </li>
             <li v-if="isLoggedIn" class="nav-item mx-3">
-              <a class="nav-link active" href="http://localhost:8080/logout"
-                >Logout</a
+              <router-link
+                class="nav-link active"
+                aria-current="page"
+                :to="{ name: 'logout' }"
+                >로그아웃</router-link
               >
             </li>
             <li v-if="!isLoggedIn" class="nav-item mx-3">
-              <a class="nav-link active" href="http://localhost:8080/login"
-                >Login</a
+              <router-link
+                class="nav-link active"
+                aria-current="page"
+                :to="{ name: 'login' }"
+                >로그인</router-link
               >
             </li>
             <li v-if="!isLoggedIn" class="nav-item mx-3">
-              <a class="nav-link active" href="http://localhost:8080/signup"
-                >회원가입</a
+              <router-link
+                class="nav-link active"
+                aria-current="page"
+                :to="{ name: 'signup' }"
+                >회원가입</router-link
               >
             </li>
           </ul>

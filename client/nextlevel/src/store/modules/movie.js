@@ -28,7 +28,7 @@ export default {
     },
     mainCarouselMovie(state) {
       return state.movies.filter((movie, idx) => {
-        if (idx < 24) {
+        if (idx < 10) {
           return movie
         }
       })

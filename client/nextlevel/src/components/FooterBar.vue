@@ -13,13 +13,17 @@
           <div md="2" lg="2" xl="2" class="mx-auto mb-4">
             <h6 class="text-uppercase fw-bold mb-4">SITE MAP</h6>
             <p>
-              <a href="#!" class="text-reset">Home</a>
+              <a href="http://localhost:8080/" class="text-reset">HOME</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Recommendations</a>
+              <a href="http://localhost:8080/recommendation" class="text-reset"
+                >Recommendations</a
+              >
             </p>
             <p>
-              <a href="#!" class="text-reset">Review</a>
+              <a href="http://localhost:8080/communities" class="text-reset"
+                >Review</a
+              >
             </p>
             <p>
               <a href="#!" class="text-reset">Log-in/Sign-up</a>
