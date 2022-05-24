@@ -10,6 +10,7 @@ export default {
   movies: {
     home: () => HOST + MOVIES + 'home/',
     createReview : (moviePk) => HOST + MOVIES + 'home/' + `${moviePk}/` + 'score/',
+    recommendation : () => HOST + MOVIES + 'recommandation/',
   },
   accounts: {
     login: () => HOST + ACCOUNTS + 'login/',
@@ -28,4 +29,5 @@ export default {
     // comment: (articlePk, commentPk) =>
     //   HOST + ARTICLES + `${articlePk}/` + COMMENTS + `${commentPk}/`,
   },
+  
 }
