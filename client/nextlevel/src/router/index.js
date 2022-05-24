@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 
+import helloView from '../views/helloView.vue'
+
 import HomeView from '../views/HomeView.vue'
 import RecommendationView from '@/views/RecommendationView.vue'
 import RecommendationMovie from '@/views/RecommendationMovie.vue'
@@ -55,6 +57,11 @@ const routes = [
     component: ReviewDetailView
   },
 
+  {
+    path: '/hello',
+    name: 'hello',
+    component: helloView
+  },
 
 
 
@@ -94,11 +101,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   store.commit('SET_AUTH_ERROR', null)
   const { isLoggedIn } = store.getters
-  const noAuthPages = ['login', 'signup',]
+  const noAuthPages = ['login', 'signup', 'hello']
   const isAuthRequired = !noAuthPages.includes(to.name)
   if (isAuthRequired && !isLoggedIn) {
     alert('로그인이 필요합니다.')
-    next({ name: 'login' })
+    next({ name: 'hello' })
   } else {
     next()
   }

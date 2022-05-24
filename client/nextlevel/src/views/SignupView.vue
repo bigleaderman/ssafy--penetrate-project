@@ -3,7 +3,7 @@
     <img
       class="background-image"
       src="@/assets/background.png"
-      alt="not-found"
+      alt="background image"
     />
     <div id="fixed-box">
       <div id="signup-box" class="rounded-4">

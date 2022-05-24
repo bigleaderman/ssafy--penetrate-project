@@ -58,7 +58,7 @@
                 >로그아웃</router-link
               >
             </li>
-            <li v-if="!isLoggedIn" class="nav-item mx-3">
+            <!-- <li v-if="isLoggedIn" class="nav-item mx-3">
               <router-link
                 class="nav-link active"
                 aria-current="page"
@@ -66,14 +66,14 @@
                 >로그인</router-link
               >
             </li>
-            <li v-if="!isLoggedIn" class="nav-item mx-3">
+            <li v-if="isLoggedIn" class="nav-item mx-3">
               <router-link
                 class="nav-link active"
                 aria-current="page"
                 :to="{ name: 'signup' }"
                 >회원가입</router-link
               >
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
