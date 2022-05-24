@@ -44,6 +44,13 @@
       </div>
       <sub-carousel :movies="SubCarouselMovie4"></sub-carousel>
     </div>
+    <div class="row sub-div">
+      <div class="h2 my-text">
+        영원히 회자되는
+        <span class="yellow">명작 10선 🏆</span>
+      </div>
+      <sub-carousel :movies="SubCarouselMovie5"></sub-carousel>
+    </div>
     <!-- 부분캐러셀끝 -->
   </div>
   <!-- 시작박스끝 -->
@@ -79,6 +86,7 @@ export default {
       "SubCarouselMovie2",
       "SubCarouselMovie3",
       "SubCarouselMovie4",
+      "SubCarouselMovie5",
       "isModalView",
       "currentUser",
     ]),

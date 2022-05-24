@@ -80,7 +80,7 @@ export default {
         .then(() => {
           dispatch('removeToken')
           alert('로그아웃 되었습니다.')
-          router.push({ name: 'home' })
+          router.push({ name: 'hello' })
         })
         .error(err => {
           console.error(err.response)
@@ -98,7 +98,7 @@ export default {
           .catch(err => {
             if (err.response.status === 401) {
               dispatch('removeToken')
-              router.push({ name: 'login' })
+              router.push({ name: 'hello' })
             }
           })
       }

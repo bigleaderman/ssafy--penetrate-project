@@ -64,6 +64,13 @@ export default {
         }
       })
     },
+    SubCarouselMovie5(state) {
+      return state.movies.filter((movie, idx) => {
+        if (50 <= idx && idx < 60) {
+          return movie
+        }
+      })
+    },
     moviedetail(state) {
       return state.moviedetail
     },

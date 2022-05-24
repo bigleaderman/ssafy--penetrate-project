@@ -70,6 +70,17 @@
             </button>
           </div>
         </form>
+        <div class="mt-5">
+          <p class="text-center" id="login-p">이미 NextLevel의 회원이시라면?</p>
+          <p class="text-center">
+            <router-link
+              id="login-text"
+              aria-current="page"
+              :to="{ name: 'login' }"
+              >로그인 페이지로 이동
+            </router-link>
+          </p>
+        </div>
       </div>
     </div>
   </div>
