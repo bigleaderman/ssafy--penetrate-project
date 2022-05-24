@@ -8,7 +8,8 @@ import axios from 'axios'
 // const API_URL = 'https://api.themoviedb.org/3/movie/popular?'
 // 모달안나올시 바꾸기
 // const API_KEY_YOU = 'AIzaSyD7y62yDxCe7Sy86zArwOyvSDfQr8ba8f4'
-const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA'
+// const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA'
+const API_KEY_YOU = 'AIzaSyCVHmCCeL7luFGStLcnlaiDYXj1JKHktTM'
 const API_URL_YOU = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {
@@ -69,6 +70,9 @@ export default {
     },
     getMovieVideo(state) {
       if (state.movievideo) return `https://www.youtube.com/embed/${state.movievideo}`
+    },
+    getMovieReview(state) {
+      if (state.moviedetail) return state.moviedetail.scores
     }
   },
   mutations: {
@@ -83,6 +87,9 @@ export default {
     },
     SET_MOVIE_VIDEO(state, video) {
       state.movievideo = video
+    },
+    PUSH_MOVIE_REVIEW(state, review) {
+      state.moviedetail.scores.push(review)
     }
   },
 
@@ -121,6 +128,22 @@ export default {
       event.stopPropagation()
       commit('DELETE_DETAIL')
     },
+    setMovieScore({ commit, getters}, {moviePk, number}){
+      axios({
+        url: drf.movies.createReview(moviePk),
+        method: 'post',
+        data : {
+          number
+        },
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('PUSH_MOVIE_REVIEW', res.data[0])
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
 
   },
 }

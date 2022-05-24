@@ -8,7 +8,8 @@ const ACCOUNTS = 'accounts/'
 
 export default {
   movies: {
-    home: () => HOST + MOVIES + 'home/'
+    home: () => HOST + MOVIES + 'home/',
+    createReview : (moviePk) => HOST + MOVIES + 'home/' + `${moviePk}/` + 'score/',
   },
   accounts: {
     login: () => HOST + ACCOUNTS + 'login/',
