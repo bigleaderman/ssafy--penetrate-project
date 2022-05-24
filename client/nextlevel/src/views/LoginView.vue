@@ -58,9 +58,12 @@
           지금 회원가입하고 영화 추천 받아보세요!
         </p>
         <p class="text-center">
-          <a href="http://localhost:8080/signup" id="login-text"
-            >회원가입 하러가기</a
-          >
+          <router-link
+            id="login-text"
+            aria-current="page"
+            :to="{ name: 'signup' }"
+            >회원가입 하러가기
+          </router-link>
         </p>
       </div>
     </div>
