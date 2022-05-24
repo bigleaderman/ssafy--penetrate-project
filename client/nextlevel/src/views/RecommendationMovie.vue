@@ -11,9 +11,11 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "RecommendationMovie",
+
   methods: {
     ...mapActions(["fetchCurrentUser"]),
   },
+
   computed: {
     ...mapGetters(["currentUser"]),
   },

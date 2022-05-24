@@ -94,7 +94,10 @@ export default {
     },
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
-    }
+    },
+    RECOMMEND_GET_MOVIES(state, movies) {
+      state.movies = movies
+    },
   },
 
   actions: {
@@ -151,7 +154,7 @@ export default {
     },
     recommendMovie({ commit, getters }, movie) {
       axios({
-        url: drf.movies.createReview(movie),
+        url: drf.movies.recommendation(),
         method: 'post',
         data: {
           movie
