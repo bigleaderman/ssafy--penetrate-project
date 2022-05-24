@@ -1,27 +1,25 @@
 <template>
   <div id="review-list">
-    <div v-for="review in paginatedData" :key="review.pk" >
-      <router-link :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk} } ">
-        <div>
-          {{ review.title}}
-        </div>
-      </router-link> 
-      <hr>
+    <div id="article-list">
+      <div v-for="review in paginatedData" :key="review.pk" >
+        <router-link :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk} } ">
+          <div>
+            {{ review.title}}
+          </div>
+        </router-link> 
+        <hr>
+      </div>
     </div>
-    <div class="btn-cover">
-      <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-        이전
-      </button>
-      <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-        다음
-      </button>
-    </div>
-    <div>
+    <div class="padding">
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item" v-for="k in pageCount" :key="k"><a class="page-link" href="#">{{k}}</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item"><a class="btn btn-outline-warning" @click.prevent="prevPage" 
+        :class="{ 'disabled' : pageNum === 0}">이전</a></li>
+        <li class="page-item" v-for="k in pageCount" :key="k"><a 
+        class="btn btn-outline-warning" 
+        @click.prevent="seletectPage(k)"
+        :class="{ 'active' : k === pageNum + 1 }"
+        >{{k}}</a></li>
+        <li class="page-item"><a class="btn btn-outline-warning" @click.prevent="nextPage">다음</a></li>
       </ul>
     </div>
   </div>
@@ -44,7 +42,7 @@ export default {
     pageSize : {
       type : Number,
       required : false,
-      default : 10,
+      default : 20,
     }
   },
   methods : {
@@ -54,6 +52,9 @@ export default {
     },
     prevPage () {
       this.pageNum -= 1;
+    },
+    seletectPage (k) {
+      this.pageNum = k-1;
     }
   },
   computed : {
@@ -76,10 +77,19 @@ export default {
 
 <style>
 #review-list {
-  color: white !important;
+  width: 100%;
+  margin: auto;
+  background-color: rgb(15, 15, 15) ;
+}
+#article-list{
+  width: 90%;
+  margin: auto;
 }
 .button {
   background-color: white;
 }
-
+.padding {
+  display: flex;
+  justify-content: center;
+}
 </style>
