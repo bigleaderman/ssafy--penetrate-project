@@ -51,6 +51,7 @@
             <span class="review-list">
               <movie-review-list
                 :reviews="moviedetail.scores"
+                :moviePk="moviedetail.pk"
                 class="mt-5"
               ></movie-review-list>
             </span>

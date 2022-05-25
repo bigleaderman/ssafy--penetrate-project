@@ -173,12 +173,18 @@ export default {
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
     },
+<<<<<<< HEAD
     GETWEATHER(state, data) {
       state.weather = data.main
     },
     GETTIME(state, hour){
       state.time = hour
     } 
+=======
+    DELETE_SCORE(state, scores) {
+      state.moviedetail.scores = scores
+    }
+>>>>>>> complete
   },
 
   actions: {
@@ -263,6 +269,7 @@ export default {
           console.log(err)
         })
     },
+<<<<<<< HEAD
     getWeather({commit}){
       const now = new Date
       axios({
@@ -275,5 +282,20 @@ export default {
           commit('GETHOUR', now.getHours())
         })
     },
+=======
+    DeleteReview({ commit, getters }, { moviePk, scorePk}) {
+      axios({
+        url: drf.movies.updateDeleteReview(moviePk, scorePk),
+        method: 'delete',
+        headers: getters.authHeader,
+      })
+        .then((res) => {
+          commit('DELETE_SCORE', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+>>>>>>> complete
   },
 }
