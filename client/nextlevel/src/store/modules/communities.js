@@ -37,6 +37,9 @@ export default {
         // })
         return state.reviews
       }
+    },
+    nowCategory(state) {
+      return state.category
     }
   },
 

@@ -1,40 +1,43 @@
 <template>
-  <div id="review-list">
-    <div id="article-list">
-      <table class="table" style="width:100%">
-        <th class="row table-secondary" style="color:white">
-          <td class="col col-2">번호</td>
-          <td class="col col-8">제목</td>
-          <td class="col col-2">작성자</td>
-          <!-- <td class="table-date">날짜</td> -->
-        </th>
-        <tr v-for="review in paginatedData" :key="review.pk" >
-          <router-link 
-          :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk}}"
-          class="row"
-          style="color:white">  
-          <td class="col col-2"> {{ review.pk }} </td>
-          <td class="col col-8"> {{ review.title }} <span id="small-text">{{ review.comment_count }}</span></td>
+  <div>
+    <div id="community-contents">
+      <table>
+        <tr>
+          <th id="num">번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+        <!-- <td class="table-date">날짜</td> -->
+        </tr>
+        <tr v-for="review in paginatedData" :key="review.pk">
+          <td id="num" class="col col-2"> {{ review.pk }} </td>
+          <td class="col col-8"> 
+            <router-link 
+            :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk}}">  
+            {{ review.title }} <span id="small-text">{{ review.comment_count }}</span>
+            </router-link> 
+            </td>
           <td class="col col-2"> {{ review.user.username }} </td>
             <!-- <td class="table-date">{{ review.created_at }}</td> -->
-          </router-link> 
         </tr>
-
       </table>
+    
     </div>
+    <router-link :to="{ name: 'createReview' }"><div class="btn btn-sm btn-warning" style="margin-top:5px">글만들기</div></router-link>
     <div class="padding">
       <ul class="pagination">
-        <li class="page-item"><a class="btn btn-outline-warning" @click.prevent="prevPage" 
+        <li class="page-item"><a class="btn btn-outline-secondary btn-sm" @click.prevent="prevPage" 
         :class="{ 'disabled' : pageNum === 0}">이전</a></li>
         <li class="page-item" v-for="k in pageCount" :key="k"><a 
-        class="btn btn-outline-warning" 
+        class="btn btn-outline-secondary btn-sm" 
         @click.prevent="seletectPage(k)"
         :class="{ 'active' : k === pageNum + 1 }"
         >{{k}}</a></li>
-        <li class="page-item"><a class="btn btn-outline-warning" @click.prevent="nextPage">다음</a></li>
+        <li class="page-item"><a class="btn btn-outline-secondary btn-sm" @click.prevent="nextPage"
+        :class="{ 'disabled' : pageNum + 1 === pageCount}">다음</a></li>
       </ul>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -88,32 +91,30 @@ export default {
 </script>
 
 <style>
-th {
-  color: white;
-}
-tr {
-  display: table-row-group;
-  vertical-align: middle;
-  border-color: inherit;
+#num {
+  padding: 0px 0px 0px 10px;
 }
 table {
-
   width: 100%;
-  padding: 25px;
+
+}
+table tr:first-child {
+  border-bottom: 3px solid rgb(80, 80, 80);
+  border-top:0px;
+}
+tr{
+  border-top: 1px solid rgb(81, 81, 81);
+  height: 40px !important;
+}
+th, td {
+  vertical-align : middle ;
 }
 
-#review-list {
-  width: 70%;
-  margin: auto;
-}
-#article-list{
-  width: 100%;
-  margin: auto;
-}
 .button {
   background-color: white;
 }
 .padding {
+  margin-top :30px ;
   display: flex;
   justify-content: center;
 }
