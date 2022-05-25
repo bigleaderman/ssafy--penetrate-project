@@ -85,7 +85,7 @@ export default {
 }
 .selected {
   opacity: 0.5;
-  border: 1.5px solid rgb(180, 180, 180);
+  border: 0.5px solid rgb(180, 180, 180);
 }
 a {
   text-decoration: none;

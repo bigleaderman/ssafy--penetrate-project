@@ -29,6 +29,9 @@ export default {
         }
       })
     },
+    recommendMovie(state) {
+      return state.recommendMovie
+    },
     mainCarouselMovie(state) {
       return state.movies.filter((movie, idx) => {
         if (idx < 10) {
