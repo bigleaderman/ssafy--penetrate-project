@@ -43,7 +43,7 @@
         </div>
         <div>
           <div class="review">
-            <h2 class="text">한줄리뷰 | 총{{ scoreMovie.score_count }}건 | 평점{{ scoreMovie.score_sum }}</h2>
+            <h2 class="text">한줄리뷰 | 총{{ scoreMovie.length }}건 | 평점{{ scoreMovie.result }}</h2>
             <hr />
             <span class="review-form">
               <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>
