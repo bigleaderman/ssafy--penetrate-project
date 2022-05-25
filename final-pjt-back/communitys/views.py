@@ -121,10 +121,10 @@ def comment_like(request, review_pk, comment_pk):
     if comment.like_users.filter(pk=user.pk).exists():
         comment.like_users.remove(user)
         comments = review.comments.all()
-        serializer = CommentSerializer(comments)
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
     else:
         comment.like_users.add(user)
         comments = review.comments.all()
-        serializer = CommentSerializer(comments)
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
