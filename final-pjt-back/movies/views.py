@@ -1,9 +1,7 @@
 from django.shortcuts import get_object_or_404
-from django.db.models import Sum, Avg
 import pandas as pd
 import numpy as np
 import warnings; warnings.filterwarnings('ignore')
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -38,17 +36,17 @@ def movie(request):
     movie_time_list = ["Family", "History", "Fantasy", "Documentary"]
     idx = weather_list.index(weather)
     
-    movies_time = Movie.objects.annotate(score_sum=Avg('scores__number', distinct=True)).filter(genres__icontains=movie_time_list[time_idx]).order_by('-vote_average')[:10]
+    movies_time = Movie.objects.filter(genres__icontains=movie_time_list[time_idx]).order_by('-vote_average')[:10]
     
-    movies_weather = Movie.objects.annotate(score_sum=Avg('scores__number', distinct=True)).filter(Q(genres__icontains=movie_genres_list[idx][0]) | Q(genres__icontains=movie_genres_list[idx][1])).order_by('-popularity')[0:10]
+    movies_weather = Movie.objects.filter(Q(genres__icontains=movie_genres_list[idx][0]) | Q(genres__icontains=movie_genres_list[idx][1])).order_by('-popularity')[0:10]
     
-    movies_now = Movie.objects.annotate(score_sum=Avg('scores__number', distinct=True)).filter(is_active=1)
+    movies_now = Movie.objects.filter(is_active=1)
     
-    movies_top10_popular = Movie.objects.annotate(score_sum=Avg('scores__number', distinct=True)).order_by('-vote_average').order_by('-popularity')[:10]
+    movies_top10_popular = Movie.objects.order_by('-vote_average').order_by('-popularity')[:10]
     
-    movies_korea_top10 = Movie.objects.annotate(score_sum=Avg('scores__number', distinct=True)).filter(original_language='ko').order_by('-popularity')[:10]
+    movies_korea_top10 = Movie.objects.filter(original_language='ko').order_by('-popularity')[:10]
     
-    movies_animation = Movie.objects.annotate(score_sum=Avg('scores__number', distinct=True)).filter(genres__icontains="Animation").order_by('-popularity')[:10]
+    movies_animation = Movie.objects.filter(genres__icontains="Animation").order_by('-popularity')[:10]
     result = list(movies_now) + list(movies_weather) + list(movies_time) + list(movies_top10_popular) + list(movies_korea_top10) + list(movies_animation)
     serializer =  MovieSerializer(result, many=True)
     return Response(serializer.data)
@@ -82,6 +80,8 @@ def score_update_or_delete(request, movie_pk, score_pk):
                 scores = movie.scores.all()
                 serializer = ScoreSerializer(scores, many=True)
                 return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete_score():
         if request.user == score.user:
@@ -89,7 +89,9 @@ def score_update_or_delete(request, movie_pk, score_pk):
             scores = movie.scores.all()
             serializer = ScoreSerializer(scores, many=True)
             return Response(serializer.data)
-    
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
     if request.method == 'PUT':
         return update_score()
     elif request.method == 'DELETE':
@@ -130,7 +132,7 @@ def recommendation(request):
         i =0 
         while len(movie_list) != 6:
             if val[i][0] not in number_list:
-                movie_list += list(Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(pk=val[i][0]))
+                movie_list += list(Movie.objects.filter(pk=val[i][0]))
             i += 1
         serializer = MovieSerializer(movie_list, many=True)
         return Response(serializer.data)
@@ -140,3 +142,9 @@ def recommendation(request):
         return get_movie()
     elif request.method == 'POST':
         return post_movie()
+
+@api_view(['POST'])
+def searchmovie(request):
+    search_movies = Movie.objects.filter(genres__icontains=request.data).order_by('-vote_average')[:10]
+    serializer = MovieSerializer(search_movies)
+    return Response(serializer.data)

@@ -131,6 +131,9 @@ export default {
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
     },
+    DELETE_SCORE(state, scores) {
+      state.moviedetail.scores = scores
+    }
   },
 
   actions: {
@@ -210,6 +213,19 @@ export default {
       })
         .then(res => {
           commit('RECOMMEND_MOVIES', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    DeleteReview({ commit, getters }, { moviePk, scorePk}) {
+      axios({
+        url: drf.movies.updateDeleteReview(moviePk, scorePk),
+        method: 'delete',
+        headers: getters.authHeader,
+      })
+        .then((res) => {
+          commit('DELETE_SCORE', res.data)
         })
         .catch(err => {
           console.log(err)

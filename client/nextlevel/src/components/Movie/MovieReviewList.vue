@@ -27,7 +27,11 @@
             >★</span
           >
           / {{ review.content }}
+          <span v-if="currentUser.username === review.user.username">
+            <button @click="reviewDelete({review, moviePk})">delete</button>
+          </span>
         </p>
+        
       </slide>
       <hooper-pagination slot="hooper-addons"></hooper-pagination>
     </hooper>
@@ -37,6 +41,7 @@
 <script>
 import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
 import "hooper/dist/hooper.css";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: "MovieReivewList",
@@ -44,14 +49,31 @@ export default {
     reviews: {
       type: Array,
     },
+    moviePk: Number,
   },
-
+  computed: {
+    ...mapGetters(['currentUser']),
+  },
   components: {
     Hooper,
     Slide,
     HooperPagination,
   },
-};
+  methods:{
+    ...mapActions(['DeleteReview']),
+    reviewDelete(review){
+      console.log(review)
+      console.log(review.review.pk)
+      console.log(this.moviePk)
+      this.DeleteReview ({
+        moviePk: this.moviePk,
+        scorePk : review.review.pk,
+        score: review.review,
+      })
+      }
+    }
+    
+  }
 </script>
 
 <style>
