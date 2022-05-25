@@ -15,7 +15,15 @@
       </div>
     </div>
 
-    <button id="myButton" @click="deleteMovie"><h1>X</h1></button>
+    <button>
+      <img
+        src="@/assets/x-button.png"
+        id="myButton"
+        @click="deleteMovie"
+        style="width: 2.5%; border-radius: 70%"
+        alt=""
+      />
+    </button>
 
     <div id="second" class="row">
       <div class="col col-12 col-lg-6" style="margin: 0.5% 0px 0px 3%">
@@ -152,7 +160,7 @@ export default {
 }
 #myButton {
   position: fixed;
-  left: 100%;
+  left: 99.5%;
   transform: translate(-100%);
   width: 50px;
 }
