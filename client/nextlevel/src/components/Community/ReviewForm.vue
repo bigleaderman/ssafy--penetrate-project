@@ -1,40 +1,47 @@
 <template>
-  <div id="community-contents" style="padding:20px">
-    <form  @submit.prevent="onSubmit" style="width : 90%; margin:auto">
-      <div style="width:100%">
-        <div>
-          <select name="kind" v-model="newReview.kind" style="width:20%; margin : auto">
+  <div>
+    <div id="community-contents" style="height:600px; padding: 30px 20px !important;">
+      <form  @submit.prevent="onSubmit" style="width : 90%; margin:auto">
+        <h1>
+          글쓰기
+        </h1>
+        <hr>
+        <div id="controller">
+          <router-link :to="{name : 'communities'}"><button>취소</button></router-link>  <span></span> 
+          <button>{{action}}</button>
+        </div>
+        <div style = "display:flex;">
+          <select name="kind" v-model="newReview.kind" style="width:20%; height:50px; margin : auto">
             <option value="0"> 분류선택</option>
             <option value="1"> 영화리뷰</option>
             <option value="2"> 영화정보</option>
             <option value="3"> 자유게시판</option>
           </select>
-        </div>
-        <input
-          v-model="newReview.title"
-          type="text"
-          id="title"
-          required
-          style="width:60%; margin:0px 10px auto"
-          />
-      </div>
-      <div>
-      </div>
-      <div>
-        <label for="content">내용: </label>
-        <textarea
-          v-model="newReview.content"
-          type="text"
-          id="content"
-          required
-        ></textarea>
-      </div>
-      <div>
-        <button>{{action}}</button>
-      </div>
-    </form>
-  </div>
 
+          <input
+            v-model="newReview.title"
+            placeholder="제목"
+            type="text"
+            id="title"
+            required
+            style="width:70%; margin: auto; height : 50px"
+            />
+        </div>
+
+        <div style="margin:auto; width:100%; padding: 30px 20px">
+          <textarea
+            v-model="newReview.content"
+            type="textarea"
+            id="content"
+            required
+            style="width:100%; height:300px; resize:none"
+          ></textarea>
+        </div>
+        
+          <button id="my-create-button">{{action}}</button>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -73,5 +80,16 @@ methods : {
 </script>
 
 <style>
+#controller {
+  position : relative ;
+  left: 84%;
+  bottom: 60px;
+}
 
+
+#my-create-button {
+  position: relative;
+  bottom: 20px;
+  left : 90%
+}
 </style>

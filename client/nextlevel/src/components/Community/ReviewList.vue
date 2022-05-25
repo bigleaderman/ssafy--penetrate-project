@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link :to="{ name: 'createReview' }"><div id="create-btn" class="btn btn-sm btn-warning" style="margin-top:5px">글만들기</div></router-link>
     <div id="community-contents">
       <table>
         <tr>
@@ -22,7 +23,6 @@
       </table>
     
     </div>
-    <router-link :to="{ name: 'createReview' }"><div class="btn btn-sm btn-warning" style="margin-top:5px">글만들기</div></router-link>
     <div class="padding">
       <ul class="pagination">
         <li class="page-item"><a class="btn btn-outline-secondary btn-sm" @click.prevent="prevPage" 
@@ -57,7 +57,7 @@ export default {
     pageSize : {
       type : Number,
       required : false,
-      default : 20,
+      default : 15,
     }
   },
   methods : {
@@ -110,8 +110,10 @@ th, td {
   vertical-align : middle ;
 }
 
-.button {
-  background-color: white;
+#create-btn {
+  position: relative;
+  left : 93%;
+  bottom: 10px;
 }
 .padding {
   margin-top :30px ;
