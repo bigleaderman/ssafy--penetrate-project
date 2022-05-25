@@ -40,7 +40,7 @@ def movie(request):
     
     movies_time = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(genres__icontains=movie_time_list[time_idx]).order_by('-vote_average')[:10]
     
-    movies_weather = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(Q(genres__icontains=movie_genres_list[idx][0]) | Q(genres__icontains=movie_genres_list[idx][1])).order_by('-popularity')[10:20]
+    movies_weather = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(Q(genres__icontains=movie_genres_list[idx][0]) | Q(genres__icontains=movie_genres_list[idx][1])).order_by('-popularity')[0:10]
     
     movies_now = Movie.objects.annotate(score_sum=Sum('scores__number', distinct=True)).filter(is_active=1)
     
