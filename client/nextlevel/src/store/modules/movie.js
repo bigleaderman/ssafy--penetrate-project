@@ -36,17 +36,11 @@ export default {
         }
         result = (sum / length).toFixed(1)
       }
-      // const result = state.moviedetail.scores.reduce(function add(sum, currValue) {
-      //   return sum + currValue;
-      // }, 0);
       const movie_score = {
-
         length: length,
         result: result,
         score_count: state.moviedetail.score_count,
         score_sum: state.moviedetail.score_sum
-
-
       }
       return movie_score
     },
@@ -173,18 +167,15 @@ export default {
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
     },
-<<<<<<< HEAD
     GETWEATHER(state, data) {
       state.weather = data.main
     },
-    GETTIME(state, hour){
+    GETHOUR(state, hour){
       state.time = hour
-    } 
-=======
+    } ,
     DELETE_SCORE(state, scores) {
       state.moviedetail.scores = scores
     }
->>>>>>> complete
   },
 
   actions: {
@@ -269,7 +260,6 @@ export default {
           console.log(err)
         })
     },
-<<<<<<< HEAD
     getWeather({commit}){
       const now = new Date
       axios({
@@ -282,7 +272,6 @@ export default {
           commit('GETHOUR', now.getHours())
         })
     },
-=======
     DeleteReview({ commit, getters }, { moviePk, scorePk}) {
       axios({
         url: drf.movies.updateDeleteReview(moviePk, scorePk),
@@ -296,6 +285,5 @@ export default {
           console.log(err)
         })
     }
->>>>>>> complete
   },
 }
