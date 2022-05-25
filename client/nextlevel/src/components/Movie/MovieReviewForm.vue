@@ -1,9 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="reviewSubmit">
-      <div class="d-flex justify-content-between">
-        <div></div>
-
+      <div class="d-flex">
         <div>
           <div class="d-flex mt-1">
             <label for="score">평점 : </label>

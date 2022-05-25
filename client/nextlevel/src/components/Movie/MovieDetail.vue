@@ -43,7 +43,7 @@
         </div>
         <div>
           <div class="review">
-            <h2 class="text-end">한줄리뷰</h2>
+            <h2 class="text">한줄리뷰</h2>
             <hr />
             <span class="review-form">
               <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>

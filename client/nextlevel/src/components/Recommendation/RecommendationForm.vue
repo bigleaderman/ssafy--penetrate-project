@@ -21,13 +21,19 @@
       </div>
     </div>
     <div class="d-flex justify-content-center py-5 grad" id="button-div">
-      <button
-        class="row btn btn-warning"
-        id="select"
-        @click="recommendMovie(selectedData)"
+      <router-link
+        aria-current="page"
+        :to="{ name: 'recommendationMovie' }"
+        id="movie-router"
       >
-        <a>선택완료</a>
-      </button>
+        <button
+          class="row btn btn-warning"
+          id="select"
+          @click="recommendMovie(selectedData)"
+        >
+          선택 완료
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -64,6 +70,9 @@ export default {
 </script>
 
 <style>
+#movie-router {
+  font-size: 20px;
+}
 #box2 {
   height: 100%;
   padding: 50px 5%;
