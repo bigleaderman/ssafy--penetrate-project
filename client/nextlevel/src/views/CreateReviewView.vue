@@ -1,7 +1,7 @@
 <template>
   <div id="communitybody">
     <community-nav></community-nav>
-    <div id="community-form">
+    <div id="community-form" style="height: 700px">
       <review-form :review="setCredential" action="create"></review-form>
     </div>
   </div>
@@ -38,12 +38,5 @@ export default {
 </script>
 
 <style>
-  #communitybody {
-    background-color: rgb(150, 150, 150);
-  }
-  .community-form {
-    width: 60%;
-    margin: 30px auto;
-    border-radius: 10px;
-  }
+
 </style>
