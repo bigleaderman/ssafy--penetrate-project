@@ -40,7 +40,7 @@
                   id="password1"
                   required
                   class="form-control"
-                  placeholder="Username"
+                  placeholder="Password1"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                 />
@@ -59,7 +59,7 @@
                   id="password2"
                   required
                   class="form-control"
-                  placeholder="Username"
+                  placeholder="Password2"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                 />

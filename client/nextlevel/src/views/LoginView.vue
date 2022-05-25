@@ -39,7 +39,7 @@
                 id="password"
                 required
                 class="form-control"
-                placeholder="Username"
+                placeholder="Password"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />

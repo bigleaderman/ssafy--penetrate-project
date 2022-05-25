@@ -1,14 +1,12 @@
 <template>
-  <div class="account-error-list">
-    <p v-for="(errors, field) in authError" :key="field">
-      {{ field }}
-      <ul>
-        <li v-for="(error, idx) in errors" :key="idx">
-          <p>잘못된 정보가 호출되었습니다.</p>
-        </li>
-      </ul>
-    </p>
-
+  <div class="account-error-list mb-4">
+    <div v-for="(errors, field) in authError" :key="field">
+      <div>
+        <div v-for="(error, idx) in errors" :key="idx">
+          <div>{{ error }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,6 +23,6 @@ export default {
 
 <style>
 .account-error-list {
-  color: red;
+  color: rgb(236, 76, 76);
 }
 </style>

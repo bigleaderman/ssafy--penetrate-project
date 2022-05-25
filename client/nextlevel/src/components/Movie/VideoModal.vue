@@ -5,12 +5,14 @@
         <div id="parent">
           <iframe :src="video"></iframe>
         </div>
-        <button
-          id="video-stop"
-          class="btn btn-warning mybutton"
-          @click="alterClose"
-        >
-          X
+        <button class="">
+          <img
+            id="video-stop"
+            @click="alterClose"
+            src="@/assets/x-button.png"
+            style="width: 3%; border-radius: 7px"
+            alt=""
+          />
         </button>
       </div>
     </div>
@@ -49,7 +51,6 @@ export default {
   position: fixed;
   top: 0%;
   left: 100%;
-  background-color: white;
 }
 #myButton {
   background-color: black;
