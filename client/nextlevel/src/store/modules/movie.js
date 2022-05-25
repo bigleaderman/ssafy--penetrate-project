@@ -11,6 +11,7 @@ import axios from 'axios'
 // const API_KEY_YOU = 'AIzaSyBliR49ASudZ4nr9LHDc9U7IKb9aBnSXVA'
 const API_KEY_YOU = 'AIzaSyCVHmCCeL7luFGStLcnlaiDYXj1JKHktTM'
 const API_URL_YOU = 'https://www.googleapis.com/youtube/v3/search'
+const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?lat=37&lon=126&appid=8fff33f093360f79e7d212707ac9a191'
 
 export default {
   // namespaced: true,
@@ -19,7 +20,9 @@ export default {
     moviedetail: null,
     movievideo: '',
     recommendMovie: null,
-    reMovies: []
+    reMovies: [],
+    weather : null,
+    time : null,
   },
   getters: {
     scoreMovie(state) {
@@ -117,6 +120,35 @@ export default {
     },
     getMovieReview(state) {
       if (state.moviedetail) return state.moviedetail.scores
+    },
+    toDayWeather(state){
+      // 날씨 맨트
+      const weather = ['Thunderstorm', 'Drizzle', 'Rain', 'Snow', 'Atmosphere', 'Clear', 'Clouds']
+      const weatherMap = [
+        '소나기 올 때는',
+        '잔잔한 이슬비와',
+        '비오는 날',
+        '크리스마스에는 집에서',
+        '안개가득한 날',
+        '화창한 날에는',
+        '오늘처럼 꿀꿀한 날',
+      ]
+      const num = weather.indexOf(state.weather)
+      return weatherMap.splice(num,1)[0]
+    },
+    nowTime(state){
+      let time_idx = 0
+      if (5 <= state.time && state.time <= 10) time_idx = 0
+      else if (11 <= state.time && state.time <= 16) time_idx = 1
+      else if (17 <= state.time && state.time <= 22) time_idx = 2
+      else time_idx = 3
+      const timeMap = [
+        ['피곤한 아침을 깨워줄', '킬링타임 영화들'],
+        ['무료한 오후', '역사 공부 어떠세요?'],
+        ['일상 후', '판타지 세계로'],
+        ['잠안오는 새벽', '다큐멘터리 한편']
+      ]
+      return timeMap.splice(time_idx,1)
     }
   },
   mutations: {
@@ -141,6 +173,12 @@ export default {
     RECOMMEND_MOVIES(state, movie) {
       state.recommendMovie = movie
     },
+    GETWEATHER(state, data) {
+      state.weather = data.main
+    },
+    GETTIME(state, hour){
+      state.time = hour
+    } 
   },
 
   actions: {
@@ -224,6 +262,18 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+    getWeather({commit}){
+      const now = new Date
+      axios({
+        url : WEATHER_URL,
+        method : 'get'
+      })
+        .then(res =>{
+          
+          commit('GETWEATHER', res.data.weather[0])
+          commit('GETHOUR', now.getHours())
+        })
+    },
   },
 }

@@ -13,7 +13,9 @@
         <span v-if="currentUser.username === comment.user.username && !isEditing">
           <a href="#" @click.prevent="switchIsEditing">Edit</a> |
           <a href="#" @click.prevent="deleteComment(payload)">Delete</a> |
-          <a href="#" @click.prevent="commentLike(payload)">{{comment.like_count}}</a>
+          <a href="#" @click.prevent="commentLike(payload)">
+            <i class="far fa-heart"></i>
+            {{comment.like_count}}</a>
         </span>
     </div>
   </div>

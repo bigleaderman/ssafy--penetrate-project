@@ -17,7 +17,9 @@
         <div id="information" style="margin :0px 20px">
           <span style="margin-right : 20px">작성자 : {{selectedReview.user.username }}</span>
           <span style="margin-right : 20px">작성 : {{ created_time }}</span>
-          <span> 좋아요 : {{ selectedReview.like_count }} <button @click="likeReview(selectedReview.pk)">좋아요</button></span>
+          <span 
+          @click="likeReview(selectedReview.pk)"><i class="fas fa-heart"></i> {{ selectedReview.like_count }} </span>
+
           <br>
           <div v-if="isAuthor">
             <div id="controlbox">

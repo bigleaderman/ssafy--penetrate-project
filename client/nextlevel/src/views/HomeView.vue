@@ -19,13 +19,13 @@
     <div class="row sub-div">
       <!-- 서브 캐러셀 -->
       <div class="h2 my-text">
-        <span class="yellow">오늘의 날씨</span>와 어울리는 영화 ☁
+        <span class="yellow">{{ toDayWeather }}</span> 이 영화 어때요? ☁
       </div>
       <sub-carousel :movies="SubCarouselMovie"></sub-carousel>
     </div>
     <div class="row sub-div">
       <div class="h2 my-text">
-        <span class="yellow">지금 시간에는 </span>이 영화 어때요? 🕑
+        <span class="yellow">{{nowTime[0][0]}} </span>{{nowTime[0][1]}} 🕑
       </div>
       <sub-carousel :movies="SubCarouselMovie2"></sub-carousel>
     </div>
@@ -72,11 +72,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser"]),
+    ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser", "getWeather"]),
   },
 
   created() {
     this.getMovies();
+    this.getWeather();
   },
 
   computed: {
@@ -89,6 +90,8 @@ export default {
       "SubCarouselMovie5",
       "isModalView",
       "currentUser",
+      "toDayWeather",
+      "nowTime"
     ]),
   },
 };
