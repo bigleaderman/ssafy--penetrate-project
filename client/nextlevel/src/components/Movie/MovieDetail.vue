@@ -18,7 +18,7 @@
     <button id="myButton" @click="deleteMovie"><h1>X</h1></button>
 
     <div id="second" class="row">
-      <div class="col col-12 col-lg-6" style="margin: 2% 0px 0px 3%">
+      <div class="col col-12 col-lg-6" style="margin: 0.5% 0px 0px 3%">
         <div class="movie-detail">
           <h1>{{ moviedetail.title }}</h1>
           <br />
@@ -38,15 +38,28 @@
               예고편보기
             </button>
           </div>
-          <hr />
-          <p>{{ moviedetail.overview }}</p>
+          <div id="border-2" class="mt-2">
+            <p class="mt-3">{{ moviedetail.overview }}</p>
+          </div>
         </div>
         <div>
           <div class="review">
-            <h2 class="text">한줄리뷰 | 총{{ scoreMovie.length }}건 | 평점{{ scoreMovie.result }}</h2>
-            <hr />
+            <div id="border-1" class="mb-2">
+              <div class="mb-3">
+                <span class="h3 text"> 한 줄 리뷰</span>
+                <span class="h5">
+                  ㆍ 총{{ scoreMovie.length }}건 | 평점{{
+                    scoreMovie.result
+                  }}</span
+                >
+              </div>
+            </div>
+
             <span class="review-form">
-              <movie-review-form :moviePk="moviedetail.pk" :scores="moviedetail.scores" ></movie-review-form>
+              <movie-review-form
+                :moviePk="moviedetail.pk"
+                :scores="moviedetail.scores"
+              ></movie-review-form>
             </span>
             <span class="review-list">
               <movie-review-list
@@ -99,6 +112,12 @@ export default {
 </script>
 
 <style>
+#border-1 {
+  border-bottom: 0.5px solid rgb(171, 171, 171);
+}
+#border-2 {
+  border-top: 0.5px solid rgb(171, 171, 171);
+}
 .movie-detail {
   padding: 0px 0px 30px 0px;
 }

@@ -1,4 +1,4 @@
-// import router from '@/router'
+import router from '@/router'
 import drf from '@/api/drf'
 import axios from 'axios'
 
@@ -21,8 +21,9 @@ export default {
     movievideo: '',
     recommendMovie: null,
     reMovies: [],
-    weather : null,
-    time : null,
+    weather: null,
+    time: null,
+    searchMovies: []
   },
   getters: {
     scoreMovie(state) {
@@ -55,11 +56,7 @@ export default {
       return state.recommendMovie
     },
     SearchMovie(state) {
-      return state.movies.filter((movie, idx) => {
-        if (idx < 60) {
-          return movie
-        }
-      })
+      return state.searchMovies
     },
     mainCarouselMovie(state) {
       return state.movies.filter((movie, idx) => {
@@ -115,7 +112,7 @@ export default {
     getMovieReview(state) {
       if (state.moviedetail) return state.moviedetail.scores
     },
-    toDayWeather(state){
+    toDayWeather(state) {
       // 날씨 맨트
       const weather = ['Thunderstorm', 'Drizzle', 'Rain', 'Snow', 'Atmosphere', 'Clear', 'Clouds']
       const weatherMap = [
@@ -128,9 +125,9 @@ export default {
         '오늘처럼 꿀꿀한 날',
       ]
       const num = weather.indexOf(state.weather)
-      return weatherMap.splice(num,1)[0]
+      return weatherMap.splice(num, 1)[0]
     },
-    nowTime(state){
+    nowTime(state) {
       let time_idx = 0
       if (5 <= state.time && state.time <= 10) time_idx = 0
       else if (11 <= state.time && state.time <= 16) time_idx = 1
@@ -142,7 +139,7 @@ export default {
         ['일상 후', '판타지 세계로'],
         ['잠안오는 새벽', '다큐멘터리 한편']
       ]
-      return timeMap.splice(time_idx,1)
+      return timeMap.splice(time_idx, 1)
     }
   },
   mutations: {
@@ -170,14 +167,17 @@ export default {
     GETWEATHER(state, data) {
       state.weather = data.main
     },
-    GETHOUR(state, hour){
+    GETHOUR(state, hour) {
       state.time = hour
-    } ,
+    },
     DELETE_SCORE(state, scores) {
       state.moviedetail.scores = scores
     },
     UPDATE_SCORE(state, scores) {
       state.moviedetail.scores = scores
+    },
+    SEARCH_MOVIE(state, searchMovies) {
+      state.searchMovies = searchMovies
     },
   },
 
@@ -262,19 +262,19 @@ export default {
           console.log(err)
         })
     },
-    getWeather({commit}){
+    getWeather({ commit }) {
       const now = new Date
       axios({
-        url : WEATHER_URL,
-        method : 'get'
+        url: WEATHER_URL,
+        method: 'get'
       })
-        .then(res =>{
-          
+        .then(res => {
+
           commit('GETWEATHER', res.data.weather[0])
           commit('GETHOUR', now.getHours())
         })
     },
-    DeleteReview({ commit, getters }, { moviePk, scorePk}) {
+    DeleteReview({ commit, getters }, { moviePk, scorePk }) {
       axios({
         url: drf.movies.updateDeleteReview(moviePk, scorePk),
         method: 'delete',
@@ -287,7 +287,7 @@ export default {
           console.log(err)
         })
     },
-    updateMoiveScore({ commit, getters }, { moviePk, scorePk, number, content}) {
+    updateMoiveScore({ commit, getters }, { moviePk, scorePk, number, content }) {
       axios({
         url: drf.movies.updateDeleteReview(moviePk, scorePk),
         method: 'put',
@@ -299,6 +299,21 @@ export default {
       })
         .then((res) => {
           commit('UPDATE_SCORE', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    searchMovie({ commit, getters }, keyword) {
+      axios({
+        url: drf.accounts.login(),
+        method: 'post',
+        data: { keyword },
+        headers: getters.authHeader,
+      })
+        .then(res => {
+          commit('SEARCH_MOVIE', res.data)
+          router.push({ name: 'search' })
         })
         .catch(err => {
           console.log(err)

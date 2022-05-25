@@ -10,6 +10,16 @@
     <!-- 모달 끝 -->
 
     <!-- 시작박스 -->
+
+    <form @submit.prevent="searchmovie(keyword)" class="d-flex" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-warning" type="submit">Search</button>
+    </form>
     <div class="row main-div">
       <div v-for="movie in SearchMovie" :key="movie.id" class="slide">
         <div class="slide-div" @click="getDetail(movie)">
@@ -38,10 +48,6 @@
           </div>
         </div>
       </div>
-      <!-- 메인캐러셀시작 -->
-      <!-- <span class="h1">메인캐러샐</span> -->
-
-      <main-carousel :movies="mainCarouselMovie"></main-carousel>
     </div>
   </div>
 </template>
@@ -50,7 +56,11 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "SearchView",
-
+  data() {
+    return {
+      keyword: "",
+    };
+  },
   methods: {
     ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser"]),
   },

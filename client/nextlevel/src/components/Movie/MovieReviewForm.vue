@@ -2,78 +2,11 @@
   <div>
     <div v-if="bools">
       <form @submit.prevent="score_update">
-      <div class="d-flex">
-        <div>
-          <div class="d-flex mt-1">
-            <label for="score">평점 : </label>
-            <div class="star-rating space-x-4">
-              <input
-                type="radio"
-                id="5-stars"
-                name="rating"
-                value="5"
-                v-model="number"
-              />
-              <label for="5-stars" class="star pr-4">★</label>
-              <input
-                type="radio"
-                id="4-stars"
-                name="rating"
-                value="4"
-                v-model="number"
-              />
-              <label for="4-stars" class="star">★</label>
-              <input
-                type="radio"
-                id="3-stars"
-                name="rating"
-                value="3"
-                v-model="number"
-              />
-              <label for="3-stars" class="star">★</label>
-              <input
-                type="radio"
-                id="2-stars"
-                name="rating"
-                value="2"
-                v-model="number"
-              />
-              <label for="2-stars" class="star">★</label>
-              <input
-                type="radio"
-                id="1-star"
-                name="rating"
-                value="1"
-                v-model="number"
-              />
-              <label for="1-star" class="star">★</label>
-            </div>
-          </div>
-          <br />
-
-          <div class="d-flex justify-content-end">
-            <label for="review">리뷰 : </label
-            ><input
-              class="review-input form-control vote-detail"
-              type=""
-              id="review"
-              v-model="content"
-            />
-            <button class="btn btn-outline-warning vote-detail">
-              <p id="text-smaller">수정하기</p>
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
-    </div>
-    <div v-else>
-      <form @submit.prevent="reviewSubmit">
         <div class="d-flex">
-          <div>
+          <div class="d-flex">
             <div class="d-flex mt-1">
-              <label for="score">평점 : </label>
-              <div class="star-rating space-x-4">
+              <label for="score">평점 :</label>
+              <div class="star-rating space-x-4 mx-2">
                 <input
                   type="radio"
                   id="5-stars"
@@ -118,8 +51,75 @@
             </div>
             <br />
 
-            <div class="d-flex justify-content-end">
-              <label for="review">리뷰 : </label
+            <div class="d-flex justify-content-end mt-1">
+              <label for="review"> </label
+              ><input
+                class="review-input form-control vote-detail"
+                type=""
+                id="review"
+                v-model="content"
+              />
+              <button class="btn btn-outline-warning vote-detail">
+                <p id="text-smaller">수정하기</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div v-else>
+      <form @submit.prevent="reviewSubmit">
+        <div class="d-flex">
+          <div class="d-flex">
+            <div class="d-flex mt-1">
+              <label for="score">평점 :</label>
+              <div class="star-rating space-x-4 mx-2">
+                <input
+                  type="radio"
+                  id="5-stars"
+                  name="rating"
+                  value="5"
+                  v-model="number"
+                />
+                <label for="5-stars" class="star pr-4"> ★</label>
+                <input
+                  type="radio"
+                  id="4-stars"
+                  name="rating"
+                  value="4"
+                  v-model="number"
+                />
+                <label for="4-stars" class="star">★</label>
+                <input
+                  type="radio"
+                  id="3-stars"
+                  name="rating"
+                  value="3"
+                  v-model="number"
+                />
+                <label for="3-stars" class="star">★</label>
+                <input
+                  type="radio"
+                  id="2-stars"
+                  name="rating"
+                  value="2"
+                  v-model="number"
+                />
+                <label for="2-stars" class="star">★</label>
+                <input
+                  type="radio"
+                  id="1-star"
+                  name="rating"
+                  value="1"
+                  v-model="number"
+                />
+                <label for="1-star" class="star">★</label>
+              </div>
+            </div>
+            <br />
+
+            <div class="d-flex justify-content-end mt-1">
+              <label for="review"> </label
               ><input
                 class="review-input form-control vote-detail"
                 type=""
@@ -134,7 +134,6 @@
         </div>
       </form>
     </div>
-    
   </div>
 </template>
 
@@ -147,49 +146,47 @@ export default {
     return {
       number: 0,
       content: "",
-      scorePk : ''
+      scorePk: "",
     };
   },
   props: {
     moviePk: Number,
-    scores: Array
+    scores: Array,
   },
-  computed : {
-    ...mapGetters(['currentUser']),
-    bools () {
-      for (let i=0; i<this.scores.length; i++){
-        if (this.scores[i].user.username === this.currentUser.username){
+  computed: {
+    ...mapGetters(["currentUser"]),
+    bools() {
+      for (let i = 0; i < this.scores.length; i++) {
+        if (this.scores[i].user.username === this.currentUser.username) {
           // this.scorePk = this.scores[i].pk
-          return true
+          return true;
         }
       }
-      return false
-    }
+      return false;
+    },
   },
   methods: {
-    ...mapActions(["setMovieScore", "updateMoiveScore"  ]),
+    ...mapActions(["setMovieScore", "updateMoiveScore"]),
     reviewSubmit() {
       this.setMovieScore({
         moviePk: this.moviePk,
         number: this.number,
         content: this.content,
       });
-      this.number = 0,
-      this.content = ""
+      (this.number = 0), (this.content = "");
     },
     score_update() {
-      for (let i=0; i<this.scores.length; i++){
-        if (this.scores[i].user.username === this.currentUser.username){
+      for (let i = 0; i < this.scores.length; i++) {
+        if (this.scores[i].user.username === this.currentUser.username) {
           this.updateMoiveScore({
             moviePk: this.moviePk,
-            scorePk : this.scores[i].pk,
+            scorePk: this.scores[i].pk,
             number: this.number,
             content: this.content,
-          })
+          });
         }
       }
-      
-    }
+    },
   },
 };
 </script>

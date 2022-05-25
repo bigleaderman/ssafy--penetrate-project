@@ -30,7 +30,11 @@
           <div></div>
           <div></div>
           <div v-if="isLoggedIn">
-            <form class="d-flex" role="search">
+            <form
+              @submit.prevent="searchmovie(keyword)"
+              class="d-flex"
+              role="search"
+            >
               <input
                 class="form-control me-2"
                 type="search"
