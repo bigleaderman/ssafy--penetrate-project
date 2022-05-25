@@ -27,8 +27,8 @@ export default {
       const scores = state.moviedetail.scores
       let sum = 0;
       let result = ''
-      if (length > 0){
-        for (let i = 0; i < length; i++){
+      if (length > 0) {
+        for (let i = 0; i < length; i++) {
           sum += scores[i]['number'];   // 배열의 요소들을 하나씩 더한다.
         }
         result = (sum / length).toFixed(1)
@@ -37,10 +37,13 @@ export default {
       //   return sum + currValue;
       // }, 0);
       const movie_score = {
-        length : length,
-        result : result,
-        score_count : state.moviedetail.score_count,
-        score_sum : state.moviedetail.score_sum
+
+        length: length,
+        result: result,
+        score_count: state.moviedetail.score_count,
+        score_sum: state.moviedetail.score_sum
+
+
       }
       return movie_score
     },
@@ -53,6 +56,13 @@ export default {
     },
     recommendMovie(state) {
       return state.recommendMovie
+    },
+    SearchMovie(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 60) {
+          return movie
+        }
+      })
     },
     mainCarouselMovie(state) {
       return state.movies.filter((movie, idx) => {

@@ -10,6 +10,7 @@
           <div style="width: 10rem" class="mb-3 mx-1">
             <div @click="setBind($event, movie.pk)">
               <img
+                id="first-recom-img"
                 :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
                 class="card-img-top"
                 alt="..."
@@ -20,6 +21,7 @@
         </div>
       </div>
     </div>
+
     <div class="d-flex justify-content-center py-5 grad" id="button-div">
       <router-link
         aria-current="page"
@@ -85,7 +87,7 @@ export default {
 }
 .selected {
   opacity: 0.5;
-  border: 0.5px solid rgb(180, 180, 180);
+  border: 1px solid rgb(255, 255, 255);
 }
 a {
   text-decoration: none;
@@ -110,5 +112,10 @@ a {
   width: 100%;
   height: 200px;
   margin-bottom: 10px;
+}
+#first-recom-img:hover {
+  transform: scale(1.05);
+  transition: all 200ms ease-in;
+  filter: brightness(60%);
 }
 </style>

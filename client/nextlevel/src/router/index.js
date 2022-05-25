@@ -2,9 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 
-import helloView from '../views/helloView.vue'
 
 import HomeView from '../views/HomeView.vue'
+import SearchView from '@/views/SearchView.vue'
+
 import RecommendationView from '@/views/RecommendationView.vue'
 import RecommendationMovie from '@/views/RecommendationMovie.vue'
 
@@ -13,6 +14,7 @@ import CreateReviewView from '@/views/CreateReviewView.vue'
 import ReviewDetailView from '@/views/ReviewDetailView.vue'
 import UpdateReviewView from '@/views/UpdateReviewView.vue'
 
+import helloView from '../views/helloView.vue'
 import LoginView from '@/views/LoginView.vue'
 import LogoutView from '@/views/LogoutView.vue'
 import SignupView from '@/views/SignupView.vue'
@@ -25,6 +27,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: SearchView
   },
   {
     path: '/recommendation',
