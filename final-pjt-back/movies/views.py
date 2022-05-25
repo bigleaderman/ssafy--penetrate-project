@@ -103,7 +103,6 @@ def recommendation(request):
         movies_list = []
         for i in sample_num:
             movies_list.append(movies[i])
-        print(movies_list)
         serializer = RecommandMovieSerializer(movies_list, many=True)
         return Response(serializer.data)
 
