@@ -24,8 +24,8 @@ export default {
   getters: {
     scoreMovie(state) {
       const movie_score = {
-        score_count : state.moviedetail.score_count,
-        score_sum : state.moviedetail.score_sum
+        score_count: state.moviedetail.score_count,
+        score_sum: state.moviedetail.score_sum
       }
       return movie_score
     },
@@ -38,6 +38,13 @@ export default {
     },
     recommendMovie(state) {
       return state.recommendMovie
+    },
+    SearchMovie(state) {
+      return state.movies.filter((movie, idx) => {
+        if (idx < 60) {
+          return movie
+        }
+      })
     },
     mainCarouselMovie(state) {
       return state.movies.filter((movie, idx) => {

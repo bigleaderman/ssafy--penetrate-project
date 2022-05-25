@@ -60,7 +60,6 @@ export default {
       "getDetail",
       "getMovies",
       "deleteMovie",
-      "isModalView",
     ]),
   },
 
@@ -92,8 +91,7 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
 }
-.box3 {
-}
+
 .my-modal {
   box-sizing: border-box;
   background-color: red;

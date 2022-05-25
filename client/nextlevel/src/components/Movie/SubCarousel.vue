@@ -14,6 +14,7 @@
       <slide v-for="movie in movies" :key="movie.id">
         <div class="slide-div" @click="getDetail(movie)">
           <img
+            id="app3img"
             style="cursor: pointer"
             width="100%"
             height="400px"
@@ -83,5 +84,10 @@ export default {
   height: 400px;
   padding: 10px;
   width: 100%;
+}
+#app3img:hover {
+  transform: scale(1.05);
+  transition: all 200ms ease-in;
+  filter: brightness(60%);
 }
 </style>
