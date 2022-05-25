@@ -14,7 +14,9 @@
           <td class="col col-8"> 
             <router-link 
             :to="{ name: 'reviewDetail' , params : {'reviewPk' : review.pk}}">  
-            {{ review.title }} <span id="small-text">{{ review.comment_count }}</span>
+            {{ review.title }} <span id="small-text" style="color:rgb(255, 187, 0);
+            font-size :small;
+            ">[{{ review.comment_count }}]</span>
             </router-link> 
             </td>
           <td class="col col-2"> {{ review.user.username }} </td>

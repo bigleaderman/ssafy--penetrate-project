@@ -2,36 +2,46 @@
   <div id="communitybody">
     <community-nav></community-nav>
     <div id="community-form">
-      <div id="community-contents" style="padding:40px 30px; height : 600px;">
+      <router-link :to="{name:'communities'}"><button id="go-menu" class ="btn btn-warning">목록</button></router-link>
+      <div id="community-contents" style="padding:40px 20px; height : 600px;">
         <div id="title">
-          <div>
-            <div class="row">
-              <div class="col col-2" style="height:10px">
-                <span class="h3" style="background-color:yellow; height:8px !important;">{{setKind}}</span>
+          <div style="margin: 0px 0xpx 25px">
+            <div class>
+              <div style="height:10px padding-bottom:100px !important">
+                <span class="h4" style="; background-color:rgb(255, 187, 0); height:8px !important;">{{setKind}}</span>
               </div>
               <h1 style="color : black" class="col">{{ selectedReview.title }}</h1>
             </div>
           </div>
         </div>
-        <div id="information" >
-          <span></span>
-          <span>작성 : {{ selectedReview.created_at }} | 수정 : {{ selectedReview.created_at }}</span>
+        <div id="information" style="margin :0px 20px">
+          <span style="margin-right : 20px">작성자 : {{selectedReview.user.username }}</span>
+          <span style="margin-right : 20px">작성 : {{ created_time }}</span>
+          <span> 좋아요 : {{ selectedReview.like_count }} <button @click="likeReview(selectedReview.pk)">좋아요</button></span>
           <br>
-          <p> 좋아요 : {{ selectedReview.like_count }} <button @click="likeReview(selectedReview.pk)">좋아요</button></p>
+          <div v-if="isAuthor">
+            <div id="controlbox">
+              <router-link :to="{name:'updateReview', params : {'reviewPk' : selectedReview.pk} }">수정</router-link>
+              <a href="#" @click.prevent="deleteReview(selectedReview.pk)"> 삭제</a>
+            </div>
         </div>
-
-        <div id="review-content">
+        </div>
+        <hr>
+        <div>
           {{ selectedReview.content }}
-          <br>
-          <router-link :to="{name:'communities'}"><button>목록</button></router-link>
-        </div>
-        <div id="controlbox" v-if="isAuthor">
-          <router-link :to="{name:'updateReview', params : {'reviewPk' : selectedReview.pk} }"><button>수정</button></router-link>
-          <button @click.prevent="deleteReview(selectedReview.pk)">삭제</button>
         </div>
       </div>
       <hr>
-      <div>
+      <div style="
+        margin-top : 0px;
+        color : white;
+        padding-left : 5px;
+        margin-bottom : 10px;
+      ">
+        댓글 수 : {{ selectedReview.comments.length }}
+      <hr>
+      </div>
+      <div style="padding-left : 5px;">
         <comment-list :comments="selectedReview.comments"></comment-list>
       </div>
     </div>
@@ -52,8 +62,8 @@ export default {
   data () {
     return {
       myKind : [
-         "영화리뷰",
-         "영화정보",
+        "영화리뷰",
+        "영화정보",
         "자유게시판"
       ]
     }
@@ -63,10 +73,13 @@ export default {
   },
 
   computed : {
-    ...mapGetters(['selectedReview', 'isAuthor']),
+    ...mapGetters(['selectedReview', 'isAuthor','isAuthor']),
     setKind(){
       const num = this.selectedReview.kind
-      return this.myKind.slice(num,num+1)[0]
+      return this.myKind.slice(num-1,num)[0]
+    },
+    created_time(){
+      return this.selectedReview.created_at.slice(0,10)
     }
   },
   created() {
@@ -76,5 +89,10 @@ export default {
 </script>
 
 <style>
-
+#go-menu {
+  position: relative;
+  left : 93%;
+  bottom : 10px;
+  right : 10%;
+}
 </style>

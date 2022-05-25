@@ -56,7 +56,8 @@ export default {
     },
     SET_CATEGORY(state, num){
       state.category = num
-    }
+    },
+
   },
 
   actions: {
@@ -176,6 +177,7 @@ export default {
         headers: getters.authHeader,
       })
         .then((res) => {
+          console.log(res.data)
           commit('SETCOMMENTS', res.data)
         })
         .catch(err => {
@@ -187,7 +189,7 @@ export default {
       axios({
         url : drf.communities.commentChange(reviewPk, commentPk),
         method : 'delete',
-        data : {}, // 수정필요할 것 같은 부분
+        data : {},
         headers: getters.authHeader,
       })
         .then((res) => {
@@ -199,6 +201,17 @@ export default {
     },
     setCategory({commit}, num ) {
       commit('SET_CATEGORY',num)
+    },
+    commentLike({ commit, getters}, {reviewPk,commentPk}){
+      axios({
+        url : drf.communities.commentLike(reviewPk, commentPk),
+        method : 'post',
+        headers: getters.authHeader,
+      })
+      .then((res)=> {
+        console.log(res.data)
+        commit('SETCOMMENTS', res.data)
+      })
     }
   },
 }

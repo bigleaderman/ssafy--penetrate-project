@@ -7,8 +7,8 @@
         </h1>
         <hr>
         <div id="controller">
-          <router-link :to="{name : 'communities'}"><button>취소</button></router-link>  <span></span> 
-          <button>{{action}}</button>
+          <router-link :to="{name : 'communities'}"><button class="btn btn-secondary">Cancle</button></router-link>  <span></span> 
+          <button class="btn btn-warning">{{action}}</button>
         </div>
         <div style = "display:flex;">
           <select name="kind" v-model="newReview.kind" style="width:20%; height:50px; margin : auto">
@@ -38,7 +38,7 @@
           ></textarea>
         </div>
         
-          <button id="my-create-button">{{action}}</button>
+          <button id="my-create-button" class="btn btn-warning">{{action}}</button>
       </form>
     </div>
   </div>
@@ -82,7 +82,7 @@ methods : {
 <style>
 #controller {
   position : relative ;
-  left: 84%;
+  left: 80%;
   bottom: 60px;
 }
 
@@ -90,6 +90,6 @@ methods : {
 #my-create-button {
   position: relative;
   bottom: 20px;
-  left : 90%
+  left : 89%
 }
 </style>
