@@ -43,7 +43,7 @@
         </div>
         <div>
           <div class="review">
-            <h2 class="text">한줄리뷰</h2>
+            <h2 class="text">한줄리뷰 | 총{{ scoreMovie.score_count }}건 | 평점{{ scoreMovie.score_sum }}</h2>
             <hr />
             <span class="review-form">
               <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>
@@ -77,7 +77,7 @@ export default {
     MovieReviewList,
   },
   computed: {
-    ...mapGetters(["moviedetail", "getMovieVideo"]),
+    ...mapGetters(["moviedetail", "getMovieVideo", "scoreMovie"]),
   },
   data() {
     return {
@@ -99,7 +99,7 @@ export default {
 
 <style>
 .movie-detail {
-  padding: 0px 0px 70px 0px;
+  padding: 0px 0px 30px 0px;
 }
 #modalbox {
   height: 100%;

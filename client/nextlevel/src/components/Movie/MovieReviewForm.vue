@@ -90,7 +90,8 @@ export default {
         number: this.number,
         content: this.content,
       });
-      this.number = 0;
+      this.number = 0,
+      this.content = ""
     },
   },
 };
