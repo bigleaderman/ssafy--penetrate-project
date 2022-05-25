@@ -1,9 +1,11 @@
 <template>
-  <form @submit.prevent="onSubmit" class="comment-list-form">
-    <label for="comment">comment: </label>
-    <input type="text" id="comment" v-model="content" required>
-    <button>Comment</button>
-  </form>
+  <div>
+    <form @submit.prevent="onSubmit" class="comment-list-form">
+      <label for="comment">comment: </label>
+      <input type="text" id="comment" v-model="content" required>
+      <button>Comment</button>
+    </form>
+  </div>
 
 </template>
 
