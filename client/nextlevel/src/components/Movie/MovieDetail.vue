@@ -46,7 +46,7 @@
             <h2 class="text">한줄리뷰 | 총{{ scoreMovie.length }}건 | 평점{{ scoreMovie.result }}</h2>
             <hr />
             <span class="review-form">
-              <movie-review-form :moviePk="moviedetail.pk"></movie-review-form>
+              <movie-review-form :moviePk="moviedetail.pk" :scores="moviedetail.scores" ></movie-review-form>
             </span>
             <span class="review-list">
               <movie-review-list

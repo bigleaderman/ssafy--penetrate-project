@@ -175,7 +175,10 @@ export default {
     } ,
     DELETE_SCORE(state, scores) {
       state.moviedetail.scores = scores
-    }
+    },
+    UPDATE_SCORE(state, scores) {
+      state.moviedetail.scores = scores
+    },
   },
 
   actions: {
@@ -224,7 +227,6 @@ export default {
         headers: getters.authHeader,
       })
         .then(res => {
-          console.log(res.data.length)
           commit('PUSH_MOVIE_REVIEW', res.data[res.data.length - 1])
         })
         .catch(err => {
@@ -284,6 +286,23 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+    updateMoiveScore({ commit, getters }, { moviePk, scorePk, number, content}) {
+      axios({
+        url: drf.movies.updateDeleteReview(moviePk, scorePk),
+        method: 'put',
+        data: {
+          number,
+          content
+        },
+        headers: getters.authHeader,
+      })
+        .then((res) => {
+          commit('UPDATE_SCORE', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
   },
 }

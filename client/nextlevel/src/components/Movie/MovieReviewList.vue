@@ -28,7 +28,7 @@
           >
           / {{ review.content }}
           <span v-if="currentUser.username === review.user.username">
-            <button @click="reviewDelete({review, moviePk})">delete</button>
+          <button @click="reviewDelete({review, moviePk})">delete</button>
           </span>
         </p>
         
@@ -62,13 +62,9 @@ export default {
   methods:{
     ...mapActions(['DeleteReview']),
     reviewDelete(review){
-      console.log(review)
-      console.log(review.review.pk)
-      console.log(this.moviePk)
       this.DeleteReview ({
         moviePk: this.moviePk,
         scorePk : review.review.pk,
-        score: review.review,
       })
       }
     }
