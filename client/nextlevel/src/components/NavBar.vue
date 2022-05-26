@@ -30,7 +30,7 @@
           <div><li>a</li></div>
           <div v-if="isLoggedIn">
             <form
-              @submit.prevent="searchMovie(keyword)"
+              @submit.prevent="mySearch(keyword)"
               class="d-flex"
               role="search"
             >
@@ -116,6 +116,10 @@ export default {
 
   methods: {
     ...mapActions(["searchMovie"]),
+    mySearch(movie) {
+      this.searchMovie(movie);
+      this.keyword = "";
+    },
   },
 
   computed: {

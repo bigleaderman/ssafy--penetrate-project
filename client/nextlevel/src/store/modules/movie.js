@@ -55,7 +55,7 @@ export default {
     recommendMovie(state) {
       return state.recommendMovie
     },
-    SearchMovie(state) {
+    searchMovie(state) {
       return state.searchMovies
     },
     mainCarouselMovie(state) {
@@ -116,7 +116,7 @@ export default {
       // 날씨 맨트
       const weather = ['Thunderstorm', 'Drizzle', 'Rain', 'Snow', 'Atmosphere', 'Clear', 'Clouds']
       const weatherMap = [
-        '소나기 올 때는',
+        '천둥번개치는 날씨엔',
         '잔잔한 이슬비와',
         '비오는 날',
         '크리스마스에는 집에서',
@@ -136,7 +136,7 @@ export default {
       const timeMap = [
         ['피곤한 아침을 깨워줄', '킬링타임 영화들'],
         ['무료한 오후', '역사 공부 어떠세요?'],
-        ['일상 후', '판타지 세계로'],
+        ['오늘 저녁엔', '판타지 세계로'],
         ['잠안오는 새벽', '다큐멘터리 한편']
       ]
       return timeMap.splice(time_idx, 1)

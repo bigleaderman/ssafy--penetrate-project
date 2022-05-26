@@ -14,11 +14,11 @@
     <div class="container" id="box2">
       <div class="row">
         <div
-          v-for="movie in movies"
+          v-for="movie in searchMovie"
           :key="movie.id"
           class="col-lg-2 col-md-3 col-sm-4 col-6"
         >
-          <div style="width: 10rem" class="mb-3 mx-1">
+          <div style="width: 10rem" class="mb-3 mx-1" @click="getDetail(movie)">
             <img
               id="first-recom-img"
               :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
@@ -35,11 +35,21 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import MovieDetail from "@/components/Movie/MovieDetail.vue";
+
 export default {
   name: "SearchView",
+  components: {
+    MovieDetail,
+  },
 
   methods: {
-    ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser"]),
+    ...mapActions([
+      "getMovies",
+      "deleteMovie",
+      "fetchCurrentUser",
+      "getDetail",
+    ]),
   },
 
   created() {
@@ -47,7 +57,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["SearchMovie", "isModalView", "currentUser"]),
+    ...mapGetters(["searchMovie", "isModalView", "currentUser", "moviedetail"]),
   },
 };
 </script>
