@@ -32,10 +32,9 @@ export default {
           return review.kind === state.category
         })
       } else {
-        state.reviews.filter(review => {
-          return review.like_count > 5
+        return state.reviews.filter(review => {
+          return review.like_count >= 1
         })
-        return state.reviews
       }
     },
     nowCategory(state) {
