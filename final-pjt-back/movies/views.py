@@ -145,6 +145,6 @@ def recommendation(request):
 
 @api_view(['POST'])
 def searchmovie(request):
-    search_movies = Movie.objects.filter(genres__icontains=request.data).order_by('-vote_average')[:10]
-    serializer = MovieSerializer(search_movies)
+    search_movies = Movie.objects.filter(title__icontains=request.data['keyword'])
+    serializer = MovieSerializer(search_movies, many=True)
     return Response(serializer.data)
