@@ -11,16 +11,6 @@
 
     <!-- 시작박스 -->
 
-    <form @submit.prevent="searchmovie(keyword)" class="d-flex" role="search">
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-warning" type="submit">Search</button>
-    </form>
-
     <div class="container" id="box2">
       <div class="row">
         <div
@@ -47,11 +37,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "SearchView",
-  data() {
-    return {
-      keyword: "",
-    };
-  },
+
   methods: {
     ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser"]),
   },

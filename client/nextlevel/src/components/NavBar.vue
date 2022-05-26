@@ -30,11 +30,12 @@
           <div><li>a</li></div>
           <div v-if="isLoggedIn">
             <form
-              @submit.prevent="searchmovie(keyword)"
+              @submit.prevent="searchMovie(keyword)"
               class="d-flex"
               role="search"
             >
               <input
+                v-model="keyword"
                 class="form-control me-2"
                 type="search"
                 placeholder="Search"
@@ -103,10 +104,20 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "NavBar",
+  data() {
+    return {
+      keyword: "",
+    };
+  },
+
+  methods: {
+    ...mapActions(["searchMovie"]),
+  },
+
   computed: {
     ...mapGetters(["isLoggedIn", "currentUser"]),
     username() {

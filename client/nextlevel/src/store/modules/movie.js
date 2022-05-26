@@ -306,12 +306,13 @@ export default {
     },
     searchMovie({ commit, getters }, keyword) {
       axios({
-        url: drf.accounts.login(),
+        url: drf.movies.search(),
         method: 'post',
         data: { keyword },
         headers: getters.authHeader,
       })
         .then(res => {
+          console.log(res.data)
           commit('SEARCH_MOVIE', res.data)
           router.push({ name: 'search' })
         })

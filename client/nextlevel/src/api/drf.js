@@ -12,6 +12,7 @@ export default {
     createReview: (moviePk) => HOST + MOVIES + 'home/' + `${moviePk}/` + 'score/',
     updateDeleteReview: (moviePk, scorePk) => HOST + MOVIES + 'home/' + `${moviePk}/` + 'score/' + `${scorePk}/`,
     recommendation: () => HOST + MOVIES + 'recommendation/',
+    search: () => HOST + MOVIES + 'searchmovie/',
   },
   accounts: {
     login: () => HOST + ACCOUNTS + 'login/',
