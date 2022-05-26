@@ -54,7 +54,7 @@
               <div class="mb-3">
                 <span class="h3 text"> 한 줄 리뷰</span>
                 <span class="h5">
-                  ㆍ 총{{ scoreMovie.length }}건 | 평점{{
+                  ㆍ 총 {{ scoreMovie.length }}건 | 평점{{
                     scoreMovie.result
                   }}</span
                 >
@@ -151,6 +151,7 @@ export default {
   /* height: 60%; */
   width: 80%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 #second {
   width: 90%;
@@ -161,5 +162,6 @@ export default {
   left: 99.5%;
   transform: translate(-100%);
   width: 50px;
+  cursor: pointer;
 }
 </style>

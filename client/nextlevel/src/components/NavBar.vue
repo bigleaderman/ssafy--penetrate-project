@@ -69,7 +69,7 @@
                 class="nav-link active"
                 aria-current="page"
                 :to="{ name: 'communities' }"
-                >리뷰</router-link
+                >게시판</router-link
               >
             </li>
             <li v-if="isLoggedIn" class="nav-item mx-3">

@@ -22,9 +22,10 @@
             v-for="index in 1"
             :key="index"
           >
-            <div class="card" style="width: 18rem">
+            <div class="card" style="width: 18rem" @click="getDetail(movie)">
               <img
-                @click="getDetail(movie)"
+                id="#app4img"
+                style="cursor: pointer"
                 :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
                 class="card-img-top"
                 alt="..."
@@ -48,6 +49,7 @@
 <script>
 import MovieDetail from "@/components/Movie/MovieDetail.vue";
 import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "RecommendationMovie",
   components: {
@@ -108,5 +110,10 @@ export default {
 .white-bg {
   width: 100%;
   height: 90%;
+}
+#app4img:hover {
+  transform: scale(1.05);
+  transition: all 200ms ease-in;
+  filter: brightness(60%);
 }
 </style>

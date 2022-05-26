@@ -5,15 +5,14 @@
         <div id="parent">
           <iframe :src="video"></iframe>
         </div>
-        <button class="">
-          <img
-            id="video-stop"
-            @click="alterClose"
-            src="@/assets/x-button.png"
-            style="width: 3%; border-radius: 7px"
-            alt=""
-          />
-        </button>
+
+        <img
+          id="video-stop"
+          @click="alterClose"
+          src="@/assets/x-button.png"
+          style="width: 3%; border-radius: 7px; cursor: pointer"
+          alt=""
+        />
       </div>
     </div>
   </div>
