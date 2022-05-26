@@ -27,7 +27,7 @@
 
       <div class="offcanvas offcanvas-end" id="navbarSupportedContent">
         <div class="d-flex justify-content-between">
-          <div><li>a</li></div>
+          <div></div>
           <div v-if="isLoggedIn">
             <form
               @submit.prevent="mySearch(keyword)"

@@ -25,7 +25,7 @@
     </div>
     <div class="row sub-div">
       <div class="h2 my-text">
-        <span class="yellow">{{nowTime[0][0]}} </span>{{nowTime[0][1]}} 🕑
+        <span class="yellow">{{ nowTime[0][0] }} </span>{{ nowTime[0][1] }} 🕑
       </div>
       <sub-carousel :movies="SubCarouselMovie2"></sub-carousel>
     </div>
@@ -72,7 +72,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getMovies", "deleteMovie", "fetchCurrentUser", "getWeather"]),
+    ...mapActions([
+      "getMovies",
+      "deleteMovie",
+      "fetchCurrentUser",
+      "getWeather",
+    ]),
   },
 
   created() {
@@ -91,7 +96,7 @@ export default {
       "isModalView",
       "currentUser",
       "toDayWeather",
-      "nowTime"
+      "nowTime",
     ]),
   },
 };

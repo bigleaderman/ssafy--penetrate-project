@@ -11,7 +11,7 @@
     </h1>
     <div id="app5">
       <sequential-entrance>
-        <!-- <div
+        <div
           v-for="movie in recommendMovie"
           :key="movie.id"
           class="col-lg-3 col-md-6 col-sm-12 col-12 recom-div mb-5"
@@ -33,39 +33,6 @@
               <div class="card-body">
                 <h5 class="card-title">{{ movie.title }}</h5>
                 <p class="card-text"></p>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <div class="row main-div">
-          <div
-            v-for="movie in recommendMovie"
-            :key="movie.id"
-            class="slide recom-div mb-5"
-          >
-            <div class="slide-div" @click="getDetail(movie)">
-              <div
-                id="test"
-                style="cursor: pointer"
-                :style="{
-                  'background-image': `linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/original${movie.backdrop_path}')`,
-                }"
-              >
-                <div id="main-sub">
-                  <div class="main-title">
-                    <h1>{{ movie.title }}</h1>
-                    <br />
-                    <span id="main-overview"> {{ movie.overview }} </span>
-                    <hr />
-                    <button
-                      id="detail-button"
-                      class="btn btn-outline-warning"
-                      @click="getDetail(movie)"
-                    >
-                      자세히 보기
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

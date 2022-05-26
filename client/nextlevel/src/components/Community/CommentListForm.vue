@@ -1,36 +1,48 @@
 <template>
-  <div>
+  <div class="mb-5">
     <form @submit.prevent="onSubmit" class="comment-list-form">
-      <input style="width:50%; height:70px" type="text" id="comment" v-model="content" required>
-      <button class="btn-warning" style="height:70px">Comment</button>
+      <div class="d-flex">
+        <input
+          type="text"
+          class="form-control"
+          style="width: 50%; height: 50px"
+          id="comment"
+          v-model="content"
+          required
+        />
+        <button class="btn btn-outline-warning" style="height: 50px">
+          Comment
+        </button>
+      </div>
     </form>
   </div>
-
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'CommentListForm',
+  name: "CommentListForm",
   data() {
     return {
-      content: ''
-    }
+      content: "",
+    };
   },
   computed: {
-    ...mapGetters(['selectedReview']),
+    ...mapGetters(["selectedReview"]),
   },
   methods: {
-    ...mapActions(['createComment']),
+    ...mapActions(["createComment"]),
     onSubmit() {
-      this.createComment({ reviewPk: this.selectedReview.pk, content: this.content, })
-      this.content = ''
-    }
-  }
-}
+      this.createComment({
+        reviewPk: this.selectedReview.pk,
+        content: this.content,
+      });
+      this.content = "";
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
