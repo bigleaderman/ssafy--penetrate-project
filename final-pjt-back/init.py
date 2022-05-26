@@ -106,7 +106,7 @@ def get_movie_datas():
                                 'title': movie['title'],
                                 'vote_average': movie['vote_average'],
                                 'genres': movie['genre_ids'],
-                                'is_active' : True,
+                                'is_active' : 1,
                                 'director': '',
                                 'actors': [],
                             }
@@ -137,7 +137,7 @@ def get_movie_datas():
                                 'title': movie['title'],
                                 'vote_average': movie['vote_average'],
                                 'genres': movie['genre_ids'],
-                                'is_active' : False,
+                                'is_active' : 3,
                                 'director': '',
                                 'actors': [],
                             }
@@ -169,7 +169,7 @@ def get_movie_datas():
                             'title': movie['title'],
                             'vote_average': movie['vote_average'],
                             'genres': movie['genre_ids'],
-                            'is_active' : False,
+                            'is_active' : 3,
                             'director': '',
                             'actors': [],
                         }
@@ -192,36 +192,105 @@ def get_movie_datas():
         request_url = f"https://api.themoviedb.org/3/movie/top_rated?api_key={TMDB_API_KEY}&language=ko-KR&page={i}"
         movies = requests.get(request_url).json()
 
-        for movie in movies['results']:
-            if movie.get('release_date', ''):
-                if movie.get('backdrop_path', ''):
-                    fields = {
-                        'adult' : movie['adult'],
-                        'backdrop_path' : movie['backdrop_path'],
-                        'original_language' : movie['original_language'],
-                        'overview' : movie['overview'],
-                        'popularity': movie['popularity'],
-                        'poster_path': movie['poster_path'],
-                        'released_date': movie['release_date'],
-                        'title': movie['title'],
-                        'vote_average': movie['vote_average'],
-                        'genres': movie['genre_ids'],
-                        'is_active' : False,
-                        'director': '',
-                        'actors': [],
-                    }
-                for dic_moive in genres:
-                    for i in range(len(fields.get('genres'))):
-                        # 딕서너리 내에서 id 값이 같은 값들만 찾아 genre네임 확보
-                        if dic_moive['id'] == fields.get('genres')[i]:
-                            fields.get('genres')[i] = dic_moive['name']
-                data = {
-                    "pk": movie['id'],
-                    "model": "movies.movie",
-                    "fields": fields
-                }
+        if i == 1:
+            j = 0
+            for movie in movies['results']:
+                if j <= 10:
+                    j += 1
+                    if movie.get('release_date', ''):
+                        if movie.get('backdrop_path', ''):
+                            fields = {
+                                'adult' : movie['adult'],
+                                'backdrop_path' : movie['backdrop_path'],
+                                'original_language' : movie['original_language'],
+                                'overview' : movie['overview'],
+                                'popularity': movie['popularity'],
+                                'poster_path': movie['poster_path'],
+                                'released_date': movie['release_date'],
+                                'title': movie['title'],
+                                'vote_average': movie['vote_average'],
+                                'genres': movie['genre_ids'],
+                                'is_active' : 2,
+                                'director': '',
+                                'actors': [],
+                            }
+                        for dic_moive in genres:
+                            for i in range(len(fields.get('genres'))):
+                                # 딕서너리 내에서 id 값이 같은 값들만 찾아 genre네임 확보
+                                if dic_moive['id'] == fields.get('genres')[i]:
+                                    fields.get('genres')[i] = dic_moive['name']
 
-                total_data.append(data)
+                        data = {
+                            "pk": movie['id'],
+                            "model": "movies.movie",
+                            "fields": fields
+                        }
+
+                        total_data.append(data)
+                else:
+                    if movie.get('release_date', ''):
+                        if movie.get('backdrop_path', ''):
+                            fields = {
+                                'adult' : movie['adult'],
+                                'backdrop_path' : movie['backdrop_path'],
+                                'original_language' : movie['original_language'],
+                                'overview' : movie['overview'],
+                                'popularity': movie['popularity'],
+                                'poster_path': movie['poster_path'],
+                                'released_date': movie['release_date'],
+                                'title': movie['title'],
+                                'vote_average': movie['vote_average'],
+                                'genres': movie['genre_ids'],
+                                'is_active' : 3,
+                                'director': '',
+                                'actors': [],
+                            }
+                        for dic_moive in genres:
+                            for i in range(len(fields.get('genres'))):
+                                # 딕서너리 내에서 id 값이 같은 값들만 찾아 genre네임 확보
+                                if dic_moive['id'] == fields.get('genres')[i]:
+                                    fields.get('genres')[i] = dic_moive['name']
+
+                        data = {
+                            "pk": movie['id'],
+                            "model": "movies.movie",
+                            "fields": fields
+                        }
+
+                        total_data.append(data)
+        else:
+            for movie in movies['results']:
+                if movie.get('release_date', ''):
+                    if movie.get('backdrop_path', ''):
+                        fields = {
+                            'adult' : movie['adult'],
+                            'backdrop_path' : movie['backdrop_path'],
+                            'original_language' : movie['original_language'],
+                            'overview' : movie['overview'],
+                            'popularity': movie['popularity'],
+                            'poster_path': movie['poster_path'],
+                            'released_date': movie['release_date'],
+                            'title': movie['title'],
+                            'vote_average': movie['vote_average'],
+                            'genres': movie['genre_ids'],
+                            'is_active' : 3,
+                            'director': '',
+                            'actors': [],
+                        }
+                    for dic_moive in genres:
+                        for i in range(len(fields.get('genres'))):
+                            # 딕서너리 내에서 id 값이 같은 값들만 찾아 genre네임 확보
+                            if dic_moive['id'] == fields.get('genres')[i]:
+                                fields.get('genres')[i] = dic_moive['name']
+
+
+                    data = {
+                        "pk": movie['id'],
+                        "model": "movies.movie",
+                        "fields": fields
+                    }
+
+                    total_data.append(data)
 
     for data in total_data:
         movie_id = data['pk']

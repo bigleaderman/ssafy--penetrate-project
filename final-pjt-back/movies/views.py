@@ -42,7 +42,7 @@ def movie(request):
     
     movies_now = Movie.objects.filter(is_active=1)
     
-    movies_top10_popular = Movie.objects.order_by('-vote_average').order_by('-popularity')[:10]
+    movies_top10_popular = Movie.objects.filter(is_active=2)
     
     movies_korea_top10 = Movie.objects.filter(original_language='ko').order_by('-popularity')[:10]
     

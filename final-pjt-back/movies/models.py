@@ -12,7 +12,7 @@ class Movie(models.Model):
     released_date = models.DateField()
     title = models.CharField(max_length=50)
     vote_average = models.FloatField()
-    is_active = models.BooleanField()
+    is_active = models.IntegerField()
     genres = models.JSONField(default=dict)
     director = models.CharField(max_length=100, null=True)
     actors = models.JSONField(null=True)
