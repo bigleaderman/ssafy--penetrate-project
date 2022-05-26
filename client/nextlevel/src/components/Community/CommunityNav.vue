@@ -75,7 +75,7 @@ export default {
   align-items: center;
   width: 1000px;
   margin: 10px auto;
-  height: 100px;
+  height: 50px;
   background-color: rgb(80, 80, 80);
   border-radius: 15px;
 }

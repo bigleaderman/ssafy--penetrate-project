@@ -7,7 +7,7 @@
       id="review-hooper"
       :itemsToShow="7"
     >
-      <slide id="review-content" v-for="review in reviews" :key="review.pk">
+      <slide id="review-content" style="margin:15px" v-for="review in reviews" :key="review.pk">
         <p class="d-flex justify-content-between align-items-center">
           <span class="d-flex align-items-center">
             <span class="me-4 d-flex">

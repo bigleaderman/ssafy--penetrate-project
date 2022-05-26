@@ -55,8 +55,7 @@
                 <span class="h3 text"> 한 줄 리뷰</span>
                 <span class="h5">
                   ㆍ 총 {{ scoreMovie.length }}건 | 평점{{
-                    scoreMovie.result
-                  }}</span
+                    scoreMovie.result }}</span
                 >
               </div>
             </div>
